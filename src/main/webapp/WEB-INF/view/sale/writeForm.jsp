@@ -57,7 +57,7 @@ margin: 5px;
 <div class="subback">
     <h2 id="center">게시글 작성</h2>
 </div>
-<form class="container pt-5" action="<%=request.getContextPath()%>/sale/writePro" name="f" enctype="multipart/form-data" method="post">
+<form class="container pt-5" action="<%=request.getContextPath()%>/sale/saleWritePro" name="f" enctype="multipart/form-data" method="post">
 
  <div class="form-group row">
   	<div class="col">

@@ -4,6 +4,22 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sale">
 
+<insert id="insertSale" parameterType="sale">
+	insert into sale values (#{saleidx}, '거래가능', #{writer}, #{password}, 
+		#{subject}, #{content}, #{price}, #{location}, #{image1}, #{image2},
+		'0', sysdate,'0')
+</insert>
 
+<select id="nextSaleidx" resultType="int">
+	select seqsale.nextval from dual
+</select>
+
+<select id="selectSaleList" resultType="sale">
+	select * from sale order by saleidx desc
+</select>
+
+<select id="selectCondition" resultType="sale">
+	select * from sale where condition = '거래가능'  order by saleidx desc;
+</select>
 
 </mapper>

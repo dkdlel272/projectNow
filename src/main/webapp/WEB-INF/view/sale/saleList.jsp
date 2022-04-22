@@ -49,7 +49,6 @@ p.button_text {font-size:16px; margin-bottom:0px; font-weight:none; text-align:c
 p.button_text a {text-decoration:none !important; display:block; color:#fff;}
 .list_button {
     width: 150px;
-    float: right;
     padding: px;
     padding: 10px;
     background-color: #23272b;
@@ -62,6 +61,14 @@ p.button_text a {text-decoration:none !important; display:block; color:#fff;}
 .list_button:hover a{
 	color:#fff;
 }
+.col{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.card-img-top{
+height: 350px;
+}
+
 </style>
 </head>
 <body>
@@ -69,27 +76,35 @@ p.button_text a {text-decoration:none !important; display:block; color:#fff;}
 <div class="subback">
 	<h2 id="center">삽니다&팝니다</h2>
 </div>
-	<div class="container ">
-	<div class="card-columns">	
+	
+
+	<div class="container">
+		<div>
+		<input type="checkbox" name="condition"> 거래가능만 리스트만 보기
+		<div class="list_button">
+		<p class="button_text">
+			<a href="<%=request.getContextPath()%>/sale/saleWriteForm">게시판입력</a>
+		</p>	
+		</div>
+	</div>
+	
+	<div class="row row-cols-1 row-cols-md-3">	
 	<c:forEach var="li" items="${list }">
+			<div class="col">
 			<div class="card" >
 		  	<img class="card-img-top" src="<%=request.getContextPath() %>/saleupload/${li.image1}" >
 				  <div class="card-body">
-				    <h4 class="card-title"> No.${li.saleidx} : ${li.subject}</h4>
-				    <p class="card-text">금액 : ${li.price} 장소 : ${li.location}</p>
-				    <p class="card-text">판매자 : ${li.writer}</p>
-				    <a href="#" class="btn btn-primary">See More</a>
+				   	<p class="card-text" style="text-align: right;">${li.condition }</p>
+				   	<h4 class="card-title"> No.${li.saleidx} : ${li.subject} </h4>
+				   	<p class="card-text">금액 : ${li.price} 장소 : ${li.location}</p>
+				   	<p class="card-text">판매자 : ${li.writer}</p>
+				   	<a href="#" class="btn list_button" style="color: #fff;">See More</a>
 				  </div>
+			</div>
 			</div>	
 	</c:forEach>
 	</div>
-	<div class="list_button">
-		<p class="button_text">
-			<a href="<%=request.getContextPath()%>/sale/writeForm">게시판입력</a>
-		</p>	
 	</div>
-	</div>
-	
 	
 </body>
 </html>
