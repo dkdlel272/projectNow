@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="reserve">
+
+<insert id="ReserveInsert" parameterType="reserve">
+insert into reserve values(
+#{reserveidx}, #{username}, #{campname}, #{room},
+#{checkin}, #{checkout}, #{person}, #{payidx}, #{kid}, #{roomno})
+</insert>
+
+<delete id="ReserveDelete" parameterType="int">
+delete from reserve where reserveidx = #{reserveidx}
+</delete>
+
+<select id="ReserveList" resultType="reserve" parameterType="String">
+select  *  from  reserve  where  username = #{value}
+order by reserveidx desc
+</select>
+
+<select id="nextIdx" resultType="int">
+select reserveidx.nextval from dual
+</select>
+
+<select id="selectCamp" resultType="camp" parameterType="string">
+select * from camp where campname = #{campname} 
+</select>
+
+<select id="username" resultType="String" parameterType="String">
+select name from userdata where userid = #{userid}
+</select>
+
+<select id="selectroom" resultType="string"  parameterType="string">
+select room  from camp where campname=#{campname} 
+</select>
+
+<select id="ReserveInfo"  resultType="reserve"  parameterType="int">
+select * from reserve where reserveidx = #{reserveidx}
+</select>
+
+<update id="ReserveUpdate" parameterType="reserve">
+update reserve set
+room=#{room}, checkin=#{checkin}, checkout=#{checkout}, person=#{person}, kid=#{kid}
+where reserveidx= #{reserveidx}
+</update>
+
+<select id="Image" resultType="reserve" parameterType="int">
+select r.username, c.campname, c.campimg, c.campimg2, c.campimg3 
+from reserve r , camp c
+where r.reserveidx = #{reserveidx} and r.campname = c.campname
+</select>
+
+</mapper>

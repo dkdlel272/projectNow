@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+		
+		<mvc:annotation-driven/> <!-- mapping -->
+		<context:component-scan base-package="controller, dao"/>
+		<!--controller랑 service에 있는 거 scan  -->
+		<context:annotation-config />
+		<mvc:view-controller path="/index" view-name="index"/>
+		
+	
+		<bean id = "viewResolver" 
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+			<property name="prefix" value="/WEB-INF/"/>
+			<property name="suffix" value=".jsp"/>
+		</bean>
+		
+		
+		<bean id = "multipartResolver" 
+				class = "org.springframework.web.multipart.commons.CommonsMultipartResolver">
+			<property name="defaultEncoding" value="utf-8" />
+		</bean>
+		
+		<mvc:resources mapping="/image/**" location="/image/" cache-period="60" />
+		<mvc:resources mapping="/boardupload/**" location="/boardupload/" cache-period="60" />
+		<mvc:resources mapping="/campupload/**" location="/campupload/" cache-period="60" />
+		<mvc:resources mapping="/saleupload/**" location="/saleupload/" cache-period="60" />
+		
+		
+		
+		<!-- css적용하기 위함 -->
+		<mvc:resources mapping="/resouces/**" location="/resouces/" cache-period="60" />
+		
+		
+		
+		<!-- 
+		<bean class="org.mybatis.spring.SqlSessionTemplate">
+			<constructor-arg ref="sqlSession"></constructor-arg>
+		</bean> -->
+		
+		
+		<!-- mybatis-config DB 연결-->
+		<!-- <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+			destroy-method="close">
+			<property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
+			<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+			<property name="username" value="vision"/>
+			<property name="password" value="1111"/>
+		</bean> -->
+		
+		<!-- DB 연동? -->
+		<!-- <bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
+			<property name="configlocation" value="classpath:mybatis/mybatis-config.xml">
+			</property>
+		</bean> -->
+		
+		
+	<!-- 	<mvc:interceptors>
+		
+			<mvc:interceptor>
+			<mvc:mapping path="/acl/**"/>
+			<bean class="service.AdminInterceptor" />direct 연결, acl
+			</mvc:interceptor>
+			
+			<bean class="service.MeasuringInterceptor" /> 모든 URL
+			
+			<mvc:interceptor>
+			<mvc:mapping path="/members/m2"/>
+			<mvc:mapping path="/files/**"/>
+			<ref bean = "login"/>reference 연결 , members&files
+			</mvc:interceptor>
+		</mvc:interceptors> 
+		
+		
+		<bean id="login" class="service.LoginInterceptor" />
+		
+	-->
+
+		
+	
+</beans>

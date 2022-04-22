@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="userdata">
+
+<select id="selectUserdata" parameterType="string" resultType="userdata">
+	select * from userdata where userid = #{userid}
+</select>
+
+<select id="nextUseridx" resultType="int">
+	select sequser.nextval from dual
+</select>
+
+<insert id="insertUserdata" parameterType="userdata">
+	insert into userdata values (#{useridx}, #{userid}, #{password}, 
+		#{name}, #{gender}, #{email}, #{tel}, #{address}, #{birthday},
+		'0','0')
+</insert>
+
+<select id="selectMyboard" parameterType="string" resultType="board">
+	select * from board b where b.writer = ( select u.name from USERDATA u where userid = #{userid})
+</select>
+
+<select id="findId" parameterType="map" resultType="string">
+	select userid from userdata where name = #{name} and email = #{email}
+</select>
+
+<select id="findPass" parameterType="map" resultType="string">
+	select password from userdata where userid = #{userid} and  name = #{name} and email = #{email}
+</select>
+
+<update id="resetPass"  parameterType="map" > 
+	update  userdata set password = #{newpass} where userid = #{userid}
+</update>
+
+<update id="updateUserdata" parameterType="userdata">
+	update userdata set name = #{name} , gender = #{gender}, birthday = #{birthday}, address = #{address} 
+		where userid = #{userid}
+</update>
+
+<update id="deleteUserdata" parameterType="string">
+	delete userdata where userid = #{userid}
+</update>
+
+<insert id="insertLeave" parameterType="leave">
+	insert into leave values ( #{id}, #{pass}, #{name}, #{gender}, #{tel},
+		#{email},  0, sysdate)
+</insert>
+
+<select id="selectLeaveList" resultType="leave">
+	select * from leave
+</select>
+
+<select id="selectUserList" resultType="userdata">
+	select * from userdata order by useridx 
+</select>
+
+<select id="findMailUser" parameterType="string" resultType="int">
+	select count(*) from userdata where email = #{email}
+</select>
+
+<select id="findMailLeave" parameterType="string" resultType="int">
+	select count(*) from leave where email = #{email}
+</select>
+
+<update id="changeBlack" parameterType="map">
+	update userdata set black = #{black} where userid = #{userid}
+</update>
+
+<select id="selectBlackList"  resultType="userdata">
+	select * from userdata where black = 1
+</select>
+
+<select id="searchUserList"  resultType="userdata" parameterType="String">
+	select * from userdata where userid like #{userid}
+</select>
+
+<update id="deleteLeave" parameterType="string">
+	delete leave where id = #{id}
+</update>
+
+</mapper>
