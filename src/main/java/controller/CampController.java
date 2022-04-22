@@ -17,13 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import dao.CampDAO;
-import dao.ReserveDAO;
-import dao.UserdataDao;
 import dto.Camp;
 import dto.Reserve;
 import dto.UserData;
 
-//@Controller
+@Controller
 @RequestMapping("/camp/")
 public class CampController{	
 		
@@ -46,13 +44,13 @@ public class CampController{
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
 			}
-			    return "/view/main.jsp";
+			    return "/view/main";
 		}
 		
 		@RequestMapping("CampInsert")
 		public String ReservatIoninput(HttpServletRequest request, HttpServletResponse response) {
 			System.out.println("insert");
-			return "/single/CampInsert.jsp";
+			return "/single/CampInsert";
 		}
 		
 		@RequestMapping("CampInsertPro") //관리자만 등록가능하게if문 추가예정
@@ -90,19 +88,19 @@ public class CampController{
 				msg="캠핑장 등록 성공";
 				url = request.getContextPath()+"/manager/camp/CampList";
 			}
-			request.setAttribute("msg", msg);
-			request.setAttribute("url", url);
-			return "/view/alert2.jsp";
+			m.addAttribute("msg", msg);
+			m.addAttribute("url", url);
+			return "/view/alert2";
 		}
 		
 		@RequestMapping("CampList") // 완성
 		public String CampList(HttpServletRequest request, HttpServletResponse response) {
 			CampDAO cd = new CampDAO();
 			List<Camp> list = cd.CampList();
-			request.setAttribute("list", list);
+			m.addAttribute("list", list);
 			
 			
-			return "/view/camp/CampList.jsp";
+			return "/view/camp/CampList";
 		}
 		
 		@RequestMapping("CampSearch")
@@ -111,9 +109,9 @@ public class CampController{
 			 String searchType = request.getParameter("searchType");
 			CampDAO cd = new CampDAO();
 			List<Camp> search = cd.SearchList(searchName, searchType);
-			request.setAttribute("search", search);
+			m.addAttribute("search", search);
 			
-			return "/view/camp/CampSearch.jsp";
+			return "/view/camp/CampSearch";
 		}
 		
 		@RequestMapping("CampInfo") //캠핑장 상세보기 해당캠핑장의 정보가 넘어와야 함
@@ -121,15 +119,15 @@ public class CampController{
 			String campname = request.getParameter("campname");
 			CampDAO cd = new CampDAO();
 			Camp info = cd.CampInfo(campname);
-			request.setAttribute("info", info);
+			m.addAttribute("info", info);
 			
-			return "/view/camp/CampInfo.jsp";
+			return "/view/camp/CampInfo";
 		}
 		
 		@RequestMapping("payManager")
 		public String payManager(HttpServletRequest request, HttpServletResponse respon) {
 
-			return "/manager/camp/payManager.jsp";
+			return "/manager/camp/payManager";
 		}
 		
 		
@@ -138,8 +136,8 @@ public class CampController{
 //			int campidx = Integer.parseInt(request.getParameter("campidx"));
 //			CampDAO cd = new CampDAO();
 //			Camp c = cd.CampUpdate(camp);
-//			request.setAttribute("c", c);
-//			return "/view/camp/CampUpdate.jsp";
+//			m.addAttribute("c", c);
+//			return "/view/camp/CampUpdate";
 //		}
 		
 	
@@ -150,23 +148,11 @@ public class CampController{
 			CampDAO cd = new CampDAO();
 			List<Reserve> rl = cd.reserveListAll();
 			List<Camp> cl = cd.campListAll();
-			request.setAttribute("cl", cl);
-			request.setAttribute("rl", rl);
-			return "/manager/camp/CampManager.jsp";
+			m.addAttribute("cl", cl);
+			m.addAttribute("rl", rl);
+			return "/manager/camp/CampManager";
 		}
-		@RequestMapping("chart")
-		public String chart(HttpServletRequest request, HttpServletResponse response) {
-			CampDAO cd = new CampDAO();
-			List<Reserve> d1 = cd.dashboard1();
-			List<Reserve> d2 = cd.dashboard1();
-			request.setAttribute("d1", d1);
-			request.setAttribute("d2", d2);
-			return "/manager/camp/chart.jsp";
-		}
-		
-		
-		
-		
+			
 		@RequestMapping("campListAll")
 		public String campListAll(HttpServletRequest request, HttpServletResponse respon) {
 			HttpSession session = request.getSession();
@@ -177,12 +163,12 @@ public class CampController{
 			if (login !=null) {
 				CampDAO cd = new CampDAO();
 				List<Camp> cl = cd.campListAll(); 
-				request.setAttribute("cl", cl);
+				m.addAttribute("cl", cl);
 				return "/manager/camp/CampManager";
 			}
-			request.setAttribute("msg", msg);
-			request.setAttribute("url", url);
-			return "/view/alert.jsp";
+			m.addAttribute("msg", msg);
+			m.addAttribute("url", url);
+			return "/view/alert";
 		}
 		@RequestMapping("blackList")
 		public String blackList(HttpServletRequest request, HttpServletResponse respon) {
@@ -195,12 +181,12 @@ public class CampController{
 				CampDAO ud = new CampDAO();
 				List<UserData> bl = ud.blackList("1"); 
 				System.out.println(bl);
-				request.setAttribute("bl", bl);
-				return "/manager/camp/blackList.jsp";
+				m.addAttribute("bl", bl);
+				return "/manager/camp/blackList";
 			}
-			request.setAttribute("msg", msg);
-			request.setAttribute("url", url);
-			return "/view/alert.jsp";
+			m.addAttribute("msg", msg);
+			m.addAttribute("url", url);
+			return "/view/alert";
 		}
 		@RequestMapping("campDelete")
 		public String campDelete(HttpServletRequest request, HttpServletResponse respon) {
@@ -219,9 +205,9 @@ public class CampController{
 						msg = "삭제완료";
 						url = request.getContextPath() + "/camp/CampManager";
 					}
-			request.setAttribute("msg", msg);
-			request.setAttribute("url", url);
-			return "/view/alert.jsp";
+			m.addAttribute("msg", msg);
+			m.addAttribute("url", url);
+			return "/view/alert";
 		}
 		
 		@RequestMapping("reserveListAll")
@@ -234,12 +220,12 @@ public class CampController{
 			if (login!=null && login.equals("vision")) {
 				CampDAO cd = new CampDAO();
 				List<Reserve> rl = cd.reserveListAll();
-				request.setAttribute("rl", rl);
+				m.addAttribute("rl", rl);
 				return "/manager/camp/CampManager";
 			}
-			request.setAttribute("msg", msg);
-			request.setAttribute("url", url);
-			return "/view/alert.jsp";
+			m.addAttribute("msg", msg);
+			m.addAttribute("url", url);
+			return "/view/alert";
 		}
 		@RequestMapping("reserveManager")
 		public String reserveManager(HttpServletRequest request, HttpServletResponse respon) {
@@ -254,14 +240,14 @@ public class CampController{
 				Map map = cd.monthReserve();
 				List<Reserve> d1 = cd.dashboard1();
 				List<Reserve> d2 = cd.dashboard2();
-				request.setAttribute("map", map);
-				request.setAttribute("d1", d1);
-				request.setAttribute("d2", d2);
-				return  "/manager/camp/reserveManager.jsp";
+				m.addAttribute("map", map);
+				m.addAttribute("d1", d1);
+				m.addAttribute("d2", d2);
+				return  "/manager/camp/reserveManager";
 			}
-			request.setAttribute("msg", msg);
-			request.setAttribute("url", url);
-			return "/view/alert.jsp";
+			m.addAttribute("msg", msg);
+			m.addAttribute("url", url);
+			return "/view/alert";
 		}
 		
 		

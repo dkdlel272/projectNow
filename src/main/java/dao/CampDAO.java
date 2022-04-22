@@ -5,9 +5,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,14 +19,22 @@ import dto.Reserve;
 import dto.UserData;
 
 
-//@Component
+@Component
 public class CampDAO {
 	private static final String NS="camp.";
 	private Map<String, Object> map = new HashMap<>();
 	
 	@Autowired
-	SqlSessionTemplate sqlSession;
+	MySqlSessionFactory sqlSessionFactory;
+	SqlSession sqlSession;
 	
+	
+	
+	@PostConstruct
+	public void setSqlSession() {
+		this.sqlSession = sqlSessionFactory.sqlmap.openSession();
+	}
+
 	public int CampInsert(Camp camp) {
 		
 		try {
@@ -33,7 +43,7 @@ public class CampDAO {
 		} catch (Exception e){
 			e.printStackTrace();
 		}finally {
-			sqlSession.close();
+			sqlSession.commit();
 		}
 		return 0;
 	}
@@ -44,7 +54,7 @@ public class CampDAO {
 		} catch (Exception e){
 			e.printStackTrace();
 		}finally {
-			sqlSession.close();
+			sqlSession.commit();
 		}
 		return 0;
 	}
@@ -56,175 +66,76 @@ public class CampDAO {
 		} catch (Exception e){
 			e.printStackTrace();
 		}finally {
-			sqlSession.close();
+			sqlSession.commit();
 		}
 		return 0;
 	}
 	
 	public Camp selectCamp(int campidx) {
-
-		try {
 			return sqlSession.selectOne(NS+"selectCamp",campidx);
-		} catch (Exception e){
-			e.printStackTrace();
-		}finally {
-			sqlSession.close();
-		}
-		return null;
 	}
 	public Camp chooseCamp(String campname) { //사용하지않는기능?
 
-		try {
 			return sqlSession.selectOne(NS+"chooseCamp",campname);
-		} catch (Exception e){
-			e.printStackTrace();
-		}finally {
-			sqlSession.close();
-		}
-		return null;
 	}
 	
 	public int nextSeq() { //예약번호를 차례로 받는 기능
 
-		try {
 			return sqlSession.selectOne(NS+"nextSeq");
-		} catch (Exception e){
-			e.printStackTrace();
-		}finally {
-			sqlSession.close();
-		}
-		return 0;
 	}
 	
 	public List<Camp> CampList(){
 
-		try {
 			return sqlSession.selectList(NS+"CampList");
-		} catch (Exception e){
-			e.printStackTrace();
-		}finally {
-			sqlSession.close();
-		}
-		return null;
 	}
 	
 	public List<Camp> SearchList(String searchName, String searchType){
 
-		try {
-			map.clear();
-			map.put("searchType", searchType); 
-			map.put("searchName", searchName);
-			
 			return sqlSession.selectList(NS+"SearchList", map);
-		} catch (Exception e){
-			e.printStackTrace();
-		}finally {
-			sqlSession.close();
-		}
-		return null;
 	}
 	
 	public Camp CampInfo(String campname){
 
-		try {
 			return sqlSession.selectOne(NS+"CampInfo", campname);
-		} catch (Exception e){
-			e.printStackTrace();
-		}finally {
-			sqlSession.close();
-		}
-		return null;
 	}
 	
 	public String RoomList() {
 
-		try {
 			return sqlSession.selectOne(NS+"RoomList");
-		} catch (Exception e){
-			e.printStackTrace();
-		}finally {
-			sqlSession.close();
-		}
-		return null;
 
 	}
 	
 	public List<Camp> campListAll(){
 
-		try {
 			return sqlSession.selectList(NS+"campListAll");
-		} catch (Exception e){
-			e.printStackTrace();
-		}finally {
-			sqlSession.close();
-		}
-		return null;
 	}
 	
 	
 	public List<UserData> blackList(String black) {
 
-		try {
 			return sqlSession.selectList(NS+"blackList",black);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			sqlSession.close();
-			}
-		return null;	} 
-	
+	}	
 	public List<Reserve> reserveListAll() {
 		
-		try {
 			return sqlSession.selectList(NS+"reserveListAll");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			sqlSession.close();
-			}
-		return null;	} 
+	}
 	public List<Reserve> reserveList() {
 	
-		try {
 			return sqlSession.selectList(NS+"reserveList");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			sqlSession.close();
 			}
-		return null;	} 
-	
 	
 	public Map monthReserve() {
 		
-		try {
 			return sqlSession.selectOne(NS+"monthReserve");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			sqlSession.close();
-			}
-		return null;	}
+		}
 	public List<Reserve> dashboard1() {
 		
-		try {
 			return sqlSession.selectList(NS+"dashboard1");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			sqlSession.close();
-			}
-		return null;	} 
+	}
 	public List<Reserve> dashboard2() {
 		
-		try {
 			return sqlSession.selectList(NS+"dashboard2");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			sqlSession.close();	
 			}
-		return null;	} 
 	
 	
 } //end class
