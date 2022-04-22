@@ -17,8 +17,6 @@
   <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenMax.min.js'></script>  
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<html>
-</head>
 
 <script>
 ( function($) {
@@ -77,6 +75,10 @@ $('.overlay').addClass('overlay-blue');
 <script>
   AOS.init();
 </script>
+<html>
+</head>
+
+
 <body>
 
 <div id="captioned-gallery">
@@ -118,10 +120,9 @@ $('.overlay').addClass('overlay-blue');
                   <div class="right_icon"><i class="xi-home"></i>편의점/마트</div>
                </div>
             </div>
-            
-            <div class="right_box right_box2" >
-          <!--     <div class="right_box right_box2" data-aos="fade-up"
-                 data-aos-duration="3000"> -->
+  
+        <div class="right_box right_box2" data-aos="fade-up"
+                 data-aos-duration="3000">
                <div class="right_image"><img src="<%=request.getContextPath()%>/image/p02.jpg"></div>
                <div class="right_text">
                   <h4>안녕 오토캠핑장</h4>
