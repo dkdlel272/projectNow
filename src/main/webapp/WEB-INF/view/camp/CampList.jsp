@@ -3,15 +3,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
-<head>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resouces/css/CampList.css">
 <meta charset="UTF-8">
 <title>캠핑장리스트</title>
+<head>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resouces/css/CampList.css">
 </head>
+<body>
 <div class="subback">
 	<h2 id ="center">캠핑장 전체보기</h2>
 </div>
-<body>
 	<div class="container">
 <div class="search_wrap">
 		<div class="searchs">
