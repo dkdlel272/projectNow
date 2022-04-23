@@ -87,6 +87,7 @@ public class CampDAO {
 	public List<Camp> CampList(){
 
 			return sqlSession.selectList(NS+"CampList");
+			
 	}
 	
 	public List<Camp> SearchList(String searchName, String searchType){

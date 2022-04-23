@@ -38,9 +38,9 @@
 				if (memid.equals("vision")) {//id가 vision이면 관리자 로그인
 					%>
 					 	<li style="position: static; float: right; font-size: 10px;" class="nav-item"><a class="nav-link"
-							href="<%=request.getContextPath() %>/common/manager.jsp">관리자페이지</a></li>
+							href="<%=request.getContextPath() %>/userdata/manager">관리자페이지</a></li>
 						<li style="float: right;" class="nav-item"><a class="nav-link"
-							href="<%=request.getContextPath() %>/view/main.jsp">일반페이지</a></li>
+							href="<%=request.getContextPath() %>/board/main">일반페이지</a></li>
 						<li style="float: right;" class="nav-item"><a class="nav-link"
 							href="<%=request.getContextPath() %>/userdata/logout">로그아웃</a></li>
 						

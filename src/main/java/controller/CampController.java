@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -28,6 +29,9 @@ public class CampController{
 		HttpServletRequest request;
 	    Model m;
 	    HttpSession session;
+
+	    @Autowired
+	    CampDAO cd;
 	
 	    @ModelAttribute //이렇게 잡아놓는작업을 해두면 이걸로 계속 사용할 수 있다.
 	    void init(HttpServletRequest request, Model m) {
@@ -35,6 +39,7 @@ public class CampController{
 	        this.m = m;
 	        this.session = request.getSession();
 	    }
+	    
     
 	    
 		@RequestMapping("main")
@@ -79,8 +84,6 @@ public class CampController{
 				camp.setCampimg3("");
 			}
 			
-			CampDAO cd =  new CampDAO();
-			
 			int seq = cd.CampInsert(camp);
 			String msg="캠핑장 등록 실패";
 			String url=request.getContextPath()+"/manager/camp/CampInsert";
@@ -94,12 +97,9 @@ public class CampController{
 		}
 		
 		@RequestMapping("CampList") // 완성
-		public String CampList(HttpServletRequest request, HttpServletResponse response) {
-			CampDAO cd = new CampDAO();
+		public String CampList() {
 			List<Camp> list = cd.CampList();
 			m.addAttribute("list", list);
-			
-			
 			return "/view/camp/CampList";
 		}
 		
@@ -107,7 +107,6 @@ public class CampController{
 		public String CampSearch(HttpServletRequest request, HttpServletResponse response) {
 			String searchName = request.getParameter("searchName"); 
 			 String searchType = request.getParameter("searchType");
-			CampDAO cd = new CampDAO();
 			List<Camp> search = cd.SearchList(searchName, searchType);
 			m.addAttribute("search", search);
 			
@@ -117,7 +116,6 @@ public class CampController{
 		@RequestMapping("CampInfo") //캠핑장 상세보기 해당캠핑장의 정보가 넘어와야 함
 		public String CampInfo(HttpServletRequest request, HttpServletResponse response) {
 			String campname = request.getParameter("campname");
-			CampDAO cd = new CampDAO();
 			Camp info = cd.CampInfo(campname);
 			m.addAttribute("info", info);
 			
@@ -145,7 +143,6 @@ public class CampController{
 		
 		@RequestMapping("CampManager")
 		public String CampManager(HttpServletRequest request, HttpServletResponse response) {
-			CampDAO cd = new CampDAO();
 			List<Reserve> rl = cd.reserveListAll();
 			List<Camp> cl = cd.campListAll();
 			m.addAttribute("cl", cl);
@@ -161,7 +158,6 @@ public class CampController{
 			String msg = "";
 			String url = "";
 			if (login !=null) {
-				CampDAO cd = new CampDAO();
 				List<Camp> cl = cd.campListAll(); 
 				m.addAttribute("cl", cl);
 				return "/manager/camp/CampManager";
@@ -170,24 +166,7 @@ public class CampController{
 			m.addAttribute("url", url);
 			return "/view/alert";
 		}
-		@RequestMapping("blackList")
-		public String blackList(HttpServletRequest request, HttpServletResponse respon) {
-			HttpSession session = request.getSession();
-			String login = (String) session.getAttribute("memberId");
-			// 로그인 불가이면
-			String msg = "권한이 없습니다";
-			String url = request.getContextPath()+"/userdata/loginForm";
-			if (login != null) {
-				CampDAO ud = new CampDAO();
-				List<UserData> bl = ud.blackList("1"); 
-				System.out.println(bl);
-				m.addAttribute("bl", bl);
-				return "/manager/camp/blackList";
-			}
-			m.addAttribute("msg", msg);
-			m.addAttribute("url", url);
-			return "/view/alert";
-		}
+	
 		@RequestMapping("campDelete")
 		public String campDelete(HttpServletRequest request, HttpServletResponse respon) {
 			HttpSession session = request.getSession();
@@ -195,11 +174,9 @@ public class CampController{
 			String msg = "로그인이 필요 합니다";
 			String url = request.getContextPath() + "/userdata/loginForm";
 		
-			CampDAO cd = new CampDAO();  
 			int idx = Integer.parseInt(request.getParameter("campidx"));
 			Camp ci = cd.selectCamp(idx);
 		
-			
 			if (login!=null && login.equals("vision")) {
 				int cl = cd.campDelete(ci);
 						msg = "삭제완료";
@@ -218,7 +195,6 @@ public class CampController{
 			String msg = "";
 			String url = "";
 			if (login!=null && login.equals("vision")) {
-				CampDAO cd = new CampDAO();
 				List<Reserve> rl = cd.reserveListAll();
 				m.addAttribute("rl", rl);
 				return "/manager/camp/CampManager";
@@ -235,7 +211,6 @@ public class CampController{
 			String url = request.getContextPath() + "/userdata/loginForm";
 			
 			if (login!=null && login.equals("vision")) {
-				CampDAO cd = new CampDAO();
 				
 				Map map = cd.monthReserve();
 				List<Reserve> d1 = cd.dashboard1();
