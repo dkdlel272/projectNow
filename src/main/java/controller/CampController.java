@@ -3,6 +3,7 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import dao.CampDAO;
 import dto.Camp;
+import dto.IndexMap;
 import dto.Reserve;
 import dto.UserData;
 
@@ -32,6 +34,7 @@ public class CampController{
 
 	    @Autowired
 	    CampDAO cd;
+	    
 	
 	    @ModelAttribute //이렇게 잡아놓는작업을 해두면 이걸로 계속 사용할 수 있다.
 	    void init(HttpServletRequest request, Model m) {
@@ -57,6 +60,7 @@ public class CampController{
 			System.out.println("insert");
 			return "/single/CampInsert";
 		}
+		
 		
 		@RequestMapping("CampInsertPro") //관리자만 등록가능하게if문 추가예정
 		public String CampInsertPro(Camp camp) {
@@ -213,11 +217,19 @@ public class CampController{
 			if (login!=null && login.equals("vision")) {
 				
 				Map map = cd.monthReserve();
-				List<Reserve> d1 = cd.dashboard1();
-				List<Reserve> d2 = cd.dashboard2();
+				List<IndexMap> d1 = cd.dashboard1();
+				List<IndexMap> d2 = cd.dashboard2();
+				Map <Integer, String >  md1 = new HashMap<Integer, String>();
+				for (IndexMap im : d1) {
+					md1.put(Integer.parseInt(im.getCo1()), im.getCo2());
+				}
+				Map <Integer, String >  md2 = new HashMap<Integer, String>();
+				for (IndexMap im : d2) {
+					md2.put(Integer.parseInt(im.getCo1()), im.getCo2());
+				}
 				m.addAttribute("map", map);
-				m.addAttribute("d1", d1);
-				m.addAttribute("d2", d2);
+				m.addAttribute("md1", md1);
+				m.addAttribute("md2", md2);
 				return  "/manager/camp/reserveManager";
 			}
 			m.addAttribute("msg", msg);

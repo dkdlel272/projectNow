@@ -107,6 +107,8 @@
 </head>
 <script
 src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
 </script>
 <body>
 <hr>
@@ -136,15 +138,10 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
 				<td>오늘 매출</td>
 				<td>${map.P32}원</td>
 				</tr>
-				<tr>
-				<td>일별 인원</td>
-				<td>${md1}원</td>
-				<td>일별 총매출</td>
-				<td>${md2}원</td>
-				</tr>
 			</thead>
 </table></div>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <hr>
 <div class="container">
 <h1 style="text-align: left;" id="center">매출 대시 보드</h1></div>
@@ -155,73 +152,112 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
     padding-left: 11%;
     display: block;
     height: 364px;"></canvas>
+   
 <script>
-            var context = document
-                .getElementById('myChart')
-                .getContext('2d');
-            var myChart = new Chart(context, {
-                type: 'bar', // 차트의 형태
-                data: { // 차트에 들어갈 데이터
-                    labels: [
-                        1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31
-                    ],
-                    datasets: [
-                        {
-                        	type: 'line',
-                            label: '일별 캠핑객',
-                            fill: false,
-                            data: [],	//캠핑객 값 불러오기
-                            backgroundColor: 'red',
-                            borderColor: 'red'
-                        },
-                        { //데이터
-                            label: '매출', //차트 제목
-                            fill: false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
-                            data: [],	//x축 label에 대응되는 데이터 값
-                            backgroundColor: [
-                                //색상
-                                'yellow','yellow','yellow','yellow','yellow','yellow','yellow','yellow','yellow','yellow','yellow','yellow','yellow','yellow','yellow','yellow','yellow','yellow','yellow','yellow','yellow','yellow','yellow','yellow','yellow','yellow','yellow','yellow','yellow','yellow','yellow'
-                            ],
-                            tension: 0,
-                            spanGaps: true,
-                          borderWidth: 1 //경계선 굵기
-                        } ,
-                    ]
-                },
-                options: {
-                	title:{
-                		display:true,
-                		text:"일별 매출현황및 캠핑객",
-                		fontSize : 25
-                	},
-                    scales: {
-                        yAxes: [
-                            {
-                                ticks: {
-                                    beginAtZero: true
-                                }
-                            }
-                        ]
-                    }
-                }
-            });
+var peoples = new Array();
+<c:forEach var="i"  begin="1" end="31" varStatus="status">
+	var json = new Object();
+	peoples.push("${md1.get(i)}");
+</c:forEach>
+
+var prices = new Array();
+<c:forEach var="i"  begin="1" end="31" varStatus="status">
+	var json = new Object();
+	prices.push("${md2.get(i)}");
+</c:forEach>
+
+$(function(){
+    let ctx = document.getElementById('myChart').getContext('2d');
+    let chart = new Chart(ctx, {
+        type: 'bar',
+        data: chartData,
+        options: chartOptions
+    })
+})
+
+// chart data and options
+let chartData = {
+    labels: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31],
+    datasets: [
+        {
+        	type: 'bar',
+            label: '매출',
+            yAxisID: 'y-left',
+            data: prices,
+            order : 2,
+            backgroundColor: 'red',
+            borderColor: 'red',
+            borderWidth: 1
+        },
+        {
+        	type: 'line',
+            label: '일별 캠핑객',
+            yAxisID: 'y-right',
+            data: peoples,
+            backgroundColor: 'orange',
+            borderColor: 'orange',
+            borderWidth: 1
+        }
+    ]
+}
+
+let chartOptions = {
+    responsive:true,
+    // maintainAspectRatio: false,
+    plugins: {
+      title: {
+        display: true,
+        text: '일별 매출현황및 캠핑객',
+        font: {size: 25}
+      }
+    },
+    scales: {
+        'y-left': {
+            type: 'linear',
+            position: 'left',
+            title: {
+                display: true,
+                text: '매출'
+            },
+            grid: {
+                display: false
+            }
+        },
+        'y-right': {
+            type: 'linear',
+            position: 'right',
+            title: {
+                display: true,
+                text: '일별 캠핑객'
+            },
+            ticks: {
+            	stepSize: 1,
+				min : 0
+            },
+            grid: {
+                display: false
+            }
+        }
+    }
+}
         </script>
  <div class="container">
 		<h1 style="text-align: left;" id="center">일별 캠핑객 현황</h1>
 <table class="table table-hover" style="font: menu;">
 <tr>
 <c:forEach var="day" begin="1" end="31" step="1">
-<th style="padding: 9px; word-break: keep-all;">${day}일</th>
+<th style="padding: 7px; word-break: keep-all;">${day}일</th>
 </c:forEach>
 </tr>
 <tr>
-<c:forEach var="i" items="${md1}" begin="1" end="31" varStatus="status">
-<td style="padding: 9px; word-break: keep-all;">
-${i.value}
+<c:forEach var="i"  begin="1" end="31" varStatus="status">
+<td style="padding: 4px; word-break: keep-all;">
+<c:if test="${md1.get(i) eq null}" >0</c:if>
+${md1.get(i)}명
 </td>
 </c:forEach>
 </tr>
-</table></div>       
+</table></div>      
         
         
 </body> 

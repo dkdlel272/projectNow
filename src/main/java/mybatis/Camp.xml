@@ -90,10 +90,10 @@ select r.*, c.* from reserve r, camp c   where r.campname = c.campname
      from dual
      
 </select>
-<select id="dashboard1" resultType="reserve">
-select checkin,COUNT(*) from reserve where to_char(checkin, 'mm')=to_char(sysdate, 'mm') GROUP BY checkin
+<select id="dashboard1" resultType="indexmap">
+select to_char(checkin, 'dd') co1 , COUNT(*) co2  from reserve where to_char(checkin, 'mm')=to_char(sysdate, 'mm') GROUP BY to_char(checkin, 'dd')
 </select>
-<select id="dashboard2" resultType="reserve">
-select checkin,sum(payidx) from reserve where to_char(checkin, 'mm')=to_char(sysdate, 'mm') GROUP BY checkin
+<select id="dashboard2" resultType="indexmap">
+select to_char(checkin, 'dd') co1, sum(payidx) co2 from reserve where to_char(checkin, 'mm')=to_char(sysdate, 'mm') GROUP BY to_char(checkin, 'dd')
 </select>
 </mapper>

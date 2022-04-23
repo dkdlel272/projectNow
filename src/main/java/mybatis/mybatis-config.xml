@@ -10,6 +10,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="dto.UserData" alias="userdata" />
 		<typeAlias type="dto.Leave" alias="leave" />
 		<typeAlias type="dto.Sale" alias="Sale" />
+		<typeAlias type="dto.IndexMap" alias="indexmap" />
 
 	</typeAliases>
 	<environments default="development">

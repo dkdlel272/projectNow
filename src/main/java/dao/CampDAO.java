@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import dto.Camp;
+import dto.IndexMap;
 import dto.Reserve;
 import dto.UserData;
 
@@ -129,11 +130,11 @@ public class CampDAO {
 		
 			return sqlSession.selectOne(NS+"monthReserve");
 		}
-	public List<Reserve> dashboard1() {
+	public List<IndexMap> dashboard1() {
 		
 			return sqlSession.selectList(NS+"dashboard1");
 	}
-	public List<Reserve> dashboard2() {
+	public List<IndexMap> dashboard2() {
 		
 			return sqlSession.selectList(NS+"dashboard2");
 			}
