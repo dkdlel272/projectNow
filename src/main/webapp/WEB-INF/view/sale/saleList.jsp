@@ -6,70 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style>
-.notosanskr * { 
- font-family: 'Noto Sans KR', sans-serif;
-}
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resouces/css/saleList.css">
 
-h2#center {
-    text-align:center;
-    margin-bottom:50px;
-    color:#fff;
-    line-height:500px;
-    font-weight:bold;
-    font-size: 35px;
-    font-family: 'Noto Sans KR', sans-serif;
-}
-.subback {
-    width:100%;
-    height:500px;
-    overflow:hidden;
-    background:url("<%=request.getContextPath()%>/image/sale.jpg");
-}
-.container {
-    margin-top:150px;
-    margin-bottom:150px;
-}
-
-.in {
-border-radius: 20px;
-border: 1px solid #ddd;
-}
-.inwidth{
-width: 48%;
-margin: 5px;
-}
-.inwidthfull{
-width: 97%;
-margin: 5px;
-
-}
-a {color:#000; font-size:15px; }
-p.button_text {font-size:16px; margin-bottom:0px; font-weight:none; text-align:center;}
-p.button_text a {text-decoration:none !important; display:block; color:#fff;}
-.list_button {
-    width: 150px;
-    padding: px;
-    padding: 10px;
-    background-color: #23272b;
-    margin-top:20px;
-    border-radius: 50px;
-}
-.list_button:hover {
-	background:#545658;
-} 
-.list_button:hover a{
-	color:#fff;
-}
-.col{
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-.card-img-top{
-height: 350px;
-}
-
-</style>
 </head>
 <body>
 
@@ -98,7 +36,7 @@ height: 350px;
 				   	<h4 class="card-title"> No.${li.saleidx} : ${li.subject} </h4>
 				   	<p class="card-text">금액 : ${li.price} 장소 : ${li.location}</p>
 				   	<p class="card-text">판매자 : ${li.writer}</p>
-				   	<a href="#" class="btn list_button" style="color: #fff;">See More</a>
+				   	<a href="<%=request.getContextPath() %>/sale/saleInfo?num=${li.saleidx}" class="btn list_button" style="color: #fff;">See More</a>
 				  </div>
 			</div>
 			</div>	

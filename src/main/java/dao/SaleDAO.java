@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import dto.Sale;
+import util.MybatisConnection;
 
 @Component
 public class SaleDAO {
@@ -60,6 +61,26 @@ public class SaleDAO {
 	public List<Sale> selectCondition() {
 
 		return sqlSession.selectList(ns + "selectCondition");
+
+	}
+
+	public Sale selectSaleOne(int saleidx) {
+
+		return sqlSession.selectOne(ns + "selectSaleOne", saleidx);
+
+	}
+
+	public void readCountUp(int saleidx) {
+
+		try {
+
+			sqlSession.update(ns + "selectSaleOne", saleidx);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			sqlSession.commit();
+		}
 
 	}
 

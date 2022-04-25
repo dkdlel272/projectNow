@@ -19,7 +19,15 @@
 </select>
 
 <select id="selectCondition" resultType="sale">
-	select * from sale where condition = '거래가능'  order by saleidx desc;
+	select * from sale where condition = '거래가능'  order by saleidx desc
 </select>
+
+<select id="selectSaleOne" resultType="sale" parameterType="int">
+	select * from sale where saleidx = #{saleidx}
+</select>
+
+<update id="readCountUp" parameterType="int"> 
+update sale set readcnt = readcnt + 1  where saleidx = #{saleidx}
+</update>
 
 </mapper>
