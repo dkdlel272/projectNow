@@ -84,9 +84,6 @@ h2#center {
     </tbody>
   </table>
 </div>
-
-</body>
-
 <script>
 function GoDelete (idx, checkin) {
     let currdate = new Date().toLocaleDateString();		
@@ -116,4 +113,5 @@ function GoReview (idx) {
 	location.href='<%=request.getContextPath() %>/board/boardWriteForm';
 }
 </script>
+</body>
 </html>

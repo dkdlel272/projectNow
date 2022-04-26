@@ -90,12 +90,7 @@ h2#center {
 <li><input type="hidden" name="reserveidx"  value="${Rinfo.reserveidx }" readonly></li>
 <li>예약자명:<input type="text" name="username"  value="${Rinfo.username }" readonly></li>
 <li>캠핑장 : <input type="text" name="campname"  value="${Rinfo.campname }" readonly></li>
-<li>객실 :<select name="room" onchange="changeRoom(this.value)">
-     <c:forEach  var="room"   items="${roomlist}">
-											<option  value="${room }">${room }</option>
-									
-											</c:forEach>
-										</select></li>
+<li>객실 :<input type="text" name="room" value="${Rinfo.room }" readonly></li>
 <li>체크인 :<input type="date" name="checkin"  value="${Rinfo.checkin }" ></li>
 <li>체크아웃 :<input type="date" name="checkout"  value="${Rinfo.checkout }" ></li>
 <li>성인인원수 :<select  name="person" onchange="changePerson(this.value)">
@@ -119,11 +114,6 @@ h2#center {
 </div>
 </form>
 <script>
-function changeRoom(r) {
-	
-	let person = document.querySelector("#roomno");
-	person.innerHTML=r
-}
 function changePerson(p) {
 	
 	let person = document.querySelector("#person");

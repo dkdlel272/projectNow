@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 
@@ -16,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import dao.CampDAO;
 import dao.ReserveDAO;
-import dto.Camp;
 import dto.Reserve;
 
 
@@ -153,7 +154,7 @@ public class ReserveController {
 	}
 	
 	@RequestMapping("ReserveInfo")
-	public String ReserveInfo(HttpServletRequest request, HttpServletResponse response) {
+	public String ReserveInfo() {
 		int idx = Integer.parseInt(request.getParameter("reserveidx"));
 		String login = (String) session.getAttribute("memberId");
 		String msg = "";
@@ -162,11 +163,7 @@ public class ReserveController {
 			msg = "로그인이 필요합니다.";
 			url = request.getContextPath()+"/userdata/loginForm";
 		}
-		try {
-			request.setCharacterEncoding("UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
+		
 		
 		String name = rd.username(login);
 		System.out.println(name);
@@ -174,8 +171,8 @@ public class ReserveController {
 		m.addAttribute("Rinfo", Rinfo);
 		
 		
-		Camp camp = cd.CampInfo(Rinfo.getCampname());
-		m.addAttribute("camp", camp);
+		
+		m.addAttribute("camp", request.getParameter("campname"));
 		
 		
 		m.addAttribute("msg", msg);
@@ -205,15 +202,15 @@ public class ReserveController {
 		m.addAttribute("roomlist", roomlist);
 		
 		
-		Camp camp = cd.CampInfo(Rinfo.getCampname());
-		m.addAttribute("camp", camp);
+		
+		m.addAttribute("camp", request.getParameter("campname"));
 		
 		m.addAttribute("msg", msg);
 		m.addAttribute("url", url);
 		return "/view/reserve/ReserveUpdate";
 	}
 	
-	@RequestMapping("ReserveUpdatePro") //완성
+	@RequestMapping("ReserveUpdatePro")
 	public String ReserveUpdatePro(HttpServletRequest request, HttpServletResponse response) {
 		
 		String msg = "";
@@ -223,11 +220,7 @@ public class ReserveController {
 			msg = "로그인이 필요합니다.";
 			url = request.getContextPath()+"/userdata/loginForm";
 		}
-		try {
-			request.setCharacterEncoding("UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
+		
 		Reserve r = new Reserve();
 		r.setUsername(request.getParameter("username"));
 		r.setCampname(request.getParameter("campname"));
@@ -259,9 +252,8 @@ public class ReserveController {
 		return "/view/alert";
 	}
 	
-	@RequestMapping("ReserveList") //예약 조회  완성
-	public String ReserveList(HttpServletRequest request, HttpServletResponse response) {
-		
+	@RequestMapping("ReserveList") //테스트 끝
+	public String ReserveList() {
 		String login = (String) session.getAttribute("memberId");
 		String msg = "";
 		String url = "";
@@ -269,16 +261,15 @@ public class ReserveController {
 			msg = "로그인이 필요합니다.";
 			url = request.getContextPath()+"/userdata/loginForm";
 		}
-		try {
-			request.setCharacterEncoding("UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
-		
 		String name = rd.username(login);
 		List<Reserve> li = rd.ReserveList(name);
 		
+		SimpleDateFormat  sf = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date();
+		String currdate = sf.format(date);
+		
 		m.addAttribute("li", li);
+		m.addAttribute("currdate", currdate);
 		
 		m.addAttribute("msg", msg);
 		m.addAttribute("url", url);

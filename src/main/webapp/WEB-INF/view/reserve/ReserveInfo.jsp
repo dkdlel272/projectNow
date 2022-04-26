@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>예약정보</title>
 <style>
 .notosanskr * { 
  font-family: 'Noto Sans KR', sans-serif;
