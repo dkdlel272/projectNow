@@ -54,7 +54,7 @@ public class CampController{
 		public String CampInsertPro(Camp camp) {
 			String path = request.getServletContext().getRealPath("/")+"/campupload/";
 			int size=10*1024*1024;
-			
+			System.out.println(path);
 			MultipartFile multipartFile1 = camp.getF1();
 			MultipartFile multipartFile2 = camp.getF2();
 			MultipartFile multipartFile3 = camp.getF3();

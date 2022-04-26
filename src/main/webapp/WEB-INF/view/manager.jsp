@@ -16,7 +16,6 @@ element.style {
     padding-left: 15%;
     display: block;
     height: 364px;
-    box-sizing: border-box;
 }
 .table {
     padding-right: 0px;

@@ -10,7 +10,6 @@
 <head>
 <meta charset="UTF-8">
 <title>객실관리</title>
-</head>
 <style>
 button{
 padding: 5px;
@@ -19,102 +18,25 @@ border-radius: 15px;
 border-color: black;
 border:solid 0.25px;
 background-color: white;
+cursor: grab;
 }
-
-.container, .container-lg, .container-md, .container-sm, .container-xl {
-    max-width: 100%;
-    margin: inherit;
-    width: 100%;
-    padding-right: 15px;
-    padding-left: 290px;
+.table-hover{
+padding-right: 0px;width: 100%;margin-bottom: 1rem;border: 0px solid #bcbcbc;color: #212529;margin-left: 85px;border-collapse: collapse;text-align-last: center;
 }
-.wrapper {
-  width: 50px;
-  height: 50px;
-  text-align: center;
-  margin: 50px auto;
+h5{
+float: right;padding-bottom: 10px;margin: inherit;margin-right: 30px;
 }
-#switch {
-  position: absolute;
-  /* hidden */
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-}
-
-.switch_label {
-  position: relative;
-  cursor: pointer;
-  display: inline-block;
-  width: 58px;
-  height: 28px;
-  background: #fff;
-  border: 2px solid #daa;
-  border-radius: 20px;
-  transition: 0.2s;
-}
-.switch_label:hover {
-  background: #efefef;
-}
-.onf_btn {
-  position: absolute;
-  top: 4px;
-  left: 3px;
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  border-radius: 20px;
-  background: #000;
-  transition: 0.2s;
-}
-#switch:checked+.switch_label {
-  background: #c44;
-  border: 2px solid #c44;
-}
-.switch_label {
-    position: relative;
-    cursor: pointer;
-    display: inline-block;
-    width: 63px;
-    height: 32px;
-    background: #fff;
-    border: 2px solid #181616;
-    border-radius: 20px;
-    transition: 0.2s;
-    margin-left: -125px;
-    margin-bottom: -50px;
-}
-.wrapper {
-    width: 50px;
-    height: 50px;
-    text-align: center;
-    margin: -35px auto;
-    margin-left: 140px;
-    margin-bottom: 3px;
-}
-#switch:checked+.switch_label:hover {
-  background: #e55;
-}
-
-#switch:checked+.switch_label .onf_btn {
-  left: 34px;
-  background: #fff;
-  box-shadow: 1px 2px 3px #00000020;
-}
-.table td, .table th {
-    text-align-last: center;
-    padding: 0.75rem;
-    vertical-align: top;
-    border-top: 1px solid #dee2e6;
-}
+.container{
+margin-top: 0px;max-width: 100%;margin: inherit;width: 100%;padding-right: 85px;padding-left: 200px;}
 </style>
+</head>
 <body>
 <hr>
 	<!-- table list start //안되면 adminchk넣기 -->
 	<div class="container">
-		<h1 style="text-align: left;" id="center">캠핑장 리스트 <h5 style="float: right;padding-bottom: 10px;margin: inherit;margin-right: 30px;"><button type="button" onclick="window.open('<%=request.getContextPath()%>/camp/CampInsert','', 'width=500, height=700')">캠핑장 추가</button></h5></h1>
+		<h1 style="text-align: left;" id="center">캠핑장 리스트 <h5><button style="margin-right: -70px;" type="button" onclick="window.open('<%=request.getContextPath()%>/camp/CampInsert','', 'width=500, height=700')">캠핑장 추가</button></h5></h1>
 <table class="table table-hover">
-			<thead>
+			<thead style="text-align: center;">
 				<tr>
 				<td>이미지</td>
 				<td>캠핑장이름</td>
@@ -145,7 +67,7 @@ background-color: white;
 
 <hr>
 	<!-- table list start //안되면 adminchk넣기 -->
-	<div class="container">
+	<div class="container" >
 		<h1 style="text-align: left;" id="center">캠핑장 예약 현황</h1>
 <table class="table table-hover">
 			<thead>
