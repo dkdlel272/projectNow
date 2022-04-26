@@ -143,37 +143,28 @@ value="<fmt:parseDate value ="${Rinfo.checkout}" var="checkout" pattern="yyyy-MM
 </form>
 <script>
 function GoDelete (idx, checkin) {
-	       let currdate = new Date().toLocaleDateString();		//현재 시스템에 날짜가 어떻게 저장되어있는지 출력
+	       let currdate = new Date().toLocaleDateString();		
 	       
 	       var str = currdate;
-	       var newStr = str.split(".");												//2022.04.13에서 split(".")을 한 결과 = 2022, 4, 13, 처럼 배열로 출력
-	       var newcheckin = checkin.split(" ");								//체크인 날짜에서 공백을 제거한 결과 = 2022-04-13,00:00:00 로 출력
-
-			if (newStr[1]<10)  newStr[1] = '0'+newStr[1].trim()		//배열[1]은 4이며 10보다 작으면 앞에'0'을 붙히고 공백을 제거해준다  결과 => 20220413
+	       var newStr = str.split(".");												
+	       var newcheckin = checkin.split(" ");								
+	       let chk = false
+			if (newStr[1]<10)  newStr[1] = '0'+newStr[1].trim()		
 			
-			let newdate = newStr[0]+"-"+newStr[1].trim()+"-"+newStr[2].trim();		//20220413에서 배열사이에 "-"추가 후 공백제거 후 변수명 newdate 로 저장
-			let regdate = newcheckin[0].trim()				//체크인은 배열 2022-04-13 과 00:00:00 으로 구성되어있으므로 첫번째배열인[0]만 남기고 뒷부분은 삭제해서 regdate로 저장
-		
-//			alert("체크인 "+(newdate == regdate))
-			
-		/* 	var test = currdate;
-			var newTest = test.replace(/\./gi, "-")
-			var newTest2 = newTest.slice(0, -1);
-			var newTest3 = newTest2.replace('4','04')
-			alert("정규식"+newTest)
-			alert("new2"+newTest2)
-			alert("new3"+newTest2)
-			
-	        alert("체크인"+checkin) */
+			let newdate = newStr[0]+"-"+newStr[1].trim()+"-"+newStr[2].trim();		
+			let regdate = newcheckin[0].trim()				
 	        
 	        if(newdate == regdate) { 
-	        	alert("예약당일은 취소가 불가능합니다.")
-	        	return;
-	        } else {
-	        	confirm("*예약을 취소하시겠습니까? \n *예약당일은 취소가 불가능합니다.")
-	        	alert("예약이 취소되었습니다.")
-	        	location.href='<%=request.getContextPath() %>/reserve/ReserveDeletePro?reserveidx='+idx;
-	        }
+			     	alert("예약당일은 취소가 불가능합니다.")
+			     	return;
+			     } else {
+			    	chk = confirm("*예약을 취소하시겠습니까? \n *예약당일은 취소가 불가능합니다.")
+			     	 chk ? alert("예약이 취소되었습니다.") 	: alert("취소하지않습니다");
+			     	
+			     }
+				if (chk) {
+					location.href='<%=request.getContextPath() %>/reserve/ReserveDeletePro?reserveidx='+idx;
+				}
 }
 function GoUpdate (idx) {
 	location.href='<%=request.getContextPath() %>/reserve/ReserveUpdate?reserveidx='+idx;

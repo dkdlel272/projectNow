@@ -39,6 +39,13 @@
 		<!-- css적용하기 위함 -->
 		<mvc:resources mapping="/resouces/**" location="/resouces/" cache-period="60" />
 		
+		<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/reserve/**"/>			<!--  로그인인터셉터가 필요한 페이지 추가 -->
+			
+			<bean class="interceptor.LoginInterceptor" />
+			</mvc:interceptor>
+		</mvc:interceptors>
 		
 		
 		<!-- 
@@ -62,27 +69,6 @@
 			</property>
 		</bean> -->
 		
-		
-	<!-- 	<mvc:interceptors>
-		
-			<mvc:interceptor>
-			<mvc:mapping path="/acl/**"/>
-			<bean class="service.AdminInterceptor" />direct 연결, acl
-			</mvc:interceptor>
-			
-			<bean class="service.MeasuringInterceptor" /> 모든 URL
-			
-			<mvc:interceptor>
-			<mvc:mapping path="/members/m2"/>
-			<mvc:mapping path="/files/**"/>
-			<ref bean = "login"/>reference 연결 , members&files
-			</mvc:interceptor>
-		</mvc:interceptors> 
-		
-		
-		<bean id="login" class="service.LoginInterceptor" />
-		
-	-->
 
 		
 	

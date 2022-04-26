@@ -46,6 +46,12 @@ color: #6c757d;
 </style>
 </head>
 <body>
+<script>
+	if ('${param.msg}') {
+		alert('${param.msg}')
+	}
+</script>
+
 <div class="subback">
     <h2 id="center">로그인</h2>
 </div>

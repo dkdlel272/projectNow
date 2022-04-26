@@ -64,7 +64,7 @@ table  td {
 	  
 	  <tr>
 	  	<th>캠핑장</th>
-	  	<td><input type="text" class="form-control" name="campname" value="${campname }" readonly></td>
+	  	<td><input type="text" class="form-control" name="campname" value="${camp.campname }" readonly></td>
 	  	<td>입니다.</td>
 	  </tr>	
 	  
@@ -83,7 +83,7 @@ table  td {
 	  <tr>
 	  	<th>체크인</th>
 	  	<td><input type="date" class="form-control" name="checkin"  ></td>
-	  	<td style="color:red; font-weight:bold;">*당일은 예약취소가 불가능합니다.</td></td>
+	  	<td style="color:red; font-weight:bold;">*당일은 예약취소가 불가능합니다.</td>
 	  </tr>	
 	  
 	  <tr>
@@ -115,28 +115,5 @@ table  td {
 	</div>
 	</form>
 	</div>
-<script>
-function(date) {
-	minDate:0
-}
-
-$(function(){
-    $('.datepicker').datepicker();
-  })
-
-$.datepicker.setDefaults({
-	  dateFormat: 'yy-mm-dd',
-	  prevText: '이전 달',
-	  nextText: '다음 달',
-	  monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-	  monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-	  dayNames: ['일', '월', '화', '수', '목', '금', '토'],
-	  dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
-	  dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-	  showMonthAfterYear: true,
-	  yearSuffix: '년',
-	  minDate:0
-	});
-</script>
 </body>
 </html>
