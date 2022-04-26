@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import dao.CampDAO;
 import dao.ReserveDAO;
+import dto.Camp;
 import dto.Reserve;
 
 
@@ -31,9 +32,10 @@ public class ReserveController {
 
     @Autowired
     ReserveDAO rd;
+    @Autowired
     CampDAO cd;
     
-    @ModelAttribute //이렇게 잡아놓는작업을 해두면 이걸로 계속 사용할 수 있다.
+    @ModelAttribute
     void init(HttpServletRequest request, Model m) {
         this.request = request;
         this.m = m;
@@ -45,33 +47,26 @@ public class ReserveController {
 	
 	
 	@RequestMapping("selectroom")
-	public String selectroom(HttpServletRequest request, HttpServletResponse response) { 
-        
+	public String selectroom() { 
 			m.addAttribute("campname", request.getParameter("campname"));
 		    return "/single/roomlist";
 	}
 	
 	@RequestMapping("ReserveInsert") //완료
-	public String ReserveInsert(HttpServletRequest request, HttpServletResponse response) {
+	public String ReserveInsert(String campname) {
 		
 		String login = (String) session.getAttribute("memberId");
-		String msg = "";
-		String url = "";
-		if (login == null || login.trim().equals("")) { //login check
-			msg = "로그인이 필요합니다.";
-			url = request.getContextPath()+"/userdata/loginForm";
-		}
-		
 		String name = rd.username(login);
 		m.addAttribute("name", name);
-		m.addAttribute("campname", request.getParameter("campname")); //파라미터로 받아온 campname를 그대로 사용
-		m.addAttribute("msg", msg);
-		m.addAttribute("url", url);
+		
+		Camp camp = cd.chooseCamp(campname);
+		m.addAttribute("camp", camp);
+		
 		
 		return "/view/reserve/ReserveInsert";
 	}
 	@RequestMapping("ReserveInsertPro") //완료
-	public String ReserveInsertPro(HttpServletRequest request, HttpServletResponse response) {
+	public String ReserveInsertPro(Reserve reserve) {
 		String login = (String) session.getAttribute("memberId");
 		String msg = "";
 		String url = "";
@@ -79,26 +74,8 @@ public class ReserveController {
 			msg = "로그인이 필요합니다.";
 			url = request.getContextPath()+"/userdata/loginForm";
 		}
-		try {
-			request.setCharacterEncoding("UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
-//		rd.ReserveInsert(r);
-		Reserve r = new Reserve();
-		r.setUsername(request.getParameter("username"));
-		r.setCampname(request.getParameter("campname"));
-		r.setRoom(request.getParameter("room"));
-		r.setCheckin(request.getParameter("checkin"));
-		r.setCheckout(request.getParameter("checkout"));
-		r.setPerson(Integer.parseInt(request.getParameter("person")));
-		r.setPayidx(Integer.parseInt(request.getParameter("payidx")));
-		r.setKid(Integer.parseInt(request.getParameter("kid")));
-		r.setRoomno(Integer.parseInt(request.getParameter("roomno")));
 		
-		r.setReserveidx(rd.nextIdx());
-		System.out.println(r.getReserveidx());
-		int idx = rd.ReserveInsert(r);
+		int idx = rd.ReserveInsert(reserve);
 		if (idx >= 1) {
 			msg = "예약이 완료되었습니다.";
 			url = request.getContextPath()+"/reserve/ReserveList";

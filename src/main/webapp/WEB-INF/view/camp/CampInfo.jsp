@@ -41,11 +41,23 @@ h2#center {
   padding: 10px;
   }
   .comment {
-  padding: 10px;
+  float: left;
   }
   .carousel-item {
   width: 800px;
   height: 700px;
+  }
+  .content {
+  	border-radius:10px;
+    padding:10px;
+    border: 1px solid #ddd;
+    resize: none;
+  }
+  .campaddr{
+ 	border-radius:10px;
+  	padding:10px;
+    border: 1px solid #ddd;
+    resize: none;
   }
   </style>
 </head>
@@ -85,15 +97,45 @@ h2#center {
   </a>
 </div>
 <div class="comment">
-<ul>
-<li><strong>캠핑장이름</strong><input style="width: 500px;" type="text" name="campname"  value="${info.campname }" readonly></li>
-<li>캠핑장 주소 :<input style="width: 500px;" type="text" name="campname"  value="${info.campaddr }" readonly></li>
-<li>객실 :<input type="text" name="room"  value="${info.room }" readonly></li>
-<li>금액 :<input type="text" name="payidx"  value="${info.payidx }" readonly></li>
-<li>체크인 :<input type="time" name="chkin"  value="15:00" readonly></li>
-<li>체크아웃 :<input type="time" name="chkout"  value="11:00" readonly></li>
-<li>소개 글 :<input type="text" name="content" value="${info.content }"></li>
-</ul>
+<table class="table table-borderless">
+    <tbody>
+      <tr>
+        <td>캠핑장</td>
+        <td><input type="text" name="campname"  value="${info.campname }" readonly></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>주소</td>
+        <td><textarea class="campaddr" name="campaddr"   rows="2" cols="50"readonly>${info.campaddr }</textarea></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>타입</td>
+        <td><input type="text" name="room"  value="${info.room }" readonly></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>금액</td>
+        <td><input type="text" name="payidx" value="${info.payidx }" readonly></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>체크인</td>
+        <td><input type="time" name="chkin"  value="15:00" readonly></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>체크아웃</td>
+        <td><input type="text" name="chkout"  value="11:00" readonly></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>소개</td>
+        <td><textarea class="content" name="content"  rows="2" cols="50"readonly>${info.content }</textarea></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
 <div class="confirm-btn">
 <button type="button" class="btn btn-dark" onclick="newReserve('${info.campname }')">예약하기</button>
 <button type="button" class="btn btn-dark" onclick="Back()">뒤로가기</button>

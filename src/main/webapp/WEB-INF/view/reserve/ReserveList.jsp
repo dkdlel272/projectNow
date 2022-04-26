@@ -90,7 +90,8 @@ function GoDelete (idx, checkin) {
     
     var str = currdate;
     var newStr = str.split(".");												
-    var newcheckin = checkin.split(" ");								
+    var newcheckin = checkin.split(" ");				
+    let chk = false
 
 		if (newStr[1]<10)  newStr[1] = '0'+newStr[1].trim()		
 		
@@ -101,10 +102,13 @@ function GoDelete (idx, checkin) {
      	alert("예약당일은 취소가 불가능합니다.")
      	return;
      } else {
-     	confirm("*예약을 취소하시겠습니까? \n *예약당일은 취소가 불가능합니다.")
-     	alert("예약이 취소되었습니다.")
-     	location.href='<%=request.getContextPath() %>/reserve/ReserveDeletePro?reserveidx='+idx;
+    	chk = confirm("*예약을 취소하시겠습니까? \n *예약당일은 취소가 불가능합니다.")
+     	 chk ? alert("예약이 취소되었습니다.") 	: alert("취소하지않습니다");
+     	
      }
+	if (chk) {
+		location.href='<%=request.getContextPath() %>/reserve/ReserveDeletePro?reserveidx='+idx;
+	}
 }
 function GoInfo (idx) {
 	location.href='<%=request.getContextPath() %>/reserve/ReserveInfo?reserveidx='+idx;
