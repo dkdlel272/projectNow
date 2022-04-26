@@ -17,13 +17,16 @@ public class Camp {
 	private String chkout;
 	private String content;
 	
-	private MultipartFile f;
+	private MultipartFile f1;
+	private MultipartFile f2;
+	private MultipartFile f3;
 	
 	public Camp () {}
+	
 
 	public Camp(int campidx, String campname, String campaddr, String room, String campimg, String campimg2,
 			String campimg3, int roomcnt, int payidx, int roomno, String chkin, String chkout, String content,
-			MultipartFile f) {
+			MultipartFile f1, MultipartFile f2, MultipartFile f3) {
 		super();
 		this.campidx = campidx;
 		this.campname = campname;
@@ -38,8 +41,11 @@ public class Camp {
 		this.chkin = chkin;
 		this.chkout = chkout;
 		this.content = content;
-		this.f = f;
+		this.f1 = f1;
+		this.f2 = f2;
+		this.f3 = f3;
 	}
+
 
 	public int getCampidx() {
 		return campidx;
@@ -145,22 +151,41 @@ public class Camp {
 		this.content = content;
 	}
 
-	public MultipartFile getF() {
-		return f;
+	public MultipartFile getF1() {
+		return f1;
 	}
 
-	public void setF(MultipartFile f) {
-		this.f = f;
+	public void setF1(MultipartFile f1) {
+		this.f1 = f1;
+	}
+
+	public MultipartFile getF2() {
+		return f2;
+	}
+
+	public void setF2(MultipartFile f2) {
+		this.f2 = f2;
+	}
+
+	public MultipartFile getF3() {
+		return f3;
+	}
+
+	public void setF3(MultipartFile f3) {
+		this.f3 = f3;
 	}
 
 	@Override
 	public String toString() {
-		return "Camp [campidx=" + campidx + ", campname=" + campname + ", campaddr=" + campaddr + ", room=" + room
-				+ ", campimg=" + campimg + ", campimg2=" + campimg2 + ", campimg3=" + campimg3 + ", roomcnt=" + roomcnt
-				+ ", payidx=" + payidx + ", roomno=" + roomno + ", chkin=" + chkin + ", chkout=" + chkout + ", content="
-				+ content + ", f=" + f + "]";
+		return "{\"campidx\":\"" + campidx + "\", \"campname\":\"" + campname + "\", \"campaddr\":\"" + campaddr
+				+ "\", \"room\":\"" + room + "\", \"campimg\":\"" + campimg + "\", \"campimg2\":\"" + campimg2
+				+ "\", \"campimg3\":\"" + campimg3 + "\", \"roomcnt\":\"" + roomcnt + "\", \"payidx\":\"" + payidx
+				+ "\", \"roomno\":\"" + roomno + "\", \"chkin\":\"" + chkin + "\", \"chkout\":\"" + chkout
+				+ "\", \"content\":\"" + content + "\", \"f1\":\"" + f1 + "\", \"f2\":\"" + f2 + "\", \"f3\":\"" + f3
+				+ "\"}";
 	}
 
+	
 	
 	
 

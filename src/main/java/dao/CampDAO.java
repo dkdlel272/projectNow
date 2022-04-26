@@ -49,9 +49,9 @@ public class CampDAO {
 		return 0;
 	}
 	
-	public int CampUpdate(Camp camp) {
+	public int CampUpdate(Camp idx) {
 		try {
-			return sqlSession.update(NS+"CampUpdate",camp);
+			return sqlSession.update(NS+"CampUpdate",idx);
 		} catch (Exception e){
 			e.printStackTrace();
 		}finally {
@@ -113,10 +113,6 @@ public class CampDAO {
 	}
 	
 	
-	public List<UserData> blackList(String black) {
-
-			return sqlSession.selectList(NS+"blackList",black);
-	}	
 	public List<Reserve> reserveListAll() {
 		
 			return sqlSession.selectList(NS+"reserveListAll");

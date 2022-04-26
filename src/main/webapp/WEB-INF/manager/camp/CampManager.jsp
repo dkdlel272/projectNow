@@ -112,7 +112,7 @@ background-color: white;
 <hr>
 	<!-- table list start //안되면 adminchk넣기 -->
 	<div class="container">
-		<h1 style="text-align: left;" id="center">캠프 생성 <h5><button type="button" onclick="window.open('<%=request.getContextPath()%>/camp/CampInsert','', 'width=500, height=700')">객실등록</button></h5></h1>
+		<h1 style="text-align: left;" id="center">캠핑장 리스트 <h5 style="float: right;padding-bottom: 10px;margin: inherit;margin-right: 30px;"><button type="button" onclick="window.open('<%=request.getContextPath()%>/camp/CampInsert','', 'width=500, height=700')">캠핑장 추가</button></h5></h1>
 <table class="table table-hover">
 			<thead>
 				<tr>
@@ -134,7 +134,11 @@ background-color: white;
 <td>
 <form action="<%=request.getContextPath() %>/camp/campDelete" method="post">
 <input type="hidden"   value="${c.campidx}"    name="campidx">
-<button type="submit">삭제</button></form></td>
+<button style="position: absolute; margin-left: 100px;" type="submit">삭제</button>
+</form>
+<form action="<%=request.getContextPath() %>/camp/campUpdate" method="post">
+<input type="hidden"   value="${c.campidx}"    name="campidx">
+<button style="margin-right: 40px;" type="button" onclick="window.open('<%=request.getContextPath()%>/camp/campUpdate?campidx=${c.campidx}','', 'width=500, height=700')">수정</button></form></td>
 				</tr>
 				</c:forEach></tbody>
 </table></div>
@@ -151,8 +155,8 @@ background-color: white;
 				<th>캠핑장 이름</th>
 				<th>캠핑장 주소</th>
 				<th>객실 타입</th>
-				<th>남은 객실</th>
 				<th>보유 객실</th>
+				<th>남은 객실</th>
 				<th>요금</th>
 				<th>체크인</th>
 	 			<th>체크아웃</th>
@@ -167,8 +171,8 @@ background-color: white;
 				<td>${r.campname}</td>
 				<td>${r.campaddr}</td> 
 				<td>${r.room}</td>
-		 		<td>${r.roomcnt}</td> 
 				<td>${r.roomno}</td>
+		 		<td>${r.roomcnt}</td> 
 				<td>${r.payidx}</td>
 				<td><fmt:parseDate value ="${r.checkin}" var="checkin" pattern="yyyy-MM-dd" />
 		<fmt:formatDate value ="${checkin}" pattern="yyyy-MM-dd" /></td>	
