@@ -39,7 +39,7 @@ h2#center {
 <form action="<%=request.getContextPath() %>/camp/CampInsertPro" enctype="multipart/form-data" method="post">
 <!-- <h2   id="center">게시물 작성</h2> -->
 				<div class="form-group">
-					<label>캠핑장번호</label> 
+					<label>캠핑장번호되나</label> 
 					<input type="text" class="form-control" name="campidx">
 					<label>캠핑장이름</label> 
 					<input type="text" class="form-control" name="campname"> 

@@ -80,7 +80,9 @@ $('.overlay').addClass('overlay-blue');
 
 
 <body>
-
+<script>
+if('${param.msg}'){alert('${param.msg}')}
+</script>
 <div id="captioned-gallery">
       <video class="videobcg" preload="auto" autoplay="true" loop="loop" muted="muted" height="auto !important" playsinline="">
          <source src="<%=request.getContextPath()%>/image/wave.mp4" type="video/mp4">
