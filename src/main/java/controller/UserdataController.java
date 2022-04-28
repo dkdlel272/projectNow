@@ -56,6 +56,22 @@ public class UserdataController  {
 		this.session = request.getSession();
 	}
 	
+	@RequestMapping("joinForm")
+	public String joinForm() {
+		
+		return "/view/userdata/joinForm";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	@RequestMapping("sendMailForm")
 	public String sendMailForm() {
@@ -64,10 +80,10 @@ public class UserdataController  {
 	}
 	
 	@RequestMapping("sendMail")
-	public String sendMail(HttpServletRequest request, HttpServletResponse response) {
+	public String sendMail(String toMail) {
 		
-		//메일 중복 확인
-		String toMail = request.getParameter("toMail");
+		//메일 중복 확인 
+		System.out.println(toMail);
 		
 		UserdataDao ud = new UserdataDao();
 		int u = ud.findMailUser(toMail);
@@ -172,15 +188,7 @@ public class UserdataController  {
 	
 	
 	
-	@RequestMapping("joinForm")
-	public String joinForm() {
-		
-		String email = request.getParameter("email");
-		
-		m.addAttribute("email", email);
-		
-		return "/view/userdata/joinForm";
-	}
+
 	
 	
 	
