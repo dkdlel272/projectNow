@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
@@ -105,8 +105,6 @@
 }
 </style>
 </head>
-<script
-src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
 <script
 src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
 </script>
@@ -231,7 +229,7 @@ let chartOptions = {
                 text: '일별 캠핑객'
             },
             ticks: {
-            	stepSize: 1,
+            	stepSize: 1,	
 				min : 0
             },
             grid: {
@@ -240,6 +238,8 @@ let chartOptions = {
         }
     }
 }
+
+
         </script>
  <div class="container">
 		<h1 style="text-align: left;" id="center">일별 캠핑객 현황</h1>
@@ -257,7 +257,7 @@ ${md1.get(i)}명
 </td>
 </c:forEach>
 </tr>
-</table></div>      
+</table></div>       
         
         
 </body> 

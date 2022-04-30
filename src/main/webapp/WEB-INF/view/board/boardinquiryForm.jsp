@@ -8,8 +8,6 @@
 <title>Insert title here</title>
 
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resouces/css/boardinquiryForm.css">
-
-</head>
 <script>
 $(document).ready(function() {
 
@@ -37,6 +35,8 @@ $(document).ready(function() {
 	     
 	});
 </script>
+</head>
+
 <body>
 <div class="subback">
 	<h2 id="center">자주묻는질문</h2>

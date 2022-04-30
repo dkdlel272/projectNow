@@ -43,21 +43,8 @@ public class CampController{
 	        this.session = request.getSession();
 	    }
 	    
-    
-	    
-		@RequestMapping("main")
-		public String main(HttpServletRequest request, HttpServletResponse response) {
-			try {
-				request.setCharacterEncoding("UTF-8");
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
-			}
-			    return "/view/main";
-		}
-		
 		@RequestMapping("CampInsert")
-		public String ReservatIoninput(HttpServletRequest request, HttpServletResponse response) {
-			System.out.println("insert");
+		public String CampInsert() {
 			return "/single/CampInsert";
 		}
 		
@@ -66,15 +53,15 @@ public class CampController{
 		public String CampInsertPro(Camp camp) {
 			String path = request.getServletContext().getRealPath("/")+"/campupload/";
 			int size=10*1024*1024;
-			
-			MultipartFile multipartFile = camp.getF();
-			if(!multipartFile.isEmpty()) {
-				File file = new File(path, multipartFile.getOriginalFilename());
+			System.out.println(path);
+			MultipartFile multipartFile1 = camp.getF1();
+			MultipartFile multipartFile2 = camp.getF2();
+			MultipartFile multipartFile3 = camp.getF3();
+			if(!multipartFile1.isEmpty()) {
+				File file = new File(path, multipartFile1.getOriginalFilename());
 				try {
-					multipartFile.transferTo(file);
-					camp.setCampimg(multipartFile.getOriginalFilename());
-					camp.setCampimg2(multipartFile.getOriginalFilename());
-					camp.setCampimg3(multipartFile.getOriginalFilename());
+					multipartFile1.transferTo(file);
+					camp.setCampimg(multipartFile1.getOriginalFilename());
 				} catch (IllegalStateException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -84,7 +71,36 @@ public class CampController{
 				}
 			}else {
 				camp.setCampimg("");
+			
+			}
+			if(!multipartFile2.isEmpty()) {
+				File file = new File(path, multipartFile2.getOriginalFilename());
+				try {
+					multipartFile2.transferTo(file);
+					camp.setCampimg2(multipartFile2.getOriginalFilename());
+				} catch (IllegalStateException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}else {
 				camp.setCampimg2("");
+			}
+			if(!multipartFile3.isEmpty()) {
+				File file = new File(path, multipartFile3.getOriginalFilename());
+				try {
+					multipartFile3.transferTo(file);
+					camp.setCampimg3(multipartFile3.getOriginalFilename());
+				} catch (IllegalStateException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}else {
 				camp.setCampimg3("");
 			}
 			
@@ -108,9 +124,7 @@ public class CampController{
 		}
 		
 		@RequestMapping("CampSearch")
-		public String CampSearch(HttpServletRequest request, HttpServletResponse response) {
-			String searchName = request.getParameter("searchName"); 
-			 String searchType = request.getParameter("searchType");
+		public String CampSearch(String searchName, String searchType) {
 			List<Camp> search = cd.SearchList(searchName, searchType);
 			m.addAttribute("search", search);
 			
@@ -118,35 +132,15 @@ public class CampController{
 		}
 		
 		@RequestMapping("CampInfo") //캠핑장 상세보기 해당캠핑장의 정보가 넘어와야 함
-		public String CampInfo(HttpServletRequest request, HttpServletResponse response) {
-			String campname = request.getParameter("campname");
+		public String CampInfo(String campname) {
 			Camp info = cd.CampInfo(campname);
 			m.addAttribute("info", info);
 			
 			return "/view/camp/CampInfo";
 		}
 		
-		@RequestMapping("payManager")
-		public String payManager(HttpServletRequest request, HttpServletResponse respon) {
-
-			return "/manager/camp/payManager";
-		}
-		
-		
-//		@RequestMapping("CampUpdate") //관리자권한 (캠핑장 수정)
-//		public String CampUpdate(HttpServletRequest request, HttpServletResponse response) {
-//			int campidx = Integer.parseInt(request.getParameter("campidx"));
-//			CampDAO cd = new CampDAO();
-//			Camp c = cd.CampUpdate(camp);
-//			m.addAttribute("c", c);
-//			return "/view/camp/CampUpdate";
-//		}
-		
-	
-		
-		
 		@RequestMapping("CampManager")
-		public String CampManager(HttpServletRequest request, HttpServletResponse response) {
+		public String CampManager() {
 			List<Reserve> rl = cd.reserveListAll();
 			List<Camp> cl = cd.campListAll();
 			m.addAttribute("cl", cl);
@@ -155,67 +149,28 @@ public class CampController{
 		}
 			
 		@RequestMapping("campListAll")
-		public String campListAll(HttpServletRequest request, HttpServletResponse respon) {
-			HttpSession session = request.getSession();
-			String login = (String) session.getAttribute("memberId");
-			// 로그인 불가이면
-			String msg = "";
-			String url = "";
-			if (login !=null) {
+		public String campListAll() {
 				List<Camp> cl = cd.campListAll(); 
 				m.addAttribute("cl", cl);
 				return "/manager/camp/CampManager";
 			}
-			m.addAttribute("msg", msg);
-			m.addAttribute("url", url);
-			return "/view/alert";
-		}
 	
 		@RequestMapping("campDelete")
-		public String campDelete(HttpServletRequest request, HttpServletResponse respon) {
-			HttpSession session = request.getSession();
-			String  login = (String) session.getAttribute("memberId");
-			String msg = "로그인이 필요 합니다";
-			String url = request.getContextPath() + "/userdata/loginForm";
-		
-			int idx = Integer.parseInt(request.getParameter("campidx"));
-			Camp ci = cd.selectCamp(idx);
-		
-			if (login!=null && login.equals("vision")) {
+		public String campDelete(int campidx) {
+			String msg = "";
+			String url = "";
+			Camp ci = cd.selectCamp(campidx);
 				int cl = cd.campDelete(ci);
 						msg = "삭제완료";
 						url = request.getContextPath() + "/camp/CampManager";
-					}
 			m.addAttribute("msg", msg);
 			m.addAttribute("url", url);
 			return "/view/alert";
 		}
 		
-		@RequestMapping("reserveListAll")
-		public String reserveListAll(HttpServletRequest request, HttpServletResponse respon) {
-			HttpSession session = request.getSession();
-			String login = (String) session.getAttribute("memberId");
-			// 로그인 불가이면
-			String msg = "";
-			String url = "";
-			if (login!=null && login.equals("vision")) {
-				List<Reserve> rl = cd.reserveListAll();
-				m.addAttribute("rl", rl);
-				return "/manager/camp/CampManager";
-			}
-			m.addAttribute("msg", msg);
-			m.addAttribute("url", url);
-			return "/view/alert";
-		}
+		
 		@RequestMapping("reserveManager")
 		public String reserveManager(HttpServletRequest request, HttpServletResponse respon) {
-			HttpSession session = request.getSession();
-			String  login = (String) session.getAttribute("memberId");
-			String msg = "로그인이 필요 합니다";
-			String url = request.getContextPath() + "/userdata/loginForm";
-			
-			if (login!=null && login.equals("vision")) {
-				
 				Map map = cd.monthReserve();
 				List<IndexMap> d1 = cd.dashboard1();
 				List<IndexMap> d2 = cd.dashboard2();
@@ -232,10 +187,32 @@ public class CampController{
 				m.addAttribute("md2", md2);
 				return  "/manager/camp/reserveManager";
 			}
+		
+		@RequestMapping("campUpdate")
+		public String campUpdate(int campidx) {
+				Camp c = cd.selectCamp(campidx);
+				System.out.println(c);
+				m.addAttribute("c", c);
+				return "/single/campUpdate";
+		}
+		@RequestMapping("CampUpdatePro")
+		public String CampUpdatePro(Camp camp) {
+			String msg ="";
+			String url ="";
+				Camp c = cd.selectCamp(camp.getCampidx());
+				if(c.getCampidx()==camp.getCampidx()) {
+				cd.CampUpdate(camp);
+				msg = "캠프 정보가 수정 되었습니다";
+				url = request.getContextPath() + "/camp/CampManager";
+				}
 			m.addAttribute("msg", msg);
 			m.addAttribute("url", url);
-			return "/view/alert";
+			return "/view/alert2";
 		}
 		
-		
+		@RequestMapping("payManager")
+		public String payManager() {
+
+			return "/manager/camp/payManager";
+		}
 	} //end class

@@ -120,14 +120,14 @@ figure.slider figure figcaption {
     font-weight: normal;
     font-style: normal;
 }
-#accordion {
+/* #accordion {
    width: 600px;
     margin: 0 auto;
     position: absolute;
     top: 32%;
     z-index: 8888;
     left: 150px;
-}
+} */
 .card-body {
    background: #fdfdfd !important;
 }

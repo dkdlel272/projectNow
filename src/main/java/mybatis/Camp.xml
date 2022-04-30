@@ -17,8 +17,8 @@ delete from camp where campidx = #{campidx}
 
 <update id="CampUpdate" parameterType="camp">
 update camp set
-campaddr = #{campaddr}, room = #{room}, campimg = #{campimg}, 
-payidx = #{payidx}, roomno = #{roomno} 
+campname=#{campname}, campaddr = #{campaddr}, room = #{room}, campimg = #{campimg}, campimg2 = #{campimg2}, campimg3 = #{campimg3}, 
+roomcnt = #{roomcnt}, payidx = #{payidx}, roomno = #{roomno} 
 where campidx = #{campidx}
 </update>
 
@@ -91,7 +91,7 @@ select r.*, c.* from reserve r, camp c   where r.campname = c.campname
      
 </select>
 <select id="dashboard1" resultType="indexmap">
-select to_char(checkin, 'dd') co1 , COUNT(*) co2  from reserve where to_char(checkin, 'mm')=to_char(sysdate, 'mm') GROUP BY to_char(checkin, 'dd')
+select to_char(checkin, 'dd') co1, sum(PERSON+KID) co2 from reserve where to_char(checkin, 'mm')=to_char(sysdate, 'mm') GROUP BY to_char(checkin, 'dd')
 </select>
 <select id="dashboard2" resultType="indexmap">
 select to_char(checkin, 'dd') co1, sum(payidx) co2 from reserve where to_char(checkin, 'mm')=to_char(sysdate, 'mm') GROUP BY to_char(checkin, 'dd')

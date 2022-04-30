@@ -49,11 +49,11 @@
 		</div>
 		<div class="form-group">
 			<label>캠핑장 사진</label> 
-			<input type="file" class="form-control" name="campimg">
+			<input type="file" class="form-control" name="f1">
 			<label>캠핑장 사진2</label> 
-			<input type="file" class="form-control" name="campimg2">
+			<input type="file" class="form-control" name="f2">
 			<label>캠핑장 사진3</label> 
-			<input type="file" class="form-control" name="campimg3">
+			<input type="file" class="form-control" name="f3">
 		</div>
 	<div id="center" style="padding: 3px;">
 		<button type="button" class="btn btn-dark"      onclick="closeCamp(this.form)">저장</button>
