@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>예약하기</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <style>
 .notosanskr * { 
  font-family: 'Noto Sans KR', sans-serif;
@@ -55,13 +57,13 @@ table  td {
 <form action="<%=request.getContextPath() %>/reserve/ReserveInsertPro" method="post">
   <table>
 
-
+<c:forEach var="user" items="${user }">
 	  <tr>
 	  	<th>예약자명</th>
-	  	<td><input type="text" class="form-control" name="username" value="${name }" readonly></td>
-	  	<td>${name }님이 선택하신 캠핑장은</td>
+	  	<td><input type="text" class="form-control" name="username" value="${user.name }" readonly></td>
+	  	<td>${user.name }님이 선택하신 캠핑장은</td>
 	  </tr>
-	  
+	  </c:forEach>
 	  <tr>
 	  	<th>캠핑장</th>
 	  	<td><input type="text" class="form-control" name="campname" value="${camp.campname }" readonly></td>
@@ -82,7 +84,7 @@ table  td {
 	  
 	  <tr>
 	  	<th>체크인</th>
-	  	<td><input type="date" class="form-control" name="checkin"  ></td>
+	  	<td><input type="date" id="currentDate" class="form-control" name="checkin" ></td>
 	  	<td style="color:red; font-weight:bold;">*당일은 예약취소가 불가능합니다.</td>
 	  </tr>	
 	  
@@ -111,9 +113,50 @@ table  td {
       </tr>	
   </table>
 	<div id="center" style="padding: 3px;">
+		<button type="button" class="btn btn-dark" id="kkopay">결제하기</button>
 		<button type="submit" class="btn btn-dark">예약완료</button>
 	</div>
 	</form>
 	</div>
+	<script>
+	
+$("#kkopay").click(function () {
+var IMP = window.IMP; // 생략가능
+IMP.init('imp02961916');
+IMP.request_pay({
+pg: 'html5_inicis',
+
+pay_method: 'card',
+card_quota:'[2,3,4,5,6]',
+
+merchant_uid: 'merchant_' + new Date().getTime(),
+
+name: '${camp.campname}',
+
+amount: '${camp.payidx}',
+
+<c:forEach var="user" items="${user }">
+buyer_email: '${user.email}',
+buyer_name: '${user.name}',
+buyer_tel: '${user.tel}',
+buyer_addr: '${user.address}',
+</c:forEach>
+}, function (rsp) {
+console.log(rsp);
+if (rsp.success) {
+var msg = '결제가 완료되었습니다.';
+msg += '고유ID : ' + rsp.imp_uid;
+msg += '상점 거래ID : ' + rsp.merchant_uid;
+msg += '결제 금액 : ' + rsp.paid_amount;
+msg += '카드 승인번호 : ' + rsp.apply_num;
+} else {
+var msg = '결제에 실패하였습니다.';
+msg += '에러내용 : ' + rsp.error_msg;
+}
+alert(msg);
+});
+});
+
+</script>
 </body>
 </html>

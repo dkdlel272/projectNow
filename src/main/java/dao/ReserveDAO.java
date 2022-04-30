@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import dto.Camp;
 import dto.Reserve;
+import dto.UserData;
 
 @Component
 public class ReserveDAO {
@@ -77,6 +78,10 @@ public int ReserveInsert(Reserve r) {//예약추가
 	
 	public String username(String userid) { //유저이름으로 리스트조회할 때 사용
 			return sqlSession.selectOne(NS+"username", userid);
+	}
+	
+	public List<UserData> userInfo(String userid) {
+		return sqlSession.selectList(NS+"userInfo", userid);
 	}
 	
 	public List<Reserve> Image(int reserveidx){

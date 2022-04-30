@@ -20,6 +20,7 @@ import dao.CampDAO;
 import dao.ReserveDAO;
 import dto.Camp;
 import dto.Reserve;
+import dto.UserData;
 
 
 
@@ -52,30 +53,27 @@ public class ReserveController {
 		    return "/single/roomlist";
 	}
 	
-	@RequestMapping("ReserveInsert") //완료
+	@RequestMapping("ReserveInsert")
 	public String ReserveInsert(String campname) {
 		
 		String login = (String) session.getAttribute("memberId");
 		String name = rd.username(login);
-		m.addAttribute("name", name);
-		
 		Camp camp = cd.chooseCamp(campname);
-		m.addAttribute("camp", camp);
+		List<UserData> user = rd.userInfo(login);
 		
+		m.addAttribute("user", user);
+		m.addAttribute("name", name);
+		m.addAttribute("camp", camp);
 		
 		return "/view/reserve/ReserveInsert";
 	}
-	@RequestMapping("ReserveInsertPro") //완료
+	@RequestMapping("ReserveInsertPro")
 	public String ReserveInsertPro(Reserve reserve) {
-		String login = (String) session.getAttribute("memberId");
 		String msg = "";
 		String url = "";
-		if (login == null || login.trim().equals("")) { //login check
-			msg = "로그인이 필요합니다.";
-			url = request.getContextPath()+"/userdata/loginForm";
-		}
-		
+		reserve.setReserveidx(rd.nextIdx());		//이렇게말고는 방법이 없는건가
 		int idx = rd.ReserveInsert(reserve);
+		
 		if (idx >= 1) {
 			msg = "예약이 완료되었습니다.";
 			url = request.getContextPath()+"/reserve/ReserveList";
@@ -87,38 +85,22 @@ public class ReserveController {
 			m.addAttribute("url", url);
 			return "/view/alert";
 		}
-	@RequestMapping("ReserveDelete") //예약취소 완성
-	public String ReserveDelete(HttpServletRequest request, HttpServletResponse response) {
-		String login = (String) session.getAttribute("memberId");
-		String msg = "로그인이 필요합니다.";
-		String url = request.getContextPath()+"/userdata/loginForm";
-		if (login == null || login.trim().equals("")) {
-
-			m.addAttribute("msg", msg);
-			m.addAttribute("url", url);
-			return "/view/alert";
-		}
-		m.addAttribute("login", login);
+	
+	@RequestMapping("ReserveDelete")
+	public String ReserveDelete() {
 		return "/view/reserve/ReserveDelete";
 	}
-	@RequestMapping("ReserveDeletePro") //팝업은 구현완료 체크인날짜와 오늘날짜비교 테스트
-	public String ReserveDeletePro(HttpServletRequest request, HttpServletResponse response) {
-		int idx = Integer.parseInt(request.getParameter("reserveidx"));
+	
+	@RequestMapping("ReserveDeletePro")
+	public String ReserveDeletePro(int reserveidx) {
+		
 		String login = (String) session.getAttribute("memberId");
 		String msg = "";
 		String url = "";
-		if (login == null || login.trim().equals("")) { //login check
-			msg = "로그인이 필요합니다.";
-			url = request.getContextPath()+"/userdata/loginForm";
-		}
-		try {
-			request.setCharacterEncoding("UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
 		String name = rd.username(login);
-		int num = rd.ReserveDelete(idx);
-			if (num == 0) { //delete no
+		
+		int idx = rd.ReserveDelete(reserveidx);
+			if (idx == 0) { //delete no
 				msg = name + "님의 예약취소시 오류 발생";
 				url = request.getContextPath()+"/reserve/reserveinfo";
 			} else { //delete ok
@@ -131,33 +113,20 @@ public class ReserveController {
 	}
 	
 	@RequestMapping("ReserveInfo")
-	public String ReserveInfo() {
-		int idx = Integer.parseInt(request.getParameter("reserveidx"));
-		String login = (String) session.getAttribute("memberId");
+	public String ReserveInfo(int reserveidx) {
 		String msg = "";
 		String url = "";
-		if (login == null || login.trim().equals("")) { //login check
-			msg = "로그인이 필요합니다.";
-			url = request.getContextPath()+"/userdata/loginForm";
-		}
+		Reserve Rinfo = rd.ReserveInfo(reserveidx);
+		Camp camp = cd.CampInfo(Rinfo.getCampname());
 		
-		
-		String name = rd.username(login);
-		System.out.println(name);
-		Reserve Rinfo = rd.ReserveInfo(idx);
+		m.addAttribute("camp", camp);
 		m.addAttribute("Rinfo", Rinfo);
-		
-		
-		
-		m.addAttribute("camp", request.getParameter("campname"));
-		
-		
 		m.addAttribute("msg", msg);
 		m.addAttribute("url", url);
 		return "/view/reserve/ReserveInfo";
 	}
 	
-	@RequestMapping("ReserveUpdate") //예약 변경 , 취소
+	@RequestMapping("ReserveUpdate") //예약업데이트가 있어야될까
 	public String ReserveUpdate(HttpServletRequest request, HttpServletResponse response) {
 		int idx = Integer.parseInt(request.getParameter("reserveidx"));
 		String login = (String) session.getAttribute("memberId");
@@ -229,15 +198,11 @@ public class ReserveController {
 		return "/view/alert";
 	}
 	
-	@RequestMapping("ReserveList") //테스트 끝
+	@RequestMapping("ReserveList")
 	public String ReserveList() {
 		String login = (String) session.getAttribute("memberId");
 		String msg = "";
 		String url = "";
-		if (login == null || login.trim().equals("")) { //login check
-			msg = "로그인이 필요합니다.";
-			url = request.getContextPath()+"/userdata/loginForm";
-		}
 		String name = rd.username(login);
 		List<Reserve> li = rd.ReserveList(name);
 		
@@ -247,7 +212,6 @@ public class ReserveController {
 		
 		m.addAttribute("li", li);
 		m.addAttribute("currdate", currdate);
-		
 		m.addAttribute("msg", msg);
 		m.addAttribute("url", url);
 		return "/view/reserve/ReserveList";

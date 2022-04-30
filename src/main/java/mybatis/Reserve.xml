@@ -31,6 +31,10 @@ select * from camp where campname = #{campname}
 select name from userdata where userid = #{userid}
 </select>
 
+<select id="userInfo" resultType="userdata" parameterType="String">
+select * from userdata where userid = #{userid}
+</select>
+
 <select id="selectroom" resultType="string"  parameterType="string">
 select room  from camp where campname=#{campname} 
 </select>
