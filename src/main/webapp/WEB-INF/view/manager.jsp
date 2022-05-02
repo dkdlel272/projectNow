@@ -148,11 +148,11 @@ hr {
 					</c:when>
 					<c:when test="${memberId eq 'vision'}">
 						<li style="position: static; float: right; font-size: 10px;"class="nav-item">
-						<a class="nav-link" href="<%=request.getContextPath()%>/userdata/manager">관리자페이지</a></li>
+						<a class="nav-link" href="<%=request.getContextPath()%>/userdata/manager">관리자페이지&nbsp;</a></li> <!-- &nbsp;지우지 마세요 -->
 						<li style="float: right;" class="nav-item"><a class="nav-link"
-							href="<%=request.getContextPath()%>/board/main">일반페이지</a></li>
+							href="<%=request.getContextPath()%>/board/main">일반페이지&nbsp;&nbsp;</a></li>
 						<li style="float: right;" class="nav-item"><a class="nav-link"
-							href="<%=request.getContextPath()%>/userdata/logout">로그아웃</a></li>
+							href="<%=request.getContextPath()%>/userdata/logout">로그아웃&nbsp;&nbsp;</a></li>
 					</c:when>
 
 				</c:choose>

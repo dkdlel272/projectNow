@@ -139,8 +139,8 @@ public class CampController{
 			return "/view/camp/CampInfo";
 		}
 		
-		@RequestMapping("CampManager")
-		public String CampManager() {
+		@RequestMapping("CampManager") 
+		public String CampManager(Camp camp) {
 			List<Reserve> rl = cd.reserveListAll();
 			List<Camp> cl = cd.campListAll();
 			m.addAttribute("cl", cl);
@@ -148,13 +148,6 @@ public class CampController{
 			return "/manager/camp/CampManager";
 		}
 			
-		@RequestMapping("campListAll")
-		public String campListAll() {
-				List<Camp> cl = cd.campListAll(); 
-				m.addAttribute("cl", cl);
-				return "/manager/camp/CampManager";
-			}
-	
 		@RequestMapping("campDelete")
 		public String campDelete(int campidx) {
 			String msg = "";
