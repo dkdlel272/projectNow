@@ -45,11 +45,22 @@
 	<mvc:mapping path="/camp/CampManager"/>
 	<mvc:mapping path="/camp/campUpdate"/>
 	<mvc:mapping path="/camp/reserveManager"/>
+	
+	<mvc:mapping path="/board/list_admin"/>
+	
+	
+	
 	<bean class="interceptor.AdminInterceptor"/>
+
+	
 	</mvc:interceptor>		
 		
 		<mvc:interceptor>
-			<mvc:mapping path="/reserve/**"/>			<!--  로그인인터셉터가 필요한 페이지 추가 -->
+			<mvc:mapping path="/reserve/**"/>	<!--  로그인인터셉터가 필요한 페이지 추가 -->
+			<mvc:mapping path="/board/boardWriteForm"/>
+			<mvc:mapping path="/board/boardUpdateForm"/>
+			<mvc:mapping path="/board/boardReviewDeleteForm"/>
+			<mvc:mapping path="/board/boardReplyPro"/>
 			<bean class="interceptor.LoginInterceptor" />
 			</mvc:interceptor>
 		</mvc:interceptors>

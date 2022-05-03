@@ -81,7 +81,7 @@
 			<input type="hidden" name="subject" value=" ">
 		 <div class="post_text">
 			<label>댓글쓰기</label>
-			<textarea class="form-control" rows="10" cols="50" name="content" placeholder="댓글내용을 입력해주세요"></textarea>
+			<textarea class="form-control" rows="10" cols="50" name="content" placeholder="로그인 후 댓글내용을 입력해주세요"></textarea>
 		</div>
 		
 		<div class="post_about">

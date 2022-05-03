@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<!DOCTYPE html>
+<html>
+<head>
 <style>
 @font-face {
     font-family: 'MinSans-Medium';
@@ -38,9 +42,6 @@ h2#center {
     border-radius: 50px;
 }
 </style>         
-<!DOCTYPE html>
-<html>
-<head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>

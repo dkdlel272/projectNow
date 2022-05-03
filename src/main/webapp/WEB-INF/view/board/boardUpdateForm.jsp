@@ -14,7 +14,7 @@
 </div>
 	<div class="container">
 	<form name="f" action="<%=request.getContextPath() %>/board/boardUpdatePro" enctype="multipart/form-data"  method="post">
-		<input type="hidden" name="file2" value="${b.file1}">
+		<input type="hidden" name="file1" value="${b.file1}">
 		<input type="hidden" name="num" value="${b.num}">
 		
 		<div class="form-group">
@@ -30,7 +30,7 @@
 		</div>
 		<div class="form-group">
 			<label >파일저장:</label> 
-			<input type="file" class="form-control" name="file1"   value="${b.file1}">
+			<input type="file" class="form-control" name="f"   value="${b.file1}">
 		</div>
 		<div id="center" style="padding: 3px;">
 			<button type="submit" class="btn btn-dark">수 정</button>

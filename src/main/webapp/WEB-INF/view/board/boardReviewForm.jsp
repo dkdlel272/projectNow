@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <style>
 @font-face {
     font-family: 'MinSans-Medium';
@@ -53,7 +54,7 @@ h2#center {
 		
 		<div class="form-group">
 			<label>작성자:</label>
-			<input type="text" class="form-control" name="writer">
+			<input type="text" class="form-control" name="writer" value="${memberId}">
 			<label>비밀번호</label>
 			<input type="password" class="form-control" name="pass">
 			<label>제목</label>
