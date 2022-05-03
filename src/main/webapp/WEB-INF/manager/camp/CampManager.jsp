@@ -44,6 +44,7 @@ margin-top: 0px;max-width: 100%;margin: inherit;width: 100%;padding-right: 85px;
 				<td>객실 타입</td>
 				<td>요금</td>
 				<td>관리</td>
+				<td>캠프 노출 관리</td>
 				</tr>
 				<tbody>
 			<c:forEach var="c" items="${cl}">
@@ -61,6 +62,7 @@ margin-top: 0px;max-width: 100%;margin: inherit;width: 100%;padding-right: 85px;
 <form action="<%=request.getContextPath() %>/camp/campUpdate" method="post">
 <input type="hidden"   value="${c.campidx}"    name="campidx">
 <button style="margin-right: 40px;" type="button" onclick="window.open('<%=request.getContextPath()%>/camp/campUpdate?campidx=${c.campidx}','', 'width=500, height=700')">수정</button></form></td>
+				<td>1</td>
 				</tr>
 				</c:forEach></tbody>
 </table></div>

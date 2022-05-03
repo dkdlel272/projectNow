@@ -26,7 +26,7 @@
 
 <body>
 <div class="container">
-<form action="<%=request.getContextPath()%>/camp/CampUpdatePro" method="post"  >
+<form action="<%=request.getContextPath()%>/camp/CampUpdatePro" method="post" enctype="multipart/form-data">
 <h2   id="center">캠핑장 수정</h2>
 				<div class="form-group">
 				<label>캠핑장번호</label> 
@@ -52,11 +52,11 @@
 		</div>
 		<div class="form-group">
 			<label>캠핑장 사진</label> 
-			<input type="file" class="form-control" name="campimg">
+			<input type="file" class="form-control" name="f1">
 			<label>캠핑장 사진2</label> 
-			<input type="file" class="form-control" name="campimg2">
+			<input type="file" class="form-control" name="f2">
 			<label>캠핑장 사진3</label> 
-			<input type="file" class="form-control" name="campimg3">
+			<input type="file" class="form-control" name="f3">
 		</div>
 	<div id="center" style="padding: 3px;">
 		<button type="button" class="btn btn-dark"      onclick="closeCamp(this.form)">수정</button>
@@ -64,10 +64,15 @@
 	</form>
 	</div>
 	<script>
+
+</script>
+	<script>
 	function closeCamp(form, closefct) {
 		 form.submit()
 		
 	}
+	
+	
 	</script>
 	<script>
 function win_upload() {

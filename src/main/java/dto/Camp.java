@@ -20,9 +20,7 @@ public class Camp {
 	private MultipartFile f1;
 	private MultipartFile f2;
 	private MultipartFile f3;
-	
 	public Camp () {}
-	
 
 	public Camp(int campidx, String campname, String campaddr, String room, String campimg, String campimg2,
 			String campimg3, int roomcnt, int payidx, int roomno, String chkin, String chkout, String content,
@@ -45,7 +43,6 @@ public class Camp {
 		this.f2 = f2;
 		this.f3 = f3;
 	}
-
 
 	public int getCampidx() {
 		return campidx;
@@ -175,6 +172,7 @@ public class Camp {
 		this.f3 = f3;
 	}
 
+
 	@Override
 	public String toString() {
 		return "{\"campidx\":\"" + campidx + "\", \"campname\":\"" + campname + "\", \"campaddr\":\"" + campaddr
@@ -184,10 +182,7 @@ public class Camp {
 				+ "\", \"content\":\"" + content + "\", \"f1\":\"" + f1 + "\", \"f2\":\"" + f2 + "\", \"f3\":\"" + f3
 				+ "\"}";
 	}
-
-	
-	
 	
 
-	
+		
 } //end class
