@@ -25,6 +25,7 @@
 				<i class="xi-eye-o">${b.readcnt}</i>
 			</p>
 			</div>
+			<c:if test="${memberId eq 'vision'}">
 			<div class="board_box_right">
 				<div class="side_menu"><i class="xi-bars"></i></div>
 				<ul>
@@ -32,6 +33,7 @@
 					<li><a href="boardDeleteForm?num=${b.num}">삭제 <i class="xi-bitbucket"></i></a></li>
 				</ul>
 			</div>
+			</c:if>
 		
 		</div>
 		<table  class="table">

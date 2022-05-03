@@ -60,6 +60,7 @@
 			<mvc:mapping path="/board/boardWriteForm"/>
 			<mvc:mapping path="/board/boardUpdateForm"/>
 			<mvc:mapping path="/board/boardReviewDeleteForm"/>
+			<mvc:mapping path="/board/boardDeleteForm"/>
 			<mvc:mapping path="/board/boardReplyPro"/>
 			<bean class="interceptor.LoginInterceptor" />
 			</mvc:interceptor>
