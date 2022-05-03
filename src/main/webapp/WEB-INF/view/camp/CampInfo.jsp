@@ -126,7 +126,7 @@ h2#center {
       </tr>
       <tr>
         <td>체크아웃</td>
-        <td><input type="text" name="chkout"  value="11:00" readonly></td>
+        <td><input type="time" name="chkout"  value="11:00" readonly></td>
         <td></td>
       </tr>
       <tr>

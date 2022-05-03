@@ -71,7 +71,7 @@ public class ReserveController {
 	public String ReserveInsertPro(Reserve reserve) {
 		String msg = "";
 		String url = "";
-		reserve.setReserveidx(rd.nextIdx());		//이렇게말고는 방법이 없는건가
+		reserve.setReserveidx(rd.nextIdx());
 		int idx = rd.ReserveInsert(reserve);
 		
 		if (idx >= 1) {

@@ -113,15 +113,15 @@ table  td {
       </tr>	
   </table>
 	<div id="center" style="padding: 3px;">
-		<button type="button" class="btn btn-dark" id="kkopay">결제하기</button>
+		<button type="button" class="btn btn-dark" id="pay">결제하기</button>
 		<button type="submit" class="btn btn-dark">예약완료</button>
 	</div>
 	</form>
 	</div>
 	<script>
 	
-$("#kkopay").click(function () {
-var IMP = window.IMP; // 생략가능
+$("#pay").click(function () {
+var IMP = window.IMP;
 IMP.init('imp02961916');
 IMP.request_pay({
 pg: 'html5_inicis',
