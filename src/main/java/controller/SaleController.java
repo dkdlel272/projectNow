@@ -150,11 +150,21 @@ public class SaleController {
 		for (String i : images) {
 			image.add(i);
 		}
-		System.out.println(image.size());
+		
 		m.addAttribute("image",image);
 		m.addAttribute("s", s);
 
 		return "/view/sale/saleInfo";
+	}
+	
+	@RequestMapping("saleUpdateForm")
+	public String saleUpdateForm(int num) {
+
+		Sale s = sd.selectSaleOne(num);
+		
+		m.addAttribute("s", s);
+
+		return "/view/sale/saleUpdateForm";
 	}
 
 }

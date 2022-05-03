@@ -77,7 +77,7 @@ margin-top: 0px;max-width: 100%;margin: inherit;width: 100%;padding-right: 85px;
 				<th>캠핑장 이름</th>
 				<th>캠핑장 주소</th>
 				<th>객실 타입</th>
-				<th>보유 객실</th>
+				<th>총 객실</th>
 				<th>남은 객실</th>
 				<th>요금</th>
 				<th>체크인</th>
@@ -88,7 +88,7 @@ margin-top: 0px;max-width: 100%;margin: inherit;width: 100%;padding-right: 85px;
 		
 			<c:forEach var="r" items="${rl}"> 
 				<tr>
-			<td>${r.campidx}</td> 
+				<td>${r.campidx}</td> 
 				<td>${r.username}</td>
 				<td>${r.campname}</td>
 				<td>${r.campaddr}</td> 

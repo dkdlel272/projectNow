@@ -62,7 +62,7 @@ color: #6c757d;
     <br>
     <input type="password" class="form-control" placeholder="비밀번호" name="pw">
     <br>
-    <a href="<%=request.getContextPath()%>/userdata/sendMailForm">
+    <a href="<%=request.getContextPath()%>/userdata/joinForm">
     <small class="form-text text-muted" >회원가입</small></a>
 
    <small class="form-text text-muted" >

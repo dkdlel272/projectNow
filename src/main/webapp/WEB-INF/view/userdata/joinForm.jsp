@@ -45,10 +45,14 @@ border-radius: 20px;
 border: 1px solid #ddd;
 }
 .inwidth{
+border-radius: 20px;
+border: 1px solid #ddd;
 width: 48%;
 margin: 5px;
 }
 .inwidthfull{
+border-radius: 20px;
+border: 1px solid #ddd;
 width: 97%;
 margin: 5px;
 
@@ -127,26 +131,34 @@ margin: 5px;
     </div>
   </div>
   
-  <div class="form-group">
+  <div class="form-group row" >
+  	<div class="col">
   	<label>Name</label>
-    <input type="text" class="form-control in" name="name">
+    <input type="text" class="form-control inwidthfull" name="name">
+    </div>
+    <div class="col">
+    <label>Birth</label>
+    <input type="text" class="form-control inwidthfull" name="birthday">
+    </div>
   </div>
   <div class="form-group">
     <label for="gender">Gender:</label>
-    <label class="radio-inline"> </label>
-    <input type="radio" name="gender" value = "1">남 <label class="radio-inline"> </label>
+    <input type="radio" name="gender" value = "1">남 
     <input type="radio" name="gender" value = "2">여
   </div>
    <div class="form-group">
-	<label>Birth</label>
-    <input type="text" class="form-control in" name="birthday">
+	
+	<div class="form-check">
+	  인증 방법 선택 : <input type="radio" name="certify" checked="checked" value="sms"> SMS인증
+	  <input type="radio" name="certify" value="email"> EMAIL 인증
+	</div>
   
-    <label>Phone</label>
-    <input type="text" class="form-control in" name="tel">
-    
-    <label>Email</label>
-    <input type="text" class="form-control in" name="email" value="${email }" readonly>
-    
+    <label>Phone</label><br>
+    <input type="text" class="inwidth" name="tel"><input type="button" value="인증코드전송">
+    <input type="text" class="inwidth" name="telCode"><input type="button" value="인증코드확인"><br>
+    <label>Email</label><br>
+    <input type="text" class="inwidth" name="email"><input type="button" value="인증코드전송">
+    <input type="text" class="inwidth" name="emailCode"><input type="button" value="인증코드확인">
    </div>
    <div class="form-group">
    		<label>Address</label><br>
@@ -161,12 +173,31 @@ margin: 5px;
 	style="cursor:pointer; position:absolute; right:0px; top:-1px; z-index:1" onclick="foldDaumPostcode()" alt="접기 버튼">
 	</div>
  <br>
- 
+ 	<div align="center">
  	<button type="submit" class="btn btn-info">회원 가입</button>
- 
+ 	</div>
  
 </form>
 
+<script>
+$(document).ready(function(){
+	//https://sseung-fire.tistory.com/24
+    // 라디오버튼 클릭시 이벤트 발생
+    $("input:radio[name=certify]").click(function(){
+ 
+        if($("input[name=certify]:checked").val() == "sms"){
+            $("input:text[name=telCode]").attr("disabled",false);
+            // radio 버튼의 value 값이 1이라면 활성화
+ 
+        }else if($("input[name=certify]:checked").val() == "email"){
+              $("input:text[name=emailCode]").attr("disabled",true);
+            // radio 버튼의 value 값이 0이라면 비활성화
+        }
+    });
+});
+
+
+</script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
     // 우편번호 찾기 찾기 화면을 넣을 element

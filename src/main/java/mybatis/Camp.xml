@@ -63,15 +63,21 @@ select room from camp where campname=#{campname}
 <select id="blackList" parameterType="string" resultType="userdata">
 	select*from userdata where black=#{black}
 </select>
+
 <select id ="campListAll" resultType="camp">
 select *  from camp  
 </select>
+
 <select id ="reserveList" resultType="reserve">
 select *  from reserve  
 </select>
 
-<select id="reserveListAll" resultType="reserve">
+<!-- <select id="reserveListAll" resultType="reserve">
 select r.*, c.* from reserve r, camp c   where r.campname = c.campname
+</select> -->
+
+<select id="reserveListAll" resultType="reserve">
+select r.CHECKIN,r.CHECKOUT, r.USERNAME,r.CAMPNAME,r.ROOM,c.CAMPADDR,c.PAYIDX,c.CAMPIDX, c.ROOMCNT-t.ROOMCNT ROOMCNT,c.ROOMNO from reserve r, camp c,(select r.campname, count(r.campname) ROOMCNT from RESERVE r, camp c where r.CAMPNAME = c.CAMPNAME group by r.campname)t where r.campname = c.campname and c.campname=t.campname
 </select>
 
 <select id="monthReserve" resultType="map" >

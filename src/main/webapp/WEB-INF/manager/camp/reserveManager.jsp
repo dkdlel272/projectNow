@@ -146,8 +146,8 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
 <!-- 차트가 그려질 부분 -->
 <canvas id="myChart"  style="max-width: 100%;
     width: 100%;
-    padding-right: 26%;
-    padding-left: 11%;
+    padding-right: 200px;
+    padding-left: 15%;
     display: block;
     height: 364px;"></canvas>
    

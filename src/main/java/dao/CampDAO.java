@@ -79,6 +79,10 @@ public class CampDAO {
 
 			return sqlSession.selectOne(NS+"chooseCamp",campname);
 	}
+	public Camp reUpdate(String campname) { //사용하지않는기능?
+		
+		return sqlSession.selectOne(NS+"reUpdate",campname);
+	}
 	
 	public int nextSeq() { //예약번호를 차례로 받는 기능
 

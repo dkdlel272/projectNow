@@ -64,15 +64,10 @@
 	</form>
 	</div>
 	<script>
-
-</script>
-	<script>
 	function closeCamp(form, closefct) {
 		 form.submit()
 		
 	}
-	
-	
 	</script>
 	<script>
 function win_upload() {

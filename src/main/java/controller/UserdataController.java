@@ -6,10 +6,18 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 import java.util.Random;
 
-
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +56,22 @@ public class UserdataController  {
 		this.session = request.getSession();
 	}
 	
+	@RequestMapping("joinForm")
+	public String joinForm() {
+		
+		return "/view/userdata/joinForm";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	@RequestMapping("sendMailForm")
 	public String sendMailForm() {
@@ -55,98 +79,118 @@ public class UserdataController  {
 		return "/view/userdata/sendMailForm";
 	}
 	
-	/*
-	 * @RequestMapping("sendMail") public String sendMail(HttpServletRequest
-	 * request, HttpServletResponse response) {
-	 * 
-	 * //메일 중복 확인 String toMail = request.getParameter("toMail");
-	 * 
-	 * UserdataDao ud = new UserdataDao(); int u = ud.findMailUser(toMail); int l =
-	 * ud.findMailLeave(toMail); String msg = ""; String url = "";
-	 * 
-	 * 
-	 * if(u == 0 && l == 0){
-	 * 
-	 * //랜덤 코드 발생 Random random = new Random(); String key = "";
-	 * 
-	 * for (int i = 0; i < 3; i++) { int index = random.nextInt(25) + 65; // A~Z까지
-	 * 랜덤 알파벳 생성(3자리) key += (char) index; } int numIndex = random.nextInt(8999) +
-	 * 1000; // 4자리 정수를 생성 key += numIndex;
-	 * 
-	 * 
-	 * //메일 보내기 final String username = "dalkey23"; final String password =
-	 * "vision1111*";
-	 * 
-	 * 
-	 * String subject = "회원가입을 위한 인증코드 입니다."; String body = "인증코드: "+key;
-	 * 
-	 * 
-	 * 
-	 * // 정보를 담기 위한 객체 생성 Properties props = new Properties();
-	 * 
-	 * // SMTP 서버 정보 설정
-	 * 
-	 * props.put("mail.smtp.auth", "true"); props.put("mail.smtp.starttls.enable",
-	 * "true"); props.put("mail.smtp.host", "smtp.gmail.com");
-	 * props.put("mail.smtp.port", "587");
-	 * 
-	 * 
-	 * Session session = Session.getDefaultInstance(props, new
-	 * javax.mail.Authenticator() { String un=username; String pw=password;
-	 * protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
-	 * return new javax.mail.PasswordAuthentication(un, pw); } });
-	 * session.setDebug(true); //for debug
-	 * 
-	 * MimeMessage mimeMessage = new MimeMessage(session); //MimeMessage 생성 try {
-	 * mimeMessage.setFrom(new InternetAddress("dalkey23@gmail.com")); //발신자 셋팅 ,이메일
-	 * 풀 주소 mimeMessage.setRecipient(Message.RecipientType.TO, new
-	 * InternetAddress(toMail)); //수신자셋팅 //.TO 외에 .CC(참조) .BCC(숨은참조) 도 있음
-	 * mimeMessage.setSubject(subject);
-	 * 
-	 * mimeMessage.setText(body);
-	 * 
-	 * Transport.send(mimeMessage);
-	 * 
-	 * System.out.println("메일 전송 완료");
-	 * 
-	 * //javax.mail.Transport.send() 이용 } catch (AddressException e) { // TODO
-	 * Auto-generated catch block e.printStackTrace(); } catch (MessagingException
-	 * e) { // TODO Auto-generated catch block e.printStackTrace(); }
-	 * 
-	 * m.addAttribute("toMail", toMail); m.addAttribute("key", key);
-	 * 
-	 * return "/view/userdata/certifyForm";
-	 * 
-	 * } else if (u != 0) { msg ="이미 가입한 이메일입니다."; url =
-	 * request.getContextPath()+"/userdata/loginForm";
-	 * 
-	 * m.addAttribute("msg", msg); m.addAttribute("url", url);
-	 * 
-	 * return "/view/alert";
-	 * 
-	 * } else {
-	 * 
-	 * msg ="가입할 수 없는 이메일입니다. 관리자에게 문의하세요"; url =
-	 * request.getContextPath()+"/board/main";
-	 * 
-	 * m.addAttribute("msg", msg); m.addAttribute("url", url);
-	 * 
-	 * return "/view/alert";
-	 * 
-	 * }
-	 * 
-	 * 
-	 * }
-	 */
-	@RequestMapping("joinForm")
-	public String joinForm() {
+	@RequestMapping("sendMail")
+	public String sendMail(String toMail) {
 		
-		String email = request.getParameter("email");
+		//메일 중복 확인 
+		System.out.println(toMail);
 		
-		m.addAttribute("email", email);
+		UserdataDao ud = new UserdataDao();
+		int u = ud.findMailUser(toMail);
+		int l = ud.findMailLeave(toMail);
+		String msg = "";
+		String url = "";
 		
-		return "/view/userdata/joinForm";
+		
+		if(u == 0 && l == 0){
+			
+			//랜덤 코드 발생
+			Random random = new Random();
+			String key = "";
+			
+			for (int i = 0; i < 3; i++) {
+				int index = random.nextInt(25) + 65; // A~Z까지 랜덤 알파벳 생성(3자리)
+				key += (char) index;
+			}
+			int numIndex = random.nextInt(8999) + 1000; // 4자리 정수를 생성
+			key += numIndex;
+			
+			
+			//메일 보내기
+			final String username = "dalkey23";
+			final String password = "vision1111*";
+			
+			
+			String subject = "회원가입을 위한 인증코드 입니다.";
+			String body = "인증코드: "+key;
+			
+			
+			
+			// 정보를 담기 위한 객체 생성 
+			Properties props = new Properties();
+			
+			// SMTP 서버 정보 설정 
+	
+			props.put("mail.smtp.auth", "true");
+			props.put("mail.smtp.starttls.enable", "true");
+			props.put("mail.smtp.host", "smtp.gmail.com");
+			props.put("mail.smtp.port", "587");
+	
+		
+			Session session = Session.getDefaultInstance(props,
+					new javax.mail.Authenticator() { String un=username; String pw=password; 
+						protected javax.mail.PasswordAuthentication getPasswordAuthentication() { 
+							return new javax.mail.PasswordAuthentication(un, pw); } }); 
+			session.setDebug(true); //for debug 
+							
+			MimeMessage mimeMessage = new MimeMessage(session); 
+			//MimeMessage 생성 
+			try {
+				mimeMessage.setFrom(new InternetAddress("dalkey23@gmail.com"));
+				//발신자 셋팅 ,이메일 풀 주소
+				mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(toMail)); 
+				//수신자셋팅 //.TO 외에 .CC(참조) .BCC(숨은참조) 도 있음 
+				mimeMessage.setSubject(subject);
+				
+				mimeMessage.setText(body); 
+				
+				Transport.send(mimeMessage); 
+				
+				System.out.println("메일 전송 완료");
+				
+				//javax.mail.Transport.send() 이용
+			} catch (AddressException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (MessagingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+			
+			request.setAttribute("toMail", toMail);
+			request.setAttribute("key", key);
+			
+			return "/view/userdata/certifyForm.jsp";
+			
+		} else if (u != 0) {
+			msg ="이미 가입한 이메일입니다.";
+			url =  request.getContextPath()+"/userdata/loginForm";
+			
+			request.setAttribute("msg", msg);
+		  	request.setAttribute("url", url);
+		  	
+			return "/view/alert.jsp"; 
+			
+		} else  {
+			
+			msg ="가입할 수 없는 이메일입니다. 관리자에게 문의하세요";
+			url = request.getContextPath()+"/board/main";
+			
+			request.setAttribute("msg", msg);
+		  	request.setAttribute("url", url);
+		  	
+			return "/view/alert.jsp"; 
+			
+		} 
+
+
 	}
+	
+	
+	
+
+	
+	
 	
 	@RequestMapping("joinPro")
 	public String joinPro() {

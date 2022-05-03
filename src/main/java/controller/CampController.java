@@ -44,8 +44,7 @@ public class CampController{
 	    }
 	    
 		@RequestMapping("CampInsert")
-		public String ReservatIoninput(HttpServletRequest request, HttpServletResponse response) {
-			System.out.println("insert");
+		public String CampInsert() {
 			return "/single/CampInsert";
 		}
 		
@@ -125,9 +124,7 @@ public class CampController{
 		}
 		
 		@RequestMapping("CampSearch")
-		public String CampSearch(HttpServletRequest request, HttpServletResponse response) {
-			String searchName = request.getParameter("searchName"); 
-			 String searchType = request.getParameter("searchType");
+		public String CampSearch(String searchName, String searchType) {
 			List<Camp> search = cd.SearchList(searchName, searchType);
 			m.addAttribute("search", search);
 			
@@ -135,22 +132,15 @@ public class CampController{
 		}
 		
 		@RequestMapping("CampInfo") //캠핑장 상세보기 해당캠핑장의 정보가 넘어와야 함
-		public String CampInfo(HttpServletRequest request, HttpServletResponse response) {
-			String campname = request.getParameter("campname");
+		public String CampInfo(String campname) {
 			Camp info = cd.CampInfo(campname);
 			m.addAttribute("info", info);
 			
 			return "/view/camp/CampInfo";
 		}
 		
-		@RequestMapping("payManager")
-		public String payManager(HttpServletRequest request, HttpServletResponse respon) {
-
-			return "/manager/camp/payManager";
-		}
-		
-		@RequestMapping("CampManager")
-		public String CampManager(HttpServletRequest request, HttpServletResponse response) {
+		@RequestMapping("CampManager") 
+		public String CampManager(Camp camp) {
 			List<Reserve> rl = cd.reserveListAll();
 			List<Camp> cl = cd.campListAll();
 			m.addAttribute("cl", cl);
@@ -158,68 +148,22 @@ public class CampController{
 			return "/manager/camp/CampManager";
 		}
 			
-		@RequestMapping("campListAll")
-		public String campListAll(HttpServletRequest request, HttpServletResponse respon) {
-			HttpSession session = request.getSession();
-			String login = (String) session.getAttribute("memberId");
-			// 로그인 불가이면
+		@RequestMapping("campDelete")
+		public String campDelete(int campidx) {
 			String msg = "";
 			String url = "";
-			if (login !=null) {
-				List<Camp> cl = cd.campListAll(); 
-				m.addAttribute("cl", cl);
-				return "/manager/camp/CampManager";
-			}
-			m.addAttribute("msg", msg);
-			m.addAttribute("url", url);
-			return "/view/alert";
-		}
-	
-		@RequestMapping("campDelete")
-		public String campDelete(HttpServletRequest request, HttpServletResponse respon) {
-			HttpSession session = request.getSession();
-			String  login = (String) session.getAttribute("memberId");
-			String msg = "로그인이 필요 합니다";
-			String url = request.getContextPath() + "/userdata/loginForm";
-		
-			int idx = Integer.parseInt(request.getParameter("campidx"));
-			Camp ci = cd.selectCamp(idx);
-		
-			if (login!=null && login.equals("vision")) {
+			Camp ci = cd.selectCamp(campidx);
 				int cl = cd.campDelete(ci);
 						msg = "삭제완료";
 						url = request.getContextPath() + "/camp/CampManager";
-					}
 			m.addAttribute("msg", msg);
 			m.addAttribute("url", url);
 			return "/view/alert";
 		}
 		
-		@RequestMapping("reserveListAll")
-		public String reserveListAll(HttpServletRequest request, HttpServletResponse respon) {
-			HttpSession session = request.getSession();
-			String login = (String) session.getAttribute("memberId");
-			// 로그인 불가이면
-			String msg = "";
-			String url = "";
-			if (login!=null && login.equals("vision")) {
-				List<Reserve> rl = cd.reserveListAll();
-				m.addAttribute("rl", rl);
-				return "/manager/camp/CampManager";
-			}
-			m.addAttribute("msg", msg);
-			m.addAttribute("url", url);
-			return "/view/alert";
-		}
+		
 		@RequestMapping("reserveManager")
 		public String reserveManager(HttpServletRequest request, HttpServletResponse respon) {
-			HttpSession session = request.getSession();
-			String  login = (String) session.getAttribute("memberId");
-			String msg = "로그인이 필요 합니다";
-			String url = request.getContextPath() + "/userdata/loginForm";
-			
-			if (login!=null && login.equals("vision")) {
-				
 				Map map = cd.monthReserve();
 				List<IndexMap> d1 = cd.dashboard1();
 				List<IndexMap> d2 = cd.dashboard2();
@@ -236,77 +180,32 @@ public class CampController{
 				m.addAttribute("md2", md2);
 				return  "/manager/camp/reserveManager";
 			}
-			m.addAttribute("msg", msg);
-			m.addAttribute("url", url);
-			return "/view/alert";
-		}
 		
 		@RequestMapping("campUpdate")
-		public String campUpdate(HttpServletRequest request, HttpServletResponse respon) {
-			HttpSession session = request.getSession();
-			String login = (String) session.getAttribute("memberId");
-			String msg = "로그인이 필요 합니다";
-			String url = request.getContextPath() + "/userdata/loginForm";
-			int idx = Integer.parseInt(request.getParameter("campidx"));
-			if (login!=null && login.equals("vision")) {
-				Camp c = cd.selectCamp(idx);
+		public String campUpdate(int campidx) {
+				Camp c = cd.selectCamp(campidx);
 				System.out.println(c);
 				m.addAttribute("c", c);
 				return "/single/campUpdate";
-			}
-			m.addAttribute("msg", msg);
-			m.addAttribute("url", url); 
-			return "/view/alert";
-
 		}
 		@RequestMapping("CampUpdatePro")
-		public String CampUpdatePro(HttpServletRequest request, HttpServletResponse respon) {
-			try {
-				request.setCharacterEncoding("utf-8");
-			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			int num = 0;
-			String msg = "로그인이 필요 합니다";
-			String url = request.getContextPath() + "/userdata/loginForm";
-			HttpSession session = request.getSession();
-			String login = (String) session.getAttribute("memberId");
-			//로그인이 불가하면
-			if (login!=null && login.equals("vision")) {
-				int idx = Integer.parseInt(request.getParameter("campidx"));
-				String campname = request.getParameter("campname");
-				String campaddr= request.getParameter("campaddr");
-				String room = request.getParameter("room");
-				String campimg = request.getParameter("campimg"); //1
-				String campimg2 = request.getParameter("campimg2"); //1
-				String campimg3 = request.getParameter("campimg3"); //1
-				int roomcnt = Integer.parseInt(request.getParameter("roomcnt"));
-				int payidx = Integer.parseInt(request.getParameter("payidx"));
-				int roomno = Integer.parseInt(request.getParameter("roomno"));
-				String content = request.getParameter("content"); //1
-				Camp c = cd.selectCamp(idx);
-				System.out.println(c);
-			//member에 email,tel을 저장
-			c.setCampname(campname);
-			c.setCampaddr(campaddr);
-			c.setRoom(room);
-			c.setCampimg(campimg);
-			c.setCampimg2(campimg2);
-			c.setCampimg3(campimg3);
-			c.setRoomcnt(roomcnt);
-			c.setPayidx(payidx);
-			c.setRoomno(roomno);
-			c.setContent(content);
-				num = cd.CampUpdate(c);
+		public String CampUpdatePro(Camp camp) {
+			String msg ="";
+			String url ="";
+				Camp c = cd.selectCamp(camp.getCampidx());
+				if(c.getCampidx()==camp.getCampidx()) {
+				cd.CampUpdate(camp);
 				msg = "캠프 정보가 수정 되었습니다";
 				url = request.getContextPath() + "/camp/CampManager";
-			}	
-			
+				}
 			m.addAttribute("msg", msg);
 			m.addAttribute("url", url);
 			return "/view/alert2";
 		}
 		
-		
+		@RequestMapping("payManager")
+		public String payManager() {
+
+			return "/manager/camp/payManager";
+		}
 	} //end class

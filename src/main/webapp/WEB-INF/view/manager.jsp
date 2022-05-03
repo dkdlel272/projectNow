@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <title><sitemesh:write property='title'/></title>
@@ -139,38 +139,23 @@ hr {
 <div class="wrapper_login">
 	<ul class="menu_login"  style="background: #616161;display: flow-root;padding-bottom: 24px;
     list-style: none;margin: 0px;padding: 10px;">
-		<%
-			String memid = (String) session.getAttribute("memberId");
-		if (memid == null) {//로그인 안되어있음
-		%>
-	
-		<li style="position: static; float: right;"><a
-			href="<%=request.getContextPath()%>/userdata/sendMailForm">JOIN</a></li>
-		<li style="float: right;"><a
-			href="<%=request.getContextPath()%>/userdata/loginForm">LOGIN</a></li>
-		<%
-			} else { //로그인 ok
-				if (memid.equals("vision")) {//id가 vision이면 관리자 로그인
-					%>
-					 	<li style="position: static; float: right; font-size: 10px;" class="nav-item"><a class="nav-link"
-							href="<%=request.getContextPath() %>/userdata/manager">관리자페이지&nbsp;</a></li>
+		<c:choose>
+					<c:when test="${memberId == null}">
+						<li style="position: static; float: right;">
+						<a href="<%=request.getContextPath()%>/userdata/joinForm">JOIN</a></li>
+						<li style="float: right;">
+						<a href="<%=request.getContextPath()%>/userdata/loginForm">LOGIN</a></li>
+					</c:when>
+					<c:when test="${memberId eq 'vision'}">
+						<li style="position: static; float: right; font-size: 10px;"class="nav-item">
+						<a class="nav-link" href="<%=request.getContextPath()%>/userdata/manager">관리자페이지&nbsp;</a></li> <!-- &nbsp;지우지 마세요 -->
 						<li style="float: right;" class="nav-item"><a class="nav-link"
-							href="<%=request.getContextPath() %>/board/main">일반페이지&nbsp;&nbsp;</a></li>
+							href="<%=request.getContextPath()%>/board/main">일반페이지&nbsp;&nbsp;</a></li>
 						<li style="float: right;" class="nav-item"><a class="nav-link"
-							href="<%=request.getContextPath() %>/userdata/logout">로그아웃&nbsp;&nbsp;</a></li>
-						
-					<% } else{
-		%>
-		
-		<li style="position: static; float: right;"><a
-			href="<%=request.getContextPath()%>/userdata/logout">LOGOUT</a></li>
-		<li style="float: right;"><a
-			href="<%=request.getContextPath()%>/userdata/mypage">MY PAGE</a></li>
-		
-		<%
-					}
-			}
-		%>	
+							href="<%=request.getContextPath()%>/userdata/logout">로그아웃&nbsp;&nbsp;</a></li>
+					</c:when>
+
+				</c:choose>
 		
 	</ul>
 	</div>

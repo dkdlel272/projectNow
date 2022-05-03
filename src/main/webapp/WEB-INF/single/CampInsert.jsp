@@ -60,12 +60,7 @@
 	</div>
 	</form>
 	</div>
-	<script>
-const img = opener.document.getElementById("campimg");
-img.src="<%=request.getContextPath()%>/campupload/${filename}"
-opener.document.picture.value="${filename}"
-self.close(); 
-</script>
+
 	<script>
 	function closeCamp(form) {
 		 form.submit()
