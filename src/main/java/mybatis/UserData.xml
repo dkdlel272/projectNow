@@ -60,8 +60,16 @@
 	select count(*) from userdata where email = #{email}
 </select>
 
-<select id="findMailLeave" parameterType="string" resultType="int">
+<select id="findMailLeave"  resultType="int">
 	select count(*) from leave where email = #{email}
+</select>
+
+<select id="findTelUser" parameterType="string" resultType="int">
+	select count(*) from userdata where tel = #{tel}
+</select>
+
+<select id="findTelLeave"  resultType="int">
+	select count(*) from leave where tel = #{tel}
 </select>
 
 <update id="changeBlack" parameterType="map">

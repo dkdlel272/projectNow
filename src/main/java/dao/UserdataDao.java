@@ -180,13 +180,25 @@ public class UserdataDao {
 
 	public int findMailUser(String email) {
 
-		return sqlSession.selectOne(ns + "findMailUser",email);
+		return sqlSession.selectOne(ns + "findMailUser", email);
 
 	}
 
 	public int findMailLeave(String email) {
 
 		return sqlSession.selectOne(ns + "findMailLeave", email);
+
+	}
+
+	public int findTelUser(String tel) {
+
+		return sqlSession.selectOne(ns + "findTelUser", tel);
+
+	}
+
+	public int findTelLeave(String tel) {
+
+		return sqlSession.selectOne(ns + "findTelLeave", tel);
 
 	}
 
