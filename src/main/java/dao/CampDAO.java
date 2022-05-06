@@ -3,27 +3,23 @@ package dao;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.ibatis.session.SqlSession;
-import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.multipart.MultipartFile;
 
 import dto.Camp;
 import dto.IndexMap;
 import dto.Reserve;
-import dto.UserData;
 
 
 @Component
 public class CampDAO {
 	private static final String NS="camp.";
+	private static final String VS="viewcamp.";
+	
 	private Map<String, Object> map = new HashMap<>();
 	
 	@Autowired
@@ -49,6 +45,7 @@ public class CampDAO {
 		}
 		return 0;
 	}
+	
 	
 	public int CampUpdate(Camp idx) {
 		try {
@@ -139,5 +136,46 @@ public class CampDAO {
 		
 			return sqlSession.selectList(NS+"dashboard2");
 			}
+	
+	
+	public int viewCampOne(int idx) {
+		return sqlSession.selectOne(VS + "viewCampOne", idx);
+	}
+
+	public int viewCampInsert(int idx, String chk) {
+		Map<String, Object> map = new HashMap<>();
+		map.clear();
+		map.put("campidx", idx);
+		map.put("chk", chk);
+		try {
+
+			return sqlSession.insert(VS + "viewCampInsert", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			sqlSession.commit();
+		}
+		return 0;
+	}
+
+	public int viewCampUpdate(int idx,String chk) {
+		Map<String, Object> map = new HashMap<>();
+		map.clear();
+		map.put("campidx", idx);
+		map.put("chk", chk);
+		try {
+			int num = sqlSession.selectOne(VS + "viewCampOne", idx);
+
+			if (num == 0)
+				return sqlSession.insert(VS + "viewCampInsert", map);
+			else
+				return sqlSession.update(VS + "viewCampUpdate", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			sqlSession.commit();
+		}
+		return 0;
+	}
 
 } //end class

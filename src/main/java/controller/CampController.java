@@ -16,9 +16,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import dao.CampDAO;
+import dao.ViewCampDao;
 import dto.Camp;
 import dto.IndexMap;
 import dto.Reserve;
@@ -34,6 +36,9 @@ public class CampController {
 
 	@Autowired
 	CampDAO cd;
+	/*
+	 * @Autowired ViewCampDao vcd;
+	 */
 
 	@ModelAttribute // 이렇게 잡아놓는작업을 해두면 이걸로 계속 사용할 수 있다.
 	void init(HttpServletRequest request, Model m) {
@@ -141,6 +146,7 @@ public class CampController {
 	public String CampManager(Camp camp) {
 		List<Reserve> rl = cd.reserveListAll();
 		List<Camp> cl = cd.campListAll();
+		System.out.println(cl);
 		m.addAttribute("cl", cl);
 		m.addAttribute("rl", rl);
 		return "/manager/camp/CampManager";
@@ -251,11 +257,19 @@ public class CampController {
 		m.addAttribute("msg", msg);
 		m.addAttribute("url", url);
 		return "/view/alert2";
-	}
+	} 
 
 	@RequestMapping("payManager")
 	public String payManager() {
 
-		return "/manager/camp/payManager";
+		return "/manager/camp/payManager"; 
+	} 
+	
+	@RequestMapping("viewChk")  
+	@ResponseBody 
+	public void viewChk(int idx, String chk) {
+		cd.viewCampUpdate(idx, chk);
 	}
+	
+	
 } // end class

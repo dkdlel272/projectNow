@@ -11,6 +11,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="dto.Leave" alias="leave" />
 		<typeAlias type="dto.Sale" alias="Sale" />
 		<typeAlias type="dto.IndexMap" alias="indexmap" />
+		<typeAlias type="dto.ViewCamp" alias="viewcamp" />
 
 	</typeAliases>
 	<environments default="development">
@@ -32,5 +33,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="mybatis/UserData.xml" />
 		<mapper resource="mybatis/Board.xml" />
 		<mapper resource="mybatis/Sale.xml" />
+		<mapper resource="mybatis/ViewCamp.xml" />
     </mappers>
 </configuration>

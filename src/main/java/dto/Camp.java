@@ -16,7 +16,7 @@ public class Camp {
 	private String chkin;
 	private String chkout;
 	private String content;
-	
+	private String chk;
 	private MultipartFile f1;
 	private MultipartFile f2;
 	private MultipartFile f3;
@@ -42,6 +42,14 @@ public class Camp {
 		this.f1 = f1;
 		this.f2 = f2;
 		this.f3 = f3;
+	}
+
+	public String getChk() {
+		return chk;
+	}
+
+	public void setChk(String chk) {
+		this.chk = chk;
 	}
 
 	public int getCampidx() {
@@ -172,16 +180,18 @@ public class Camp {
 		this.f3 = f3;
 	}
 
-
 	@Override
 	public String toString() {
 		return "{\"campidx\":\"" + campidx + "\", \"campname\":\"" + campname + "\", \"campaddr\":\"" + campaddr
 				+ "\", \"room\":\"" + room + "\", \"campimg\":\"" + campimg + "\", \"campimg2\":\"" + campimg2
 				+ "\", \"campimg3\":\"" + campimg3 + "\", \"roomcnt\":\"" + roomcnt + "\", \"payidx\":\"" + payidx
 				+ "\", \"roomno\":\"" + roomno + "\", \"chkin\":\"" + chkin + "\", \"chkout\":\"" + chkout
-				+ "\", \"content\":\"" + content + "\", \"f1\":\"" + f1 + "\", \"f2\":\"" + f2 + "\", \"f3\":\"" + f3
-				+ "\"}";
+				+ "\", \"content\":\"" + content + "\", \"chk\":\"" + chk + "\", \"f1\":\"" + f1 + "\", \"f2\":\"" + f2
+				+ "\", \"f3\":\"" + f3 + "\"}";
 	}
+
+
+	
 	
 
 		

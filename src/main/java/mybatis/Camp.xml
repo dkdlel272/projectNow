@@ -37,8 +37,10 @@ select seqcamp.nextval from dual
 
 <select id="CampList"  resultType="camp">
 select campname, campaddr, 
-room, campimg, payidx, content
-from camp order by campidx desc
+room, campimg, payidx, content, nvl(chk, 'y')
+from camp c , viewcamp v 
+where c.CAMPIDX=v.CAMPIDX(+)  and  nvl(chk, 'y') != 'n'
+order by c.campidx
 </select>
 
 <select id="SearchList" resultType="camp" parameterType="map">
@@ -64,8 +66,8 @@ select room from camp where campname=#{campname}
 	select*from userdata where black=#{black}
 </select>
 
-<select id ="campListAll" resultType="camp">
-select *  from camp  
+<select id ="campListAll" resultType="camp"  >
+select c.*, chk from camp  c, viewcamp v where c.campidx = v.campidx(+)
 </select>
 
 <select id ="reserveList" resultType="reserve">

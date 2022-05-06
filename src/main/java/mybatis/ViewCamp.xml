@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="viewcamp">
+
+<select id="viewCampOne" parameterType="viewcamp" resultType="int">
+select count(*) from viewcamp where campidx=#{campidx}
+</select>
+
+<insert id="viewCampInsert" parameterType="Map">
+insert into viewcamp(campidx,chk) values (${campidx},'${chk}')
+</insert>
+
+<update id="viewCampUpdate" parameterType="viewcamp">
+update viewcamp set chk=#{chk} where campidx = #{campidx}
+</update>
+
+</mapper>

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class MySqlSessionFactory {
 
-	public SqlSessionFactory sqlmap;
+	public static SqlSessionFactory sqlmap;
 	
 	MySqlSessionFactory(){
 		Reader reader = null;
