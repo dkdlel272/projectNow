@@ -17,7 +17,7 @@ public class SiteMeshFilter extends ConfigurableSiteMeshFilter{
 			.addDecoratorPath("/board/list_admin", "/WEB-INF/view/manager.jsp")
 			.addExcludedPath("/camp/campUpdate")
 			.addExcludedPath("/camp/CampInsert")
-			.addExcludedPath("/single/*");
+			.addExcludedPath("/userdata/readId");
 		
 	}
 }

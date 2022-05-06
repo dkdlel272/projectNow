@@ -29,11 +29,25 @@
 			<property name="defaultEncoding" value="utf-8" />
 		</bean>
 		
+		<bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+			<property name="host" value="smtp.gmail.com" />
+			<property name="port" value="587"/>
+			<property name="username" value="dalkey23" />
+			<property name="password" value="vision1111*" />
+			<property name="javaMailProperties">
+				<props>
+					<prop key="mail.smtp.starttls.enable">true</prop>
+					<prop key="mail.smtp.auth">true</prop>
+					<prop key="mail.smtp.ssl.protocols">TLSv1.2</prop>
+				</props>
+			</property>
+		</bean>
+		
 		<mvc:resources mapping="/image/**" location="/image/" cache-period="60" />
 		<mvc:resources mapping="/boardupload/**" location="/boardupload/" cache-period="60" />
 		<mvc:resources mapping="/campupload/**" location="/campupload/" cache-period="60" />
 		<mvc:resources mapping="/saleupload/**" location="/saleupload/" cache-period="60" />
-		
+		<mvc:resources mapping="/js/**" location="/js/" cache-period="60" />
 		
 		
 		<!-- css적용하기 위함 -->
