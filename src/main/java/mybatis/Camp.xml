@@ -80,9 +80,8 @@ select r.*, c.* from reserve r, camp c   where r.campname = c.campname
 
 <select id="reserveListAll" resultType="reserve">
 select r.CHECKIN,r.CHECKOUT, r.USERNAME,r.CAMPNAME,r.ROOM,c.CAMPADDR,c.PAYIDX,c.CAMPIDX,
-c.ROOMCNT-t.ROOMCNT ROOMCNT,c.ROOMNO 
-from reserve r, camp c,(select r.campname, count(r.campname) ROOMCNT from RESERVE r, camp c where r.CAMPNAME = c.CAMPNAME group by r.campname)t 
-where r.campname = c.campname and c.campname=t.campname ORDER BY r.CHECKIN desc
+c.ROOMCNT,c.ROOMNO 
+from reserve r, camp c where r.campname = c.campname ORDER BY r.CHECKIN desc
 </select>
 
 <select id="monthReserve" resultType="map" >
