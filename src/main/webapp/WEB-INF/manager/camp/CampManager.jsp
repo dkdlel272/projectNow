@@ -166,7 +166,7 @@ function toggle(element, idx) {
 								method="post">
 								<input type="hidden" value="${c.campidx}" name="campidx">
 								<button style="position: absolute; margin-left: 100px;"
-									type="submit">삭제[${c.chk}]</button>
+									type="submit">삭제</button>
 							</form>
 							<form action="<%=request.getContextPath()%>/camp/campUpdate"
 								method="post">
