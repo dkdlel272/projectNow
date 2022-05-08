@@ -274,9 +274,6 @@ public class UserdataController {
 		return msg;
 		
 	}
-	
-	
-
 
 	@RequestMapping("joinPro")
 	public String joinPro(UserData u) {
@@ -301,14 +298,85 @@ public class UserdataController {
 		m.addAttribute("url", url);
 
 		return "/view/alert";
-		
-
+	
 	}
 
 	@RequestMapping("loginForm")
 	public String loginForm() {
 
 		return "/view/userdata/loginForm";
+	}
+	
+	@RequestMapping("loginPro")
+	public String loginPro(String id, String pw) {
+
+
+		UserData u = ud.selectUserdata(id);
+
+		String msg = "아이디를 확인하세요";
+		String url = request.getContextPath() + "/userdata/loginForm";
+
+		if (u != null) {
+			if (pw.equals(u.getPassword())) {			// 비밀번호 확인 
+				if (u.getUserid().equals("vision")) { 	// 로그인 아이디가 vision인지 확인
+					
+					request.getSession().setAttribute("memberId", id);
+					msg = u.getName() + "님이 로그인 하셨습니다.";
+					url = request.getContextPath() + "/userdata/manager"; // 관리자페이지로 이동
+				
+				} else { //일반회원 로그인 시 블랙리스트인지 확인
+					
+					if (!u.getBlack().equals("0")) {
+						msg = "로그인이 불가능한 아이디입니다. 관리자에게 문의하세요.";
+						url = request.getContextPath() + "/userdata/loginForm";
+						
+					} else {
+						
+						request.getSession().setAttribute("memberId", id);
+						msg = u.getName() + "님이 로그인 하셨습니다";
+						url = request.getContextPath() + "/board/main";
+						
+					}
+				}
+				
+			} else { //비밀번호 오류
+				msg = "비밀번호를 확인하세요";
+			}
+		}
+
+		m.addAttribute("msg", msg);
+		m.addAttribute("url", url);
+
+		return "/view/alert";
+
+	}
+	
+	@RequestMapping("manager")
+	public String manager() {
+
+		return "/view/manager";
+	}
+	
+	@RequestMapping("kakaoLogin")
+	public String kakaoLogin() {
+		System.out.println("kakaoLogin------------");
+		
+		return "/view/userdata/loginForm";
+	}
+
+	@RequestMapping("logout")
+	public String logout() {
+
+		String login = (String) session.getAttribute("memberId");
+		request.getSession().invalidate();
+
+		String msg = login + "님이 로그아웃하였습니다.";
+		String url = request.getContextPath() + "/board/main";
+
+		m.addAttribute("msg", msg);
+		m.addAttribute("url", url);
+
+		return "/view/alert";
 	}
 
 	@RequestMapping("findIdForm")
@@ -318,10 +386,7 @@ public class UserdataController {
 	}
 
 	@RequestMapping("findId")
-	public String findId() {
-
-		String name = request.getParameter("name");
-		String email = request.getParameter("email");
+	public String findId(String name, String email) {
 
 		String userid = ud.findId(name, email);
 
@@ -351,14 +416,10 @@ public class UserdataController {
 	}
 
 	@RequestMapping("resetPass")
-	public String resetPass() {
-
-		String userid = request.getParameter("id");
-		String name = request.getParameter("name");
-		String email = request.getParameter("email");
+	public String resetPass(@RequestParam("id") String userid, 
+					String name, String email) {
 
 		String password = ud.findPass(userid, name, email);
-		System.out.println(password + "===================");
 		Random random = new Random();
 		String newpass = "";
 
@@ -380,7 +441,7 @@ public class UserdataController {
 		} else {
 
 			int num = ud.resetPass(userid, newpass);
-			// int num=0;
+			
 			if (num > 0) {
 
 				msg = "비밀번호가 변경되었습니다 :" + newpass;
@@ -395,81 +456,12 @@ public class UserdataController {
 
 		m.addAttribute("msg", msg);
 		m.addAttribute("url", url);
-		System.out.println(password + "===================2");
-
-		return "/view/alert";
-	}
-
-	@RequestMapping("manager")
-	public String manager() {
-
-		return "/common/manager";
-	}
-
-	@RequestMapping("loginPro")
-	public String loginPro(String id, String pw) {
-
-
-		UserData u = ud.selectUserdata(id);
-
-		String msg = "아이디를 확인하세요";
-		String url = request.getContextPath() + "/userdata/loginForm";
-
-		if (u != null) {
-
-			if (u.getUserid().equals("vision")) { // 로그인 아이디가 vision인지 확인
-				if (pw.equals(u.getPassword())) { // 비밀번호 확인
-
-					request.getSession().setAttribute("memberId", id);
-					msg = u.getName() + "님이 로그인 하셨습니다.";
-					url = request.getContextPath() + "/userdata/manager"; // 관리자페이지로 이동
-
-				} else { // 비밀번호 틀린경우
-					msg = "비밀번호를 확인하세요";
-				}
-			} else {
-				if (pw.equals(u.getPassword())) {
-					if (!u.getBlack().equals("0")) {
-						msg = "블랙회원입니다. 관리자에게 문의하세요.";
-						url = request.getContextPath() + "/userdata/loginForm";
-					} else {
-						request.getSession().setAttribute("memberId", id);
-						msg = u.getName() + "님이 로그인 하셨습니다";
-						url = request.getContextPath() + "/board/main";
-					}
-				} else {
-					msg = "비밀번호를 확인하세요";
-				}
-
-			}
-		}
-
-		m.addAttribute("msg", msg);
-		m.addAttribute("url", url);
-
-		return "/view/alert";
-
-	}
-
-	@RequestMapping("logout")
-	public String logout() {
-
-		HttpSession session = request.getSession();
-		// import 하고 session.getAttribute만 써도 됨
-		String login = (String) session.getAttribute("memberId");
-		request.getSession().invalidate();
-
-		String msg = login + "님이 로그아웃하였습니다.";
-		String url = request.getContextPath() + "/board/main";
-
-		m.addAttribute("msg", msg);
-		m.addAttribute("url", url);
-
+		
 		return "/view/alert";
 	}
 
 	@RequestMapping("mypage")
-	public String mypageForm() {
+	public String mypage() {
 
 		return "/view/userdata/mypage";
 	}
@@ -477,7 +469,6 @@ public class UserdataController {
 	@RequestMapping("updateForm")
 	public String updateForm() {
 
-		HttpSession session = request.getSession();
 		String login = (String) session.getAttribute("memberId");
 
 		UserData u = ud.selectUserdata(login);
@@ -488,56 +479,26 @@ public class UserdataController {
 	}
 
 	@RequestMapping("userdataUpdate")
-	public String userdataUpdate() {
+	public String userdataUpdate(UserData newUser) {
 
-		try {
-			request.setCharacterEncoding("utf-8");
-
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
-
-		HttpSession session = request.getSession();
-		String login = (String) session.getAttribute("memberId");
-
-		int num = 0;
-		String msg = "비밀번호가 틀립니다. 확인 후 다시 입력하세요";
+		UserData oldUser = ud.selectUserdata(newUser.getUserid());
+		String msg = "";
 		String url = request.getContextPath() + "/userdata/updateForm";
-
-		// 로그인이 불가하면
-		if (login == null || login.trim().equals("")) {
-			msg = "로그인이 필요 합니다";
-			url = request.getContextPath() + "/userdata/loginForm";
-		} else {
-
-			String name = request.getParameter("name");
-			String pass = request.getParameter("password");
-			int gender = Integer.parseInt(request.getParameter("gender"));
-			String birthday = request.getParameter("birthday");
-			String tel = request.getParameter("tel");
-			String address = request.getParameter("address");
-
-			UserData u = ud.selectUserdata(login);
-
-			u.setName(name);
-			u.setGender(gender);
-			u.setBirthday(birthday);
-			u.setTel(tel);
-			u.setAddress(address);
-
-			if (u.getPassword().equals(pass)) {
-				num = ud.updateUserdata(u);
+		
+		if (newUser.getPassword().equals(oldUser.getPassword())) {
+				int num = ud.updateUserdata(newUser);
 				if (num > 0) {
 
 					msg = "회원 정보가 수정 되었습니다";
-					url = request.getContextPath() + "/userdata/updateForm";
-
+					
 				} else {
 					msg = "정보 수정이 실패했습니다";
 				}
 
+			} else {
+				
+				msg = "비밀번호가 틀립니다. 다시 확인바랍니다.";
 			}
-		}
 
 		m.addAttribute("msg", msg);
 		m.addAttribute("url", url);
@@ -553,26 +514,23 @@ public class UserdataController {
 	}
 
 	@RequestMapping("changePassPro")
-	public String changePassPro() {
+	public String changePassPro(String password, String newpassword) {
 
-		HttpSession session = request.getSession();
+		
 		String login = (String) session.getAttribute("memberId");
-
-		String pass = request.getParameter("password");
-		String newpass = request.getParameter("newpassword");
 
 		UserData u = ud.selectUserdata(login);
 
 		String msg = "비밀번호가 틀립니다. 확인 후 다시 입력하세요";
 		String url = request.getContextPath() + "/userdata/changePass";
 
-		if (u.getPassword().equals(pass)) {
+		if (u.getPassword().equals(password)) {
 
-			int num = ud.resetPass(login, newpass);
+			int num = ud.resetPass(login, newpassword);
 
 			if (num > 0) {
 
-				msg = "비밀번호가 변경되었습니다.";
+				msg = "비밀번호가 변경되었습니다. 다시 로그인 바랍니다.";
 				request.getSession().invalidate();
 				url = request.getContextPath() + "/userdata/loginForm";
 
@@ -580,7 +538,7 @@ public class UserdataController {
 				msg = "비밀번호 변경이 실패했습니다.";
 
 			}
-		}
+		} 
 
 		m.addAttribute("msg", msg);
 		m.addAttribute("url", url);
@@ -591,7 +549,6 @@ public class UserdataController {
 	@RequestMapping("deleteForm")
 	public String deleteForm() {
 
-		HttpSession session = request.getSession();
 		String userid = (String) session.getAttribute("memberId");
 
 		m.addAttribute("userid", userid);
@@ -600,13 +557,9 @@ public class UserdataController {
 	}
 
 	@RequestMapping("deleteUserdata")
-	public String deleteUserdata() {
+	public String deleteUserdata(String password) {
 
-		HttpSession session = request.getSession();
 		String userid = (String) session.getAttribute("memberId");
-
-		String pass = request.getParameter("password");
-
 		UserData u = ud.selectUserdata(userid);
 
 		String msg = "비밀번호가 틀립니다. 확인 후 다시 입력하세요";
@@ -621,7 +574,7 @@ public class UserdataController {
 		l.setTel(u.getTel());
 		l.setEmail(u.getEmail());
 
-		if (u.getPassword().equals(pass)) {
+		if (u.getPassword().equals(password)) {
 
 			int num = ud.deleteUserdata(userid);
 
@@ -649,7 +602,6 @@ public class UserdataController {
 	@RequestMapping("myBoardList")
 	public String myBoardList() {
 
-		HttpSession session = request.getSession();
 		String login = (String) session.getAttribute("memberId");
 
 		List<Board> list = ud.selectMyboard(login);
@@ -701,16 +653,12 @@ public class UserdataController {
 
 
 	@RequestMapping("changeBlack")
-	public String changeBlack() {
-		try {
-			request.setCharacterEncoding("utf-8");
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
+	public String changeBlack(String userid) {
+	
 		int num = 0;
 		String msg = " ";
 		String url = request.getContextPath() + "/userdata/userdataList";
-		String userid = request.getParameter("userid");
+		
 
 		UserData u = ud.selectUserdata(userid);
 		System.out.println(u.getBlack());
@@ -749,9 +697,15 @@ public class UserdataController {
 		return "/single/searchUserForm";
 	}
 
+	
+	
+	
+	
+	
+	
 	@RequestMapping("searchUserList")
-	public String searchUserList() {
-		String searchId = request.getParameter("searchId");
+	public String searchUserList(String searchId) {
+		
 
 		List<UserData> list = ud.searchUserList(searchId);
 		System.out.println(list);

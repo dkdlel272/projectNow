@@ -62,7 +62,9 @@
 	
 	<mvc:mapping path="/board/list_admin"/>
 	
-	
+	<mvc:mapping path="/userdata/userdataList"/>
+	<mvc:mapping path="/userdata/blackList"/>
+	<mvc:mapping path="/userdata/leaveList"/>
 	
 	<bean class="interceptor.AdminInterceptor"/>
 
@@ -76,6 +78,16 @@
 			<mvc:mapping path="/board/boardReviewDeleteForm"/>
 			<mvc:mapping path="/board/boardDeleteForm"/>
 			<mvc:mapping path="/board/boardReplyPro"/>
+			
+			<mvc:mapping path="/userdata/mypage"/>
+			<mvc:mapping path="/userdata/userdataUpdate"/>
+			<mvc:mapping path="/userdata/updateForm"/>
+			<mvc:mapping path="/userdata/changePass*"/>
+			<mvc:mapping path="/userdata/changePassPro"/>
+			<mvc:mapping path="/userdata/deleteForm"/>
+			<mvc:mapping path="/userdata/deleteUserdata"/>
+			<mvc:mapping path="/userdata/myBoardList"/>
+			
 			<bean class="interceptor.LoginInterceptor" />
 			</mvc:interceptor>
 		</mvc:interceptors>

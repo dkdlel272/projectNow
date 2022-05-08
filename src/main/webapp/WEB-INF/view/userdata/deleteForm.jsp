@@ -5,47 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style >
+<link rel="stylesheet" type="text/css" 
+		href="<%=request.getContextPath() %>/resouces/css/joinForm.css">
 
-.notosanskr * { 
- font-family: 'Noto Sans KR', sans-serif;
-}
-
-h2#center {
-    text-align:center;
-    margin-bottom:50px;
-    color:#fff;
-    line-height:500px;
-    font-weight:bold;
-    font-size: 35px;
-    font-family: 'Noto Sans KR', sans-serif;
-}
-.subback {
-    width:100%;
-    height:500px;
-    overflow:hidden;
-    background:url("<%=request.getContextPath()%>/image/notice.jpg");
-}
-.container {
-    margin-top:150px;
-    margin-bottom:150px;
-}
-
-.btn-info {
-    margin-top: 25px;
-    background: #27606b;
-    border: 1px solid #27606b;
-    border-radius: 20px;
-    width: 150px;
-    line-height: 30px;
-    font-size: 17px;
-}
-
-</style>
 <script>
 function confirmDelete() {
 	
-	if(window.confirm("회원탈퇴 하시겠습니까?")){
+	if(window.confirm("탈퇴 후 7일동안 재가입이 불가합니다.\n정말 탈퇴 하시겠습니까?")){
 		return true;
 	} else{
 		return false;
@@ -70,10 +36,10 @@ function confirmDelete() {
 			<div class="form-group">
 			 
 				<label > ID </label>
-				<input type="text" class="form-control" name="userid" value="${userid }" readonly="readonly"> 
+				<input type="text" class="form-control in" name="userid" value="${userid }" readonly="readonly"> 
 				
 				<label > 비밀번호 </label>
-				<input type="password" class="form-control" name="password"> 
+				<input type="password" class="form-control in" name="password"> 
 				
 		
 				

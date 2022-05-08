@@ -54,7 +54,7 @@ h2#center {
     	
     	<div class="card bg-light text-dark">
     	<div class="card-body text-center">
-    		<a href="<%=request.getContextPath()%>/userdata/myBoardList" class="card-link">내가 쓴 글</a></div>
+    		<a href="<%=request.getContextPath()%>/userdata/myBoardList" class="card-link">내가 쓴 리뷰</a></div>
     	</div>
    
    </div>  

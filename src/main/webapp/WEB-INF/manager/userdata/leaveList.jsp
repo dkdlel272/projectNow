@@ -112,13 +112,13 @@ p.button_text a {text-decoration:none !important; display:block; color:#fff;}
  			 <thead class="thead-dark">
 				<tr>
 					<th>선택</th>
-					<th>userid</th>
-					<th>password</th>
-					<th>name</th>
-					<th>gender</th>
-					<th>email</th>
-					<th>tel</th>
-					<th>leave_date</th>
+					<th>아이디</th>
+					<th>비밀번호</th>
+					<th>이름</th>
+					<th>성별</th>
+					<th>이메일</th>
+					<th>연락처</th>
+					<th>탈퇴날짜</th>
 				</tr>
 			</thead>
 			<tbody>

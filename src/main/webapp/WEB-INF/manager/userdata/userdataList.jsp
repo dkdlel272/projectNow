@@ -106,16 +106,16 @@ p.button_text a {text-decoration:none !important; display:block; color:#fff;}
 		<table class="table">
  			 <thead class="thead-dark">
 				<tr>
-					<th>useridx</th>
-					<th>userid</th>
-					<th>password</th>
-					<th>name</th>
-					<th>gender</th>
-					<th>email</th>
-					<th>tel</th>
-					<th>address</th>
-					<th>birthday</th>
-					<th>black</th>
+					<th>번호</th>
+					<th>아이디</th>
+					<th>비밀번호</th>
+					<th>이름</th>
+					<th>성별</th>
+					<th>이메일</th>
+					<th>연락처</th>
+					<th>주소</th>
+					<th>생년월일</th>
+					<th>블랙회원</th>
 				</tr>
 			</thead>
 			<tbody>

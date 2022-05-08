@@ -5,43 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style >
+<link rel="stylesheet" type="text/css" 
+		href="<%=request.getContextPath() %>/resouces/css/joinForm.css">
 
-.notosanskr * { 
- font-family: 'Noto Sans KR', sans-serif;
-}
-
-h2#center {
-    text-align:center;
-    margin-bottom:50px;
-    color:#fff;
-    line-height:500px;
-    font-weight:bold;
-    font-size: 35px;
-    font-family: 'Noto Sans KR', sans-serif;
-}
-.subback {
-    width:100%;
-    height:500px;
-    overflow:hidden;
-    background:url("<%=request.getContextPath()%>/image/notice.jpg");
-}
-.container {
-    margin-top:150px;
-    margin-bottom:150px;
-}
-.btn-info {
-    margin-top: 25px;
-    background: #27606b;
-    border: 1px solid #27606b;
-    width: 150px;
-    line-height: 30px;
-    font-size: 17px;
-}
-.mx-auto{
-	margin-left: 30% !important;
-}
-</style>
 </head>
 <body>
 
@@ -55,11 +21,11 @@ h2#center {
 		
 			<div class="form-group">
 				<label >아이디:</label> 
-				<input type="text" class="form-control" name="id" readonly = "readonly" value = "${u.userid }"> 
+				<input type="text" class="form-control in" name="userid" readonly = "readonly" value = "${u.userid }"> 
 				<label >비밀번호:</label>
-				<input type="password" class="form-control" name="password"> 
+				<input type="password" class="form-control in" name="password"> 
 				<label >이름:</label> 
-				<input type="text" class="form-control"  name="name"  value = "${u.name }"> 
+				<input type="text" class="form-control in"  name="name"  value = "${u.name }"> 
 				<label>성별:</label> <label class="radio-inline"> </label>
 				<input type="radio" name="gender" ${u.gender == 1? "checked" : "" } value = "1" >남 <label class="radio-inline"> </label>
 				<input type="radio" name="gender" ${u.gender == 2? "checked" : "" } value = "2" >여
@@ -68,15 +34,15 @@ h2#center {
 		
 		<div class="form-group">
 			<label >생년월일:</label> 
-			<input type="text"	class="form-control" name="birthday" value = "${u.birthday}">
+			<input type="text"	class="form-control in" name="birthday" value = "${u.birthday}">
 			<label >전화번호:</label> 
-			<input type="text" class="form-control" name="tel" value = "${u.tel}">
+			<input type="text" class="form-control in" name="tel" value = "${u.tel}">
 				
 			<label ">이메일:</label>
-			<input type="text" class="form-control" name="email" value = "${u.email}" readonly = "readonly" >
+			<input type="text" class="form-control in" name="email" value = "${u.email}" readonly = "readonly" >
 				
 			<label >주소:</label>
-			<input type="text" class="form-control"	name="address" value = "${u.address}"  >
+			<input type="text" class="form-control in"	name="address" value = "${u.address}"  >
 		</div>
 
 

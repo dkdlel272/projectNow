@@ -5,42 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style >
-
-.notosanskr * { 
- font-family: 'Noto Sans KR', sans-serif;
-}
-
-h2#center {
-    text-align:center;
-    margin-bottom:50px;
-    color:#fff;
-    line-height:500px;
-    font-weight:bold;
-    font-size: 35px;
-    font-family: 'Noto Sans KR', sans-serif;
-}
-.subback {
-    width:100%;
-    height:500px;
-    overflow:hidden;
-    background:url("<%=request.getContextPath()%>/image/notice.jpg");
-}
-.container {
-    margin-top:150px;
-    margin-bottom:150px;
-}
-
-.btn-info {
-    margin-top: 25px;
-    background: #27606b;
-    border: 1px solid #27606b;
-    width: 150px;
-    line-height: 30px;
-    font-size: 17px;
-}
-
-</style>
+<link rel="stylesheet" type="text/css" 
+		href="<%=request.getContextPath() %>/resouces/css/joinForm.css">
 <script>
 function inputChk(f){
 
@@ -88,13 +54,13 @@ function inputChk(f){
 			<div class="form-group">
 			 
 				<label > 현재 비밀번호:</label>
-				<input type="password" class="form-control" name="password"> 
+				<input type="password" class="form-control in" name="password"> 
 				
 				<label > 비밀번호 수정:</label>
-				<input type="password" class="form-control" name="newpassword"> 
+				<input type="password" class="form-control in" name="newpassword"> 
 				
 				<label >비밀번호 확인:</label>
-				<input type="password" class="form-control" name="newpassword1"> 
+				<input type="password" class="form-control in" name="newpassword1"> 
 				
 			</div>
 

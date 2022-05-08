@@ -7,62 +7,9 @@
 <title>Insert title here</title>
 <script type="text/javascript"
 	src="<%=request.getContextPath()%>/js/ajax.js"></script>
-<style>
-.notosanskr * {
-	font-family: 'Noto Sans KR', sans-serif;
-}
+<link rel="stylesheet" type="text/css" 
+		href="<%=request.getContextPath() %>/resouces/css/joinForm.css">
 
-h2#center {
-	text-align: center;
-	margin-bottom: 50px;
-	color: #fff;
-	line-height: 500px;
-	font-weight: bold;
-	font-size: 35px;
-	font-family: 'Noto Sans KR', sans-serif;
-}
-
-.subback {
-	width: 100%;
-	height: 500px;
-	overflow: hidden;
-	background: url("<%=request.getContextPath()%>/image/notice.jpg");
-}
-
-.container {
-	margin-top: 150px;
-	margin-bottom: 150px;
-}
-
-.btn-info {
-	margin-top: 25px;
-	background: #27606b;
-	border: 1px solid #27606b;
-	border-radius: 20px;
-	width: 150px;
-	line-height: 30px;
-	font-size: 17px;
-}
-
-.in {
-	border-radius: 20px;
-	border: 1px solid #ddd;
-}
-
-.inwidth {
-	border-radius: 20px;
-	border: 1px solid #ddd;
-	width: 48%;
-	margin: 5px;
-}
-
-.inwidthfull {
-	border-radius: 20px;
-	border: 1px solid #ddd;
-	width: 97%;
-	margin: 5px;
-}
-</style>
 <script>
 
 	function idChk(){
@@ -393,7 +340,7 @@ h2#center {
 		</div>
 		<div class="form-group">
 			<label>Address</label><br> 
-			<input type="text" class="inwidth" id="address" placeholder="총 주소" name="address"> 
+			<input type="text" class="inwidth" id="address" placeholder="주소" name="address"> 
 			<input type="button" onclick="sample3_execDaumPostcode()" value="우편번호 찾기"><br>
 		</div>
 			

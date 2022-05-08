@@ -35,7 +35,7 @@
 </update>
 
 <update id="updateUserdata" parameterType="userdata">
-	update userdata set name = #{name} , gender = #{gender}, birthday = #{birthday}, address = #{address} 
+	update userdata set name = #{name} , gender = #{gender}, tel = #{tel}, birthday = #{birthday}, address = #{address} 
 		where userid = #{userid}
 </update>
 

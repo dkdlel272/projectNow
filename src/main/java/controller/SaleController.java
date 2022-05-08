@@ -151,8 +151,11 @@ public class SaleController {
 			image.add(i);
 		}
 		
+		String userid = (String) session.getAttribute("memberId");
+		
 		m.addAttribute("image",image);
 		m.addAttribute("s", s);
+		m.addAttribute("userid", userid);
 
 		return "/view/sale/saleInfo";
 	}

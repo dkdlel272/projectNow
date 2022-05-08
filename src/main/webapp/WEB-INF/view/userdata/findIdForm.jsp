@@ -5,41 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style>
-.notosanskr * { 
- font-family: 'Noto Sans KR', sans-serif;
-}
+<link rel="stylesheet" type="text/css" 
+		href="<%=request.getContextPath() %>/resouces/css/findId.css">
 
-h2#center {
-    text-align:center;
-    margin-bottom:50px;
-    color:#fff;
-    line-height:500px;
-    font-weight:bold;
-    font-size: 35px;
-    font-family: 'Noto Sans KR', sans-serif;
-}
-.subback {
-    width:100%;
-    height:500px;
-    overflow:hidden;
-    background:url("<%=request.getContextPath()%>/image/notice.jpg");
-}
-.container {
-    margin-top:150px;
-    margin-bottom:150px;
-}
-
-.btn-info {
-    margin-top: 25px;
-    background: #27606b;
-    border: 1px solid #27606b;
-    width: 150px;
-    line-height: 30px;
-    font-size: 17px;
-}
-
-</style>
 </head>
 <body>
 <div class="subback">
@@ -48,10 +16,11 @@ h2#center {
 
 <form class="container pt-5" action="<%=request.getContextPath()%>/userdata/findId">
   <div class="form-group">
+  <h2>아이디 찾기</h2>
     <br>
-    <input type="text" class="form-control" placeholder="이름" name="name">
+    <input type="text" class="form-control in" placeholder="이름" name="name">
     <br>
-    <input type="email" class="form-control" placeholder="email" name="email">
+    <input type="email" class="form-control in" placeholder="email" name="email">
     
   
 

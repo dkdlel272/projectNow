@@ -76,15 +76,19 @@
 		<tr>
 			<td colspan="2">
 			<div> 
-			<button class="btn btn-dark" 
-			onclick="location.href='<%=request.getContextPath()%>/board/boardReplyForm?num=${s.saleidx}'">답변</button>
-			<button class="btn btn-dark"
-			onclick="location.href='<%=request.getContextPath()%>/sale/saleUpdateForm?num=${s.saleidx}'">수정</button>
-			<button class="btn btn-dark"
-				onclick="location.href='<%=request.getContextPath()%>/board/boardDeleteForm?num=${s.saleidx}'">삭
-				제</button>
-			<button class="btn btn-dark" onclick="location.href='<%=request.getContextPath()%>/sale/saleList'">목
-				록</button>
+			
+			<c:if test="${s.writer eq userid}">
+				<button class="btn btn-dark" 
+					onclick="location.href='<%=request.getContextPath()%>/sale/saleUpdateForm?num=${s.saleidx}'">
+					수 정</button>
+				<button class="btn btn-dark"
+					onclick="location.href='<%=request.getContextPath()%>/board/boardDeleteForm?num=${s.saleidx}'">
+					삭 제</button>
+			
+			</c:if>
+			
+			<button class="btn btn-dark" onclick="location.href='<%=request.getContextPath()%>/sale/saleList'">
+				목 록</button>
 			</div>
 			</td>
 		</tr>
