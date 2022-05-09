@@ -32,7 +32,7 @@
   	<label>내용</label>
   	<textarea class="in" name="content" style="width:100%; height: 150px; border-radius: 0px;"></textarea>
   	
-  	<label>사진등록</label> 
+  	<label>사진등록</label> <span><small>업로드할 이미지는 한 번에 선택바랍니다. 최대 5개까지 업로드 가능합니다.</small></span>
 	<input type="file" multiple="multiple"	class="form-control" name="image"> 
 	
   </div>

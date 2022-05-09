@@ -74,7 +74,7 @@ public class SaleDAO {
 
 		try {
 
-			sqlSession.update(ns + "selectSaleOne", saleidx);
+			sqlSession.update(ns + "readCountUp", saleidx);
 
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -132,9 +132,7 @@ public class SaleController {
 		
 		Sale s = sd.selectSaleOne(num);
 		sd.readCountUp(num);
-		System.out.println("==================");
-		System.out.println(s.getReadcnt());
-		
+	
 		String[] images = s.getImage2().split(",");
 		List<String> image = new ArrayList<String>();
 		
@@ -160,5 +158,60 @@ public class SaleController {
 
 		return "/view/sale/saleUpdateForm";
 	}
+	
+	@RequestMapping("saleUpdatePro")
+	public String saleUpdatePro(Sale sale, MultipartHttpServletRequest mhRequest,
+			@RequestParam("image") MultipartFile[] file) {
 
+		String path = request.getServletContext().getRealPath("/") + "/saleupload/";
+
+		String fileOriginName = "";
+		String fileMultiName = "";
+
+		//수정파일이 있을 경우, 없을 경우 나누기
+		for (int i = 0; i < file.length; i++) {
+
+			fileOriginName = file[i].getOriginalFilename();
+			
+
+			File f = new File(path, fileOriginName);
+			try {
+				file[i].transferTo(f);
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if (i == 0) {
+				fileMultiName += fileOriginName;
+				sale.setImage1(fileMultiName); 
+			} else {
+				fileMultiName += "," + fileOriginName;
+			}
+		}
+		System.out.println("*" + fileMultiName);
+
+		sale.setSaleidx(sd.nextSaleidx());
+		sale.setImage2(fileMultiName);
+
+		int num = sd.insertSale(sale);
+
+		String msg = "게시물 등록 실패";
+		String url = request.getContextPath() + "/sale/saleUpdateForm";
+
+		if (num == 1) {
+
+			msg = "게시물 등록 성공";
+			url = request.getContextPath() + "/sale/saleInfo";
+
+		}
+
+		m.addAttribute("msg", msg);
+		m.addAttribute("url", url);
+
+		return "/view/alert";
+
+	}
 }

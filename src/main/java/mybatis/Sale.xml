@@ -27,7 +27,7 @@
 </select>
 
 <update id="readCountUp" parameterType="int"> 
-update sale set readcnt = readcnt + 1  where saleidx = #{saleidx}
+	update sale set readcnt = readcnt + 1  where saleidx = #{saleidx}
 </update>
 
 </mapper>
