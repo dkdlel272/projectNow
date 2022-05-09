@@ -65,20 +65,10 @@ public class SaleController {
 
 		String userid = (String) session.getAttribute("memberId");
 
-		if (userid == null) {
-			String msg = "로그인이 필요합니다.";
-			String url = request.getContextPath() + "/userdata/loginForm";
-
-			m.addAttribute("msg", msg);
-			m.addAttribute("url", url);
-
-			return "/view/alert";
-		} else {
-
 			m.addAttribute("userid", userid);
 
 			return "/view/sale/saleWriteForm";
-		}
+		
 
 	}
 
@@ -139,10 +129,11 @@ public class SaleController {
 
 	@RequestMapping("saleInfo")
 	public String saleInfo(int num) {
-
 		
 		Sale s = sd.selectSaleOne(num);
 		sd.readCountUp(num);
+		System.out.println("==================");
+		System.out.println(s.getReadcnt());
 		
 		String[] images = s.getImage2().split(",");
 		List<String> image = new ArrayList<String>();

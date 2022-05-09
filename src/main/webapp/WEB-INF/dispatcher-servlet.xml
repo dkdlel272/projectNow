@@ -88,6 +88,8 @@
 			<mvc:mapping path="/userdata/deleteUserdata"/>
 			<mvc:mapping path="/userdata/myBoardList"/>
 			
+			<mvc:mapping path="/sale/saleWriteForm"/>
+			
 			<bean class="interceptor.LoginInterceptor" />
 			</mvc:interceptor>
 		</mvc:interceptors>

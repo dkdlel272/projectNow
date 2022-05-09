@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,8 +36,12 @@
 				  <div class="card-body">
 				   	<p class="card-text" style="text-align: right;">${li.condition }</p>
 				   	<h4 class="card-title"> No.${li.saleidx} : ${li.subject} </h4>
-				   	<p class="card-text">금액 : ${li.price} 장소 : ${li.location}</p>
+				   	<p class="card-text">장소 : ${li.location}</p>
 				   	<p class="card-text">판매자 : ${li.writer}</p>
+				   	<h5 class="card-text" style="color: red">
+				   	<fmt:formatNumber value="${li.price}" pattern="#,###"/>
+					</h5>
+					<p class="card-text" style="color: gray;">${li.readcnt}</p>
 				   	<a href="<%=request.getContextPath() %>/sale/saleInfo?num=${li.saleidx}" class="btn list_button" style="color: #fff;">See More</a>
 				  </div>
 			</div>
