@@ -85,7 +85,7 @@
 					<li class="dropdown"><a
 						href="<%=request.getContextPath()%>/camp/CampList">예약관리</a>
 						<ul>
-							<li><a href="<%=request.getContextPath()%>/camp/CampList">캠핑장보기</a></li>
+							<li><a href="<%=request.getContextPath()%>/reserve/CampList">캠핑장보기</a></li>
 							<li><a
 								href="<%=request.getContextPath()%>/reserve/ReserveInsert">예약하기</a></li>
 						</ul></li>

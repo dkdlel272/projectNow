@@ -217,4 +217,27 @@ public class ReserveController {
 		return "/view/reserve/ReserveList";
 	}
 	
+	@RequestMapping("CampList")
+	public String CampList() {
+		List<Camp> list = cd.CampList();
+		m.addAttribute("list", list);
+		return "/view/reserve/CampList";
+	}
+
+	@RequestMapping("CampSearch")
+	public String CampSearch(String searchName, String searchType) {
+		List<Camp> search = cd.SearchList(searchName, searchType);
+		m.addAttribute("search", search);
+
+		return "/view/reserve/CampSearch";
+	}
+
+	@RequestMapping("CampInfo")
+	public String CampInfo(String campname) {
+		Camp info = cd.CampInfo(campname);
+		m.addAttribute("info", info);
+
+		return "/view/reserve/CampInfo";
+	}
+	
 }// end class

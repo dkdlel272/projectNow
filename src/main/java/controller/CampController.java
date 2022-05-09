@@ -116,29 +116,6 @@ public class CampController {
 		return "/view/alert2";
 	}
 
-	@RequestMapping("CampList") // 완성
-	public String CampList() {
-		List<Camp> list = cd.CampList();
-		m.addAttribute("list", list);
-		return "/view/camp/CampList";
-	}
-
-	@RequestMapping("CampSearch")
-	public String CampSearch(String searchName, String searchType) {
-		List<Camp> search = cd.SearchList(searchName, searchType);
-		m.addAttribute("search", search);
-
-		return "/view/camp/CampSearch";
-	}
-
-	@RequestMapping("CampInfo") // 캠핑장 상세보기 해당캠핑장의 정보가 넘어와야 함
-	public String CampInfo(String campname) {
-		Camp info = cd.CampInfo(campname);
-		m.addAttribute("info", info);
-
-		return "/view/camp/CampInfo";
-	}
-
 	@RequestMapping("CampManager")
 	public String CampManager(Camp camp) {
 		List<Reserve> rl = cd.reserveListAll();
