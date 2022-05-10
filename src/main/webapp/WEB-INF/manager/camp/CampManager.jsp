@@ -189,6 +189,31 @@ function toggle(element, idx) {
 	<!-- table list start //안되면 adminchk넣기 -->
 	<div class="container">
 		<h1 style="text-align: left;" id="center">캠핑장 예약 현황</h1>
+		<div class="container">
+<div class="search_wrap">
+		<div class="searchs">
+			 <form name="search" action="<%=request.getContextPath()%>/camp/CampManager">
+				<table class="pull-right">
+					<tr>
+						<td style="text-align:right">
+							<select class="from-control" name="searchType">
+								<option value="0"> 선택 </option>
+								<option value="1"> 월검색 </option>
+								<option value="2"> 예약자명 </option>
+							</select>
+						</td>
+						<td>
+							<input type="text" class="form-control" placeholder="검색어 입력" name="searchName" maxlength="100">
+						</td>
+						<td>
+							<button type="submit" class="btn btn-success">검색</button>
+						</td>		
+					</tr>
+				</table>
+			</form>
+		</div>
+	</div> 
+</div>
 		<table class="table table-hover">
 			<thead>
 				<tr>
