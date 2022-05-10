@@ -7,7 +7,16 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-ul.menu_login {background:#616161!important;}
+ul.menu_login {
+    display: flow-root;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    list-style: none;
+    margin: 0px;
+    padding-right: 1304px;
+    float: right;
+    background: linear-gradient(150deg, #3585CB, #48a3e5, #2babbf, #519ed7, #4496ed);
+}
 #wrapper {
 	display:none !important;
 }

@@ -289,7 +289,8 @@ hr {
 			<div class="listbar">블랙리스트</div></a><br>
 			<a href="<%=request.getContextPath()%>/userdata/leaveList">
 			<div class="listbar">탈퇴회원리스트</div></a><br>
-			<div class="hr-sect">캠핑관리</div><a href="<%=request.getContextPath()%>/camp/reserveManager">
+			<div class="hr-sect">캠핑관리</div>
+			<a href="<%=request.getContextPath()%>/camp/reserveManager">
 			<div class="listbar">예약관리</div></a><br>
 			<a href="<%=request.getContextPath()%>/camp/CampManager">
 			<div class="listbar">객실관리</div></a><br>

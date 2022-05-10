@@ -5,6 +5,16 @@
 <html>
 <head>
 <style>
+ul.menu_login {
+    display: flow-root;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    list-style: none;
+    margin: 0px;
+    padding-right: 1304px;
+    float: right;
+    background: linear-gradient(150deg, #3585CB, #48a3e5, #2babbf, #519ed7, #4496ed);
+}
 @font-face {
     font-family: 'MinSans-Medium';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/MinSans-Medium.woff') format('woff');

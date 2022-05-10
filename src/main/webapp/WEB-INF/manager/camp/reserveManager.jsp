@@ -11,6 +11,26 @@
 <meta charset="UTF-8">
 <title>예약관리</title>
 <style>
+ul.menu_login {
+    display: flow-root;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    list-style: none;
+    margin: 0px;
+    padding-right: 1304px;
+    float: right;
+    background: linear-gradient(150deg, #3585CB, #48a3e5, #2babbf, #519ed7, #4496ed);
+}
+#sidebar {
+    padding-top: 180px;
+    min-width: 250px;
+    max-width: 250px;
+    min-height: 104.9vh;
+    background: linear-gradient(150deg, #3585CB, #48a3e5, #2babbf, #519ed7, #4496ed);
+    transition: 0.5s all;
+    margin-top: -24px;
+    z-index: 1;
+}
 .table {
     width: 40%;
     margin-bottom: 1rem;
@@ -20,12 +40,6 @@
  th, td {
   border: 1px solid #bcbcbc;
  }
- .wrapper {
-  width: 50px;
-  height: 50px;
-  text-align: center;
-  margin: 50px auto;
-}
 #switch {
   position: absolute;
   /* hidden */
@@ -90,7 +104,7 @@
     height: 50px;
     text-align: center;
     margin: -35px auto;
-    margin-left: 140px;
+    margin-left: 0px;
     margin-bottom: 3px;
 }
 #switch:checked+.switch_label:hover {
