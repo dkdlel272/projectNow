@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,15 +33,20 @@
   	<label>내용</label>
   	<textarea class="in" name="content" style="width:100%; height: 150px; border-radius: 0px;"></textarea>
   	
-  	<label>사진등록</label> <span><small>업로드할 이미지는 한 번에 선택바랍니다. 최대 5개까지 업로드 가능합니다.</small></span>
+  	<label>사진등록</label>
 	<input type="file" multiple="multiple"	class="form-control" name="image"> 
+	<span><small>업로드할 이미지는 한 번에 선택바랍니다. 최소 1개의 사진을 등록해주세요.</small></span>
 	
   </div>
   
      <div class="form-group row">
   	<div class="col">
     <label>거래장소</label>
-     <input type="text" class="form-control in" name="location" />  
+	    <select class="form-control in" name="location">
+	     	<c:forEach var="campName" items="${campNames }">
+	    		<option value="${campName}">${campName}</option>
+	   		</c:forEach>
+	    </select>
     </div>
     <div class="col">
     <label>금액</label>

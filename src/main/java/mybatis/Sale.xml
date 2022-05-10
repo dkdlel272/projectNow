@@ -30,4 +30,27 @@
 	update sale set readcnt = readcnt + 1  where saleidx = #{saleidx}
 </update>
 
+<update id="updateSale" parameterType="sale"> 
+	update sale set subject = #{subject}, content = #{content}, 
+		price = #{price}, location = #{location}, 
+		image1 = #{image1}, image2 = #{image2}
+		where saleidx = #{saleidx}
+</update>
+
+<update id="deleteSale" parameterType="int">
+	delete sale where saleidx = #{saleidx}
+</update>
+
+<select id="selectCampList" resultType="String" >
+	select campname from camp 
+</select>
+
+<select id="mySaleList" resultType="sale" parameterType="String">
+	select * from sale where writer = #{writer} order by saleidx desc
+</select>
+
+<update id="changeCon" parameterType="map"> 
+	update sale set condition=#{condition} where saleidx = #{saleidx}
+</update>
+
 </mapper>
