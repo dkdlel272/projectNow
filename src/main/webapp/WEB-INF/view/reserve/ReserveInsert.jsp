@@ -54,7 +54,7 @@ table  td {
     <h2 id="center">예약하기</h2>
 </div>
 <div class="container">
-<form action="<%=request.getContextPath() %>/reserve/ReserveInsertPro" method="post">
+<form action="<%=request.getContextPath() %>/reserve/ReserveInsertPro" method="post" id="insert">
   <table>
 
 <c:forEach var="user" items="${user }">
@@ -114,7 +114,7 @@ table  td {
   </table>
 	<div id="center" style="padding: 3px;">
 		<button type="button" class="btn btn-dark" id="pay">결제하기</button>
-		<button type="submit" class="btn btn-dark">예약완료</button>
+		
 	</div>
 	</form>
 	</div>
@@ -145,10 +145,9 @@ buyer_addr: '${user.address}',
 console.log(rsp);
 if (rsp.success) {
 var msg = '결제가 완료되었습니다.';
-msg += '고유ID : ' + rsp.imp_uid;
-msg += '상점 거래ID : ' + rsp.merchant_uid;
-msg += '결제 금액 : ' + rsp.paid_amount;
-msg += '카드 승인번호 : ' + rsp.apply_num;
+
+document.getElementById('insert').submit();
+
 } else {
 var msg = '결제에 실패하였습니다.';
 msg += '에러내용 : ' + rsp.error_msg;

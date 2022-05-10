@@ -72,7 +72,10 @@
 	</mvc:interceptor>		
 		
 		<mvc:interceptor>
-			<mvc:mapping path="/reserve/**"/>	<!--  로그인인터셉터가 필요한 페이지 추가 -->
+			<mvc:mapping path="/reserve/ReserveInsert"/>	<!--  로그인인터셉터가 필요한 페이지 추가 -->
+			<mvc:mapping path="/reserve/ReserveList"/>
+			<mvc:mapping path="/reserve/ReserveInfo"/>
+			
 			<mvc:mapping path="/board/boardWriteForm"/>
 			<mvc:mapping path="/board/boardUpdateForm"/>
 			<mvc:mapping path="/board/boardReviewDeleteForm"/>

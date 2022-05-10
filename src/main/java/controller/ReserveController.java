@@ -1,13 +1,11 @@
 package controller;
 
-import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -126,78 +124,6 @@ public class ReserveController {
 		return "/view/reserve/ReserveInfo";
 	}
 	
-	@RequestMapping("ReserveUpdate") //예약업데이트가 있어야될까
-	public String ReserveUpdate(HttpServletRequest request, HttpServletResponse response) {
-		int idx = Integer.parseInt(request.getParameter("reserveidx"));
-		String login = (String) session.getAttribute("memberId");
-		String msg = "";
-		String url = "";
-		if (login == null || login.trim().equals("")) { //login check
-			msg = "로그인이 필요합니다.";
-			url = request.getContextPath()+"/userdata/loginForm";
-		}
-		try {
-			request.setCharacterEncoding("UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
-		
-		Reserve Rinfo = rd.ReserveInfo(idx);
-		List<String>   roomlist = rd.selectroom(Rinfo.getCampname());
-		m.addAttribute("Rinfo", Rinfo);
-		m.addAttribute("roomlist", roomlist);
-		
-		
-		
-		m.addAttribute("camp", request.getParameter("campname"));
-		
-		m.addAttribute("msg", msg);
-		m.addAttribute("url", url);
-		return "/view/reserve/ReserveUpdate";
-	}
-	
-	@RequestMapping("ReserveUpdatePro")
-	public String ReserveUpdatePro(HttpServletRequest request, HttpServletResponse response) {
-		
-		String msg = "";
-		String url = "";
-		String login = (String) session.getAttribute("memberId");
-		if (login == null || login.trim().equals("")) { //login check
-			msg = "로그인이 필요합니다.";
-			url = request.getContextPath()+"/userdata/loginForm";
-		}
-		
-		Reserve r = new Reserve();
-		r.setUsername(request.getParameter("username"));
-		r.setCampname(request.getParameter("campname"));
-		r.setRoom(request.getParameter("room"));
-		r.setCheckin(request.getParameter("checkin"));
-		r.setCheckout(request.getParameter("checkout"));
-		r.setPerson(Integer.parseInt(request.getParameter("person")));
-		r.setPayidx(Integer.parseInt(request.getParameter("payidx")));
-		r.setKid(Integer.parseInt(request.getParameter("kid")));
-		r.setRoomno(Integer.parseInt(request.getParameter("roomno")));
-		r.setReserveidx(Integer.parseInt(request.getParameter("reserveidx")));
-		
-		String name = rd.username(login);
-		int num = rd.ReserveUpdate(r);
-			if (num == 0) { //update no
-				msg = name + "님의 예약변경이 불가능합니다";
-				url = request.getContextPath()+"/reserve/ReserveList";
-			} else { //update ok
-				msg = name + "님의 예약이 변경되었습니다";
-				url = request.getContextPath()+"/reserve/ReserveList";
-			}
-			int idx = Integer.parseInt(request.getParameter("reserveidx"));
-			Reserve Rinfo = rd.ReserveInfo(idx);
-			m.addAttribute("Rinfo", Rinfo);
-			
-			
-		m.addAttribute("msg", msg);
-		m.addAttribute("url", url);
-		return "/view/alert";
-	}
-	
 	@RequestMapping("ReserveList")
 	public String ReserveList() {
 		String login = (String) session.getAttribute("memberId");
@@ -228,7 +154,7 @@ public class ReserveController {
 	public String CampSearch(String searchName, String searchType) {
 		List<Camp> search = cd.SearchList(searchName, searchType);
 		m.addAttribute("search", search);
-
+		
 		return "/view/reserve/CampSearch";
 	}
 
