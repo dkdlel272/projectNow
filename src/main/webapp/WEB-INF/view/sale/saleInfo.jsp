@@ -82,7 +82,7 @@
 					onclick="location.href='<%=request.getContextPath()%>/sale/saleUpdateForm?num=${s.saleidx}'">
 					수 정</button>
 				<button class="btn btn-dark"
-					onclick="location.href='<%=request.getContextPath()%>/board/boardDeleteForm?num=${s.saleidx}'">
+					onclick="location.href='<%=request.getContextPath()%>/sale/saleDeleteForm?num=${s.saleidx}'">
 					삭 제</button>
 			
 			</c:if>

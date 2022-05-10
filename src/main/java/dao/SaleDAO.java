@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import dto.Sale;
-import util.MybatisConnection;
+
 
 @Component
 public class SaleDAO {
@@ -74,7 +74,7 @@ public class SaleDAO {
 
 		try {
 
-			sqlSession.update(ns + "selectSaleOne", saleidx);
+			sqlSession.update(ns + "readCountUp", saleidx);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -83,5 +83,69 @@ public class SaleDAO {
 		}
 
 	}
+	
+	public int updateSale(Sale sale) {
+
+		try {
+
+			return sqlSession.update(ns + "updateSale", sale);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			sqlSession.commit();
+		}
+
+		return 0;
+
+	}
+	
+	public int deleteSale(int saleidx) {
+
+		try {
+
+			return sqlSession.delete(ns + "deleteSale", saleidx);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			sqlSession.commit();
+		}
+
+		return 0;
+
+	}
+	
+	public List<String> selectCampList() {
+
+		return sqlSession.selectList(ns + "selectCampList");
+
+	}
+	
+	public List<Sale> mySaleList(String writer) {
+
+		return sqlSession.selectList(ns + "mySaleList",writer);
+
+	}
+	
+	public int changeCon(int saleidx, String condition) {
+		map.clear();
+		map.put("saleidx", saleidx);
+		map.put("condition", condition);
+		
+		try {
+
+			return sqlSession.update(ns + "changeCon", map);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			sqlSession.commit();
+		}
+
+		return 0;
+
+	}
+	
 
 }

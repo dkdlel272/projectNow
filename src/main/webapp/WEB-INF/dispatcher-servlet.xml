@@ -89,6 +89,11 @@
 			<mvc:mapping path="/userdata/myBoardList"/>
 			
 			<mvc:mapping path="/sale/saleWriteForm"/>
+			<mvc:mapping path="/sale/saleWritePro"/>
+			<mvc:mapping path="/sale/saleUpdateForm"/>
+			<mvc:mapping path="/sale/saleUpdatePro"/>
+			<mvc:mapping path="/sale/saleDeleteForm"/>
+			<mvc:mapping path="/sale/saleDeletePro"/>
 			
 			<bean class="interceptor.LoginInterceptor" />
 			</mvc:interceptor>

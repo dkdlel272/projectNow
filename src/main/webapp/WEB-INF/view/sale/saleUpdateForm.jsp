@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,6 +16,8 @@
 <form class="container pt-5" action="<%=request.getContextPath()%>/sale/saleUpdatePro" name="f" enctype="multipart/form-data" method="post">
 
  <div class="form-group row">
+ <input type="hidden" name="saleidx" value="${s.saleidx}">
+ 
   	<div class="col">
     <label>작성자</label>
      <input type="text" class="form-control in" name="writer" value="${s.writer}" readonly="readonly"/>  
@@ -41,7 +44,12 @@
      <div class="form-group row">
   	<div class="col">
     <label>거래장소</label>
-     <input type="text" class="form-control in" name="location" value="${s.location}"/>  
+     	<select class="form-control in" name="location">
+	     	<c:forEach var="campName" items="${campNames }">
+	    		<option value="${campName}" 
+	    		<c:if test="${campName==s.location}">selected</c:if>>${campName}</option>
+	   		</c:forEach>
+	    </select> 
     </div>
     <div class="col">
     <label>금액</label>
