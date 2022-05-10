@@ -94,7 +94,9 @@ public class CampDAO {
 	}
 	
 	public List<Camp> SearchList(String searchName, String searchType){
-
+		map.clear();
+		map.put("searchType", searchType); 
+		map.put("searchName", searchName);
 			return sqlSession.selectList(NS+"SearchList", map);
 	}
 	

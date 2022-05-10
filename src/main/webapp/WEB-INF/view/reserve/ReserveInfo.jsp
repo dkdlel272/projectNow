@@ -133,7 +133,6 @@ value="<fmt:parseDate value ="${Rinfo.checkout}" var="checkout" pattern="yyyy-MM
     </tbody>
   </table>
 <div class="confirm-btn">
-<button type="button" class="btn btn-dark" onclick="GoUpdate ('${Rinfo.reserveidx}')">변경하기</button>
 <button type="button" class="btn btn-dark" onclick="GoDelete ('${Rinfo.reserveidx}', '${Rinfo.checkin }')">예약취소</button>
 </div>
 </div>
@@ -165,9 +164,6 @@ function GoDelete (idx, checkin) {
 				if (chk) {
 					location.href='<%=request.getContextPath() %>/reserve/ReserveDeletePro?reserveidx='+idx;
 				}
-}
-function GoUpdate (idx) {
-	location.href='<%=request.getContextPath() %>/reserve/ReserveUpdate?reserveidx='+idx;
 }
 </script>
 </body>
