@@ -11,6 +11,67 @@
 <meta charset="UTF-8">
 <title>객실관리</title>
 <style>
+/*시작*/
+ul.menu_login {
+    display: flow-root;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    list-style: none;
+    margin: 0px;
+    padding-right: 1304px;
+    float: right;
+    background: linear-gradient(150deg, #3585CB, #48a3e5, #2babbf, #519ed7, #4496ed);
+}
+#sidebar {
+    padding-top: 180px;
+    min-width: 250px;
+    max-width: 250px;
+    min-height: 205.9vh;
+    background: linear-gradient(150deg, #3585CB, #48a3e5, #2babbf, #519ed7, #4496ed);
+    transition: 0.5s all;
+    margin-top: -24px;
+    z-index: 1;
+    display: inline-block;
+}
+.table {
+    width: 40%;
+    margin-bottom: 1rem;
+    border: 1px solid #bcbcbc;
+    color: #212529;
+    }
+ th, td {
+  border: 1px solid #bcbcbc;
+ }
+#table1 {
+        width: 400px;
+        height: 300px;
+      }
+.container, .container-lg, .container-md, .container-sm, .container-xl {
+    max-width: 100%;
+    margin: inherit;
+    width: 100%;
+    padding-right: 580px;
+    padding-left: 200px;
+}
+.wrapper {
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    margin: -35px auto;
+    margin-left: 0px;
+    margin-bottom: 3px;
+}
+ul.menu_login {
+    display: flow-root;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    list-style: none;
+    margin: 0px;
+    padding-right: 1304px;
+    float: right;
+    background: linear-gradient(150deg, #3585CB, #48a3e5, #2babbf, #519ed7, #4496ed);
+}
+/*끝*/
 button {
 	padding: 5px;
 	margin-right: 15px;
@@ -193,7 +254,7 @@ function toggle(element, idx) {
 <div class="search_wrap">
 		<div class="searchs">
 			 <form name="search" action="<%=request.getContextPath()%>/camp/reserveSearch">
-				<table class="pull-right">
+				<table class="pull-right" style="float:right;  margin-right: -170px;">
 					<tr>
 						<td style="text-align:right">
 							<select class="from-control" name="searchType">

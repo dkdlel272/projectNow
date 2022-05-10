@@ -5,6 +5,7 @@
 <html>
 <head>
 <style>
+/*시작*/
 ul.menu_login {
     display: flow-root;
     padding-bottom: 20px;
@@ -15,6 +16,56 @@ ul.menu_login {
     float: right;
     background: linear-gradient(150deg, #3585CB, #48a3e5, #2babbf, #519ed7, #4496ed);
 }
+#sidebar {
+    padding-top: 180px;
+    min-width: 250px;
+    max-width: 250px;
+    min-height: 205.9vh;
+    background: linear-gradient(150deg, #3585CB, #48a3e5, #2babbf, #519ed7, #4496ed);
+    transition: 0.5s all;
+    margin-top: -24px;
+    z-index: 1;
+    display: inline-block;
+}
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    border: 1px solid #bcbcbc;
+    color: #212529;
+    }
+ th, td {
+  border: 1px solid #bcbcbc;
+ }
+#table1 {
+        width: 400px;
+        height: 300px;
+      }
+.container, .container-lg, .container-md, .container-sm, .container-xl {
+    max-width: 100%;
+    margin: inherit;
+    width: 100%;
+    padding-right: 580px;
+    padding-left: 200px;
+}
+.wrapper {
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    margin: -35px auto;
+    margin-left: 0px;
+    margin-bottom: 3px;
+}
+ul.menu_login {
+    display: flow-root;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    list-style: none;
+    margin: 0px;
+    padding-right: 1304px;
+    float: right;
+    background: linear-gradient(150deg, #3585CB, #48a3e5, #2babbf, #519ed7, #4496ed);
+}
+/*끝*/
 @font-face {
     font-family: 'MinSans-Medium';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/MinSans-Medium.woff') format('woff');
@@ -23,10 +74,6 @@ ul.menu_login {
 }
 .notosanskr * { 
  font-family: 'Noto Sans KR', sans-serif;
-}
-.container {
-	margin-top:150px;
-	margin-bottom:150px;
 }
 h2#center {
 	text-align:center;
@@ -87,15 +134,21 @@ p.button_text a {text-decoration:none !important; display:block; color:#fff;}
 }
 .page-link {color:#000;}
 .container {
- 	margin-top:150px;
+ 	margin-top:100px;
 }
  h2#head_Text {
  	text-align:center;
  	width:100%;
  	font-size:30px;
  	font-weight:bold;
- 	margin-bottom:100px;
+ 	margin-bottom:40px;
  }
+ .container {
+    margin-top: 100px;
+    margin-left: 200px;
+    padding-left: 0%;
+    padding-right: 17%;
+}
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -151,7 +204,7 @@ p.button_text a {text-decoration:none !important; display:block; color:#fff;}
 			</p>
 		</div>
 		
-		<div class="container" style="margin-top:100px;">
+		<div class="container">
 		<ul class="pagination justify-content-center"  >
 	     <li class='page-item <c:if test="${startPage <= bottomLine}"> disabled</c:if>'><a
 	    	class="page-link" href="<%=request.getContextPath() %>/board/list?pageNum=${startPage-bottomLine}">Previous</a></li>

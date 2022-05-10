@@ -30,6 +30,7 @@ ul.menu_login {
     transition: 0.5s all;
     margin-top: -24px;
     z-index: 1;
+    display: inline-block;
 }
 .table {
     width: 40%;
@@ -155,12 +156,13 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <hr>
 <div class="container">
-<h1 style="text-align: left;" id="center">매출 대시 보드</h1><div class="search_wrap">
+<h1 style="text-align: left;" id="center">매출 대시 보드</h1></div>
+<div class="search_wrap" style="margin-right: 63%;">
 		<div class="searchs">
 			 <form name="search" action="<%=request.getContextPath()%>/camp/chartSearch">
-				<table class="pull-right">
+				<table class="pull-right" style="float: right; margin-top: -55px;">
 					<tr>
-						<td style="text-align:right">
+						<td style="text-align:right" >
 							<select class="from-control" name="searchType">
 								<option value="0"> 월선택 </option>
 								<option value="1"> 1월 </option>
@@ -185,13 +187,13 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
 			</form>
 		</div>
 	</div> 
-</div>
 <!-- 차트가 그려질 부분 -->
 <canvas id="myChart"  style="max-width: 100%;
     width: 100%;
     padding-right: 200px;
     padding-left: 15%;
     display: block;
+    float: right;
     height: 364px;"></canvas>
    
 <script>
