@@ -46,11 +46,105 @@ order by c.campidx
 <select id="SearchList" resultType="camp" parameterType="map">
 select * from camp
 	<if test="searchType == 1"> 
-			 where campaddr like '%${searchName}%'
+			 where campaddr  like '%${searchName}%'
 </if>
 	<if test="searchType == 2">
-			where room like '%${searchName}%'
+			where room  like '%${searchName}%'
 </if>
+</select>
+
+<select id="reserveSearchList" resultType="reserve" parameterType="map">
+select t.* from (select r.CHECKIN,r.CHECKOUT, r.USERNAME,r.CAMPNAME,r.ROOM,c.CAMPADDR,c.PAYIDX,c.CAMPIDX
+from reserve r, camp c where r.campname = c.campname ORDER BY r.CHECKIN desc) t
+	<if test="searchType == 1"> 
+			 where to_char(checkin,'mm')  like '%${searchName}%'
+</if>
+	<if test="searchType == 2">
+			where username  like '%${searchName}%'
+</if>
+order by checkin desc
+</select>
+
+<select id="chartMonthBoard1" resultType="indexmap" parameterType="map">
+select to_char(checkin, 'dd') co1, sum(PERSON+KID) co2 from reserve
+<if test="searchType == 1">
+where to_char(checkin, 'mm') like '01'
+</if>
+<if test="searchType == 2">
+where to_char(checkin, 'mm') like '02'
+</if>
+<if test="searchType == 3">
+where to_char(checkin, 'mm') like '03'
+</if>
+<if test="searchType == 4">
+where to_char(checkin, 'mm') like '04'
+</if>
+<if test="searchType == 5">
+where to_char(checkin, 'mm') like '05'
+</if>
+<if test="searchType == 6">
+where to_char(checkin, 'mm') like '06'
+</if>
+<if test="searchType == 7">
+where to_char(checkin, 'mm') like '07'
+</if>
+<if test="searchType == 8">
+where to_char(checkin, 'mm') like '08'
+</if>
+<if test="searchType == 9">
+where to_char(checkin, 'mm') like '09'
+</if>
+<if test="searchType == 10">
+where to_char(checkin, 'mm') like '10'
+</if>
+<if test="searchType == 11">
+where to_char(checkin, 'mm') like '11'
+</if>
+<if test="searchType == 12">
+where to_char(checkin, 'mm') like '12'
+</if>
+GROUP BY to_char(checkin, 'dd')
+</select>
+
+<select id="chartSearchList2" resultType="indexmap" parameterType="map">
+select to_char(checkin, 'dd') co1, sum(payidx) co2 from reserve
+<if test="searchType == 1">
+where to_char(checkin, 'mm') like '01'
+</if>
+<if test="searchType == 2">
+where to_char(checkin, 'mm') like '02'
+</if>
+<if test="searchType == 3">
+where to_char(checkin, 'mm') like '03'
+</if>
+<if test="searchType == 4">
+where to_char(checkin, 'mm') like '04'
+</if>
+<if test="searchType == 5">
+where to_char(checkin, 'mm') like '05'
+</if>
+<if test="searchType == 6">
+where to_char(checkin, 'mm') like '06'
+</if>
+<if test="searchType == 7">
+where to_char(checkin, 'mm') like '07'
+</if>
+<if test="searchType == 8">
+where to_char(checkin, 'mm') like '08'
+</if>
+<if test="searchType == 9">
+where to_char(checkin, 'mm') like '09'
+</if>
+<if test="searchType == 10">
+where to_char(checkin, 'mm') like '10'
+</if>
+<if test="searchType == 11">
+where to_char(checkin, 'mm') like '11'
+</if>
+<if test="searchType == 12">
+where to_char(checkin, 'mm') like '12'
+</if>
+GROUP BY to_char(checkin, 'dd')
 </select>
 
 <select id="CampInfo"  resultType="camp"  parameterType="String">

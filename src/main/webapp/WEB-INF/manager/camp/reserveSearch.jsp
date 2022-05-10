@@ -229,7 +229,7 @@ function toggle(element, idx) {
 			</thead>
 			<tbody>
 
-				<c:forEach var="r" items="${rl}">
+				<c:forEach var="r" items="${reserveSearch}">
 					<tr>
 						<td>${r.campidx}</td>
 						<td>${r.username}</td>

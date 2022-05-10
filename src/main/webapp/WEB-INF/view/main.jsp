@@ -97,7 +97,7 @@ if('${param.msg}'){alert('${param.msg}')}
          </p>
 
             <div id="center" style="padding: 3px;">
-                  <button type="submit" class="btn btn-info"><a href="<%=request.getContextPath()%>/camp/CampList">예약하기</a></button>
+                  <button type="submit" class="btn btn-info"><a href="<%=request.getContextPath()%>/reserve/CampList">예약하기</a></button>
             </div>
          </div>
         </div>

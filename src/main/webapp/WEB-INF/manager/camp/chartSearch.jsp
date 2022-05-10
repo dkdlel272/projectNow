@@ -140,8 +140,10 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <hr>
+
 <div class="container">
-<h1 style="text-align: left;" id="center">매출 대시 보드</h1><div class="search_wrap">
+<h1 style="text-align: left;" id="center">매출 대시 보드</h1>
+<div class="search_wrap">
 		<div class="searchs">
 			 <form name="search" action="<%=request.getContextPath()%>/camp/chartSearch">
 				<table class="pull-right">
@@ -172,6 +174,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
 		</div>
 	</div> 
 </div>
+
 <!-- 차트가 그려질 부분 -->
 <canvas id="myChart"  style="max-width: 100%;
     width: 100%;

@@ -83,7 +83,7 @@
 							<li><a href="#">Contact Us</a></li>
 						</ul></li>
 					<li class="dropdown"><a
-						href="<%=request.getContextPath()%>/camp/CampList">예약관리</a>
+						href="<%=request.getContextPath()%>/reserve/CampList">예약관리</a>
 						<ul>
 							<li><a href="<%=request.getContextPath()%>/reserve/CampList">캠핑장보기</a></li>
 							<li><a

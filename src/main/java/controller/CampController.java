@@ -104,7 +104,7 @@ public class CampController {
 			camp.setCampimg3("");
 		}
 
-		int seq = cd.CampInsert(camp);
+		int seq = cd.CampInsert(camp); 
 		String msg = "캠핑장 등록 실패";
 		String url = request.getContextPath() + "/manager/camp/CampInsert";
 		if (seq >= 1) {
@@ -116,7 +116,7 @@ public class CampController {
 		return "/view/alert2";
 	}
 
-	@RequestMapping("CampManager")
+	@RequestMapping("CampManager") 
 	public String CampManager(Camp camp) {
 		List<Reserve> rl = cd.reserveListAll();
 		List<Camp> cl = cd.campListAll();
@@ -243,6 +243,35 @@ public class CampController {
 	public void viewChk(int idx, String chk) {
 		cd.viewCampUpdate(idx, chk);
 	}
-	
+	@RequestMapping("reserveSearch") 
+	public String reserveSearch(String searchName, String searchType) {
+		List<Camp> reserveSearch = cd.reserveSearchList(searchName, searchType);
+		List<Camp> cl = cd.campListAll();
+		m.addAttribute("cl", cl);
+		m.addAttribute("reserveSearch", reserveSearch);
+		
+		return "/manager/camp/reserveSearch";
+	}
+	@RequestMapping("chartSearch")
+	public String chartSearch(String searchType) {
+		List<Camp> cl = cd.campListAll();
+		Map map = cd.monthReserve();
+		List<IndexMap> d1 = cd.chartMonthBoard1(searchType);
+		List<IndexMap> d2 = cd.chartMonthBoard2(searchType);
+		Map<Integer, String> md1 = new HashMap<Integer, String>();
+		for (IndexMap im : d1) {
+			md1.put(Integer.parseInt(im.getCo1()), im.getCo2());
+		}
+		Map<Integer, String> md2 = new HashMap<Integer, String>();
+		for (IndexMap im : d2) {
+			md2.put(Integer.parseInt(im.getCo1()), im.getCo2());
+		}
+		m.addAttribute("map", map);
+		m.addAttribute("md1", md1);
+		m.addAttribute("md2", md2);
+		m.addAttribute("cl", cl);
+		
+		return "/manager/camp/chartSearch";
+	}
 	
 } // end class
