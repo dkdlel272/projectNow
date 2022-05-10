@@ -19,17 +19,17 @@
 	
 
 	<div class="container">
-		<div>
-		<input type="checkbox" name="condition"> 거래가능만 리스트만 보기
+		
+		
 		<div class="list_button">
 		<p class="button_text">
 			<a href="<%=request.getContextPath()%>/sale/saleWriteForm">게시판입력</a>
 		</p>	
 		</div>
-	</div>
+	
 	
 	<div class="row row-cols-1 row-cols-md-3">	
-	<c:forEach var="li" items="${list }">
+		<c:forEach var="li" items="${list }">
 			<div class="col">
 			<div class="card" >
 		  	<img class="card-img-top" src="<%=request.getContextPath() %>/saleupload/${li.image1}" >
@@ -40,13 +40,19 @@
 				   	<p class="card-text">판매자 : ${li.writer}</p>
 				   	<h5 class="card-text" style="color: red">
 				   	<fmt:formatNumber value="${li.price}" pattern="#,###"/>
-					</h5>
-					<p class="card-text" style="color: gray;">${li.readcnt}</p>
+					</h5> 
+					<p class="card-text tables" style="color: gray;">
+						<%-- <i class="xi-heart-o"> ${li.good}</i>&nbsp; --%>
+						<i class="xi-eye-o"> ${li.readcnt}</i>
+					</p>
+					
 				   	<a href="<%=request.getContextPath() %>/sale/saleInfo?num=${li.saleidx}" class="btn list_button" style="color: #fff;">See More</a>
 				  </div>
 			</div>
 			</div>	
+		
 	</c:forEach>
+
 	</div>
 	</div>
 	
