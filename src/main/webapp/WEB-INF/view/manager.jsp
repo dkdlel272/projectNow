@@ -14,9 +14,10 @@
 /*부트스트랩 사이드바 시작*/
 /*레이아웃 영역 지정*/
 .wrapper {
-	display: flex;
+	background-color: #f3f3f3;
 	width: 100%;
 	align-items: stretch;
+	display: block;
 }
 /*메뉴 텍스트에 마우스 올려놓을 시 밑줄생김 방짐*/
 a, a:hover {
@@ -24,11 +25,13 @@ a, a:hover {
 }
 /*사이드 메뉴 영역*/
 #sidebar {
+	padding-top: 180px;
 	min-width: 250px;
 	max-width: 250px;
-	min-height: 100vh;
-	background-color: dimgray;
+	min-height: 99.9vh;
+	background: linear-gradient(150deg, #3585CB, #48a3e5, #2babbf, #519ed7, #4496ed);
 	transition: 0.5s all;
+	margin-top: -24px;
 }
 
 #sidebar ul li a {
@@ -36,10 +39,6 @@ a, a:hover {
 	font-size: 1.1em;
 	display: block;
 	color: black;
-}
-/*사이드 메뉴 숨기기 버튼 클릭 시 사이드 메뉴에 스타일 설정*/
-#sidebar.active {
-	margin-left: -250px;
 }
 
 a[data-toggle="collapse"] {
@@ -86,7 +85,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 ul.menu_login {
-	background: #616161 !important;
+	display: flow-root;
+	padding-bottom: 20px;
+	padding-top: 20px;
+	list-style: none;
+	margin: 0px;
+	padding-right: 1321px;
+	float: right;
+	background: linear-gradient(150deg, #3585CB, #48a3e5, #2babbf, #519ed7, #4496ed);
 }
 
 #wrapper {
@@ -190,9 +196,6 @@ ul.menu_login li a {
 	text-decoration: none;
 }
 
-ul.menu_login {
-	background: #616161 !important;
-}
 
 #wrapper {
 	display: none !important;
@@ -203,6 +206,43 @@ hr {
 	border-top: 1px solid #eee;
 	margin: 0px 0;
 }
+
+.listbar {
+	text-align: center;
+	color: rgb(255, 255, 255);
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: bold;
+	text-shadow: 1px 3px 3px #464646;
+}
+
+.hr-sect {
+	display: flex;
+	flex-basis: 100%;
+	align-items: center;
+	color: rgb(255, 255, 255);
+	font-size: 14px;
+	margin: 20px 0px;
+}
+
+.hr-sect::before {
+	content: "";
+	flex-grow: 1;
+	background: rgb(255, 255, 255);
+	height: 1px;
+	font-size: 0px;
+	line-height: 0px;
+	margin: 0px 11px;
+}
+
+.hr-sect::after {
+	content: "";
+	flex-grow: 4;
+	background: rgb(255, 255, 255);
+	height: 1px;
+	font-size: 0px;
+	line-height: 0px;
+	margin: 0px 13px;
+}
 </style>
 <script
 	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -212,8 +252,7 @@ hr {
 <sitemesh:write property='head' />
 <body>
 	<div class="wrapper_login">
-		<ul class="menu_login"
-			style="background: #616161; display: flow-root; padding-bottom: 24px; list-style: none; margin: 0px; padding: 10px;">
+		<ul class="menu_login" style="">
 			<c:choose>
 				<c:when test="${memberId == null}">
 					<li style="position: static; float: right;"><a
@@ -231,44 +270,36 @@ hr {
 					<li style="float: right;" class="nav-item"><a class="nav-link"
 						href="<%=request.getContextPath()%>/userdata/logout">로그아웃&nbsp;&nbsp;</a></li>
 				</c:when>
-
 			</c:choose>
-
 		</ul>
 	</div>
+	<a href="<%=request.getContextPath()%>/userdata/manager"><img
+		style="padding-top: 0px; padding-left: 15px; margin-left: 7px; position: absolute;"
+		src="<%=request.getContextPath()%>/image/wucam2.png" width="200px"></a>
+	<br>
 	<div class="wrapper">
 		<!--사이드 메뉴-->
 		<nav id="sidebar">
-			<ul class="list-unstyled components">
-				<li><a href="#dropdownMenu1" data-toggle="collapse"
-					aria-expanded="false" class="dropdown-toggle"> 회원관리 </a> <!--드롭다운 메뉴-->
-					<ul class="collapse list-unstyled" id="dropdownMenu1">
-						<li><a href="<%=request.getContextPath()%>/userdata/userdataList">회원리스트</a></li>
-						<li><a href="<%=request.getContextPath()%>/userdata/blackList">블랙리스트 관리</a></li>
-						<li><a href="<%=request.getContextPath()%>/userdata/leaveList">탈퇴회원 리스트</a></li>
-					</ul></li>
-				<li><a href="#dropdownMenu2" data-toggle="collapse"
-					aria-expanded="false" class="dropdown-toggle"> 캠핑장관리 </a> <!--드롭다운 메뉴-->
-					<ul class="collapse list-unstyled" id="dropdownMenu2">
-						<li><a href="<%=request.getContextPath()%>/camp/reserveManager">예약관리</a></li>
-						<li><a href="<%=request.getContextPath()%>/camp/CampManager">객실관리</a></li>
-					</ul></li>
-				<li><a href="#dropdownMenu3" data-toggle="collapse"
-					aria-expanded="false" class="dropdown-toggle"> 게시판관리 </a> <!--드롭다운 메뉴-->
-					<ul class="collapse list-unstyled" id="dropdownMenu3">
-						<li><a href="<%=request.getContextPath()%>/board/list_admin?boardid=1">공지사항관리</a></li>
-					</ul></li></ul>
+			<div
+				style="text-align: center; color: white; margin-top: -85px; padding-bottom: 40px;">대시보드</div>
+			<div class="hr-sect">회원관리</div>
+			<a href="<%=request.getContextPath()%>/userdata/userdataList">
+			<div class="listbar">회원리스트</div></a><br>
+			<a	href="<%=request.getContextPath()%>/userdata/blackList">
+			<div class="listbar">블랙리스트</div></a><br>
+			<a href="<%=request.getContextPath()%>/userdata/leaveList">
+			<div class="listbar">탈퇴회원리스트</div></a><br>
+			<div class="hr-sect">캠핑관리</div><a href="<%=request.getContextPath()%>/camp/reserveManager">
+			<div class="listbar">예약관리</div></a><br>
+			<a href="<%=request.getContextPath()%>/camp/CampManager">
+			<div class="listbar">객실관리</div></a><br>
+			<div class="hr-sect">게시판관리</div>
+			<a href="<%=request.getContextPath()%>/board/list_admin?boardid=1">
+			<div class="listbar">공지사항관리</div></a><br></ul>
 		</nav>
 		<!--콘텐츠영역-->
 	</div>
-		<sitemesh:write property='body' />
-	<script>
-		$(function() {
-			$('#sidebarToggle').on('click', function() {
-				$('#sidebar').toggleClass('active');
-			});
-		});
-	</script>
+	<sitemesh:write property='body' />
 
 </body>
 </html>
