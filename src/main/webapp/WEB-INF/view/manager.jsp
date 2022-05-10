@@ -7,9 +7,17 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+<link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel='stylesheet'
-	href='//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css'>
+	href='//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css'>	
+<script
+	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script
+	src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+	
 <style>
 /*부트스트랩 사이드바 시작*/
 /*레이아웃 영역 지정*/
@@ -248,8 +256,10 @@ hr {
 	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script
 	src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+	
+<sitemesh:write property='head' />	
 </head>
-<sitemesh:write property='head' />
+
 <body>
 	<div class="wrapper_login">
 		<ul class="menu_login" style="">

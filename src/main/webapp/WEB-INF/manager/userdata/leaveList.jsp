@@ -5,7 +5,7 @@
 <html>
 <head>
 <style>
-ul.menu_login {
+/* ul.menu_login {
     display: flow-root;
     padding-bottom: 20px;
     padding-top: 20px;
@@ -14,7 +14,7 @@ ul.menu_login {
     padding-right: 1304px;
     float: right;
     background: linear-gradient(150deg, #3585CB, #48a3e5, #2babbf, #519ed7, #4496ed);
-}
+} */
 @font-face {
     font-family: 'MinSans-Medium';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/MinSans-Medium.woff') format('woff');
@@ -27,6 +27,7 @@ ul.menu_login {
 .container {
 	margin-top:150px;
 	margin-bottom:150px;
+	margin-left: 150px;
 }
 h2#center {
 	text-align:center;
@@ -86,9 +87,7 @@ p.button_text a {text-decoration:none !important; display:block; color:#fff;}
 	border:none;
 }
 .page-link {color:#000;}
-.container {
- 	margin-top:150px;
-}
+
  h2#head_Text {
  	text-align:center;
  	width:100%;
@@ -101,6 +100,15 @@ p.button_text a {text-decoration:none !important; display:block; color:#fff;}
     width: 100px;
     float: right;
     margin: 10px;
+}
+
+.wrapper {
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    margin: -35px auto;
+    margin-left: 0px;
+    margin-bottom: 3px;
 }
 </style>
 <meta charset="UTF-8">
