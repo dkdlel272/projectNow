@@ -7,13 +7,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-.w3-sidebar {
-    height: 754px;
-    width: 15%;
-    position: fixed!important;
-    z-index: 1;
-    overflow: auto;
-}
 ul.menu_login {background:#616161!important;}
 #wrapper {
 	display:none !important;
