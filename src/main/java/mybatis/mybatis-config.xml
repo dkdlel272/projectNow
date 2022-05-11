@@ -12,7 +12,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="dto.Sale" alias="Sale" />
 		<typeAlias type="dto.IndexMap" alias="indexmap" />
 		<typeAlias type="dto.ViewCamp" alias="viewcamp" />
-
+	<!-- 추가 -->	<typeAlias type="dto.SaleReply" alias="salereply" />
+		
 	</typeAliases>
 	<environments default="development">
 		<environment id="development">

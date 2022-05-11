@@ -1,20 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
 <style>
-/* ul.menu_login {
-    display: flow-root;
-    padding-bottom: 20px;
-    padding-top: 20px;
-    list-style: none;
-    margin: 0px;
-    padding-right: 1304px;
-    float: right;
-    background: linear-gradient(150deg, #3585CB, #48a3e5, #2babbf, #519ed7, #4496ed);
-} */
 @font-face {
     font-family: 'MinSans-Medium';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/MinSans-Medium.woff') format('woff');
@@ -44,6 +37,9 @@ h2#center {
 	overflow:hidden;
 	background:url("<%=request.getContextPath()%>/image/notice.jpg");
 }
+.table {
+	width: 90%;
+}
 .table .thead-dark th {
     color: #000;
     font-size: 16px;
@@ -59,7 +55,7 @@ h2#center {
     font-size:15px;
     border-top: 1px solid #dee2e6;
 }
-p.list_count {
+/* p.list_count {
 	font-size:16px;
 }
 a {color:#000; font-size:15px; }
@@ -86,14 +82,14 @@ p.button_text a {text-decoration:none !important; display:block; color:#fff;}
 	background-color: #23272b;
 	border:none;
 }
-.page-link {color:#000;}
+.page-link {color:#000;} */
 
  h2#head_Text {
  	text-align:center;
  	width:100%;
  	font-size:30px;
  	font-weight:bold;
- 	margin-bottom:100px;
+ 	margin-bottom:60px;;
  }
  
   .btn-dark {
@@ -111,8 +107,7 @@ p.button_text a {text-decoration:none !important; display:block; color:#fff;}
     margin-bottom: 3px;
 }
 </style>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+
 </head>
 <body>
 
@@ -123,7 +118,7 @@ p.button_text a {text-decoration:none !important; display:block; color:#fff;}
 
 		<h2 id="head_Text">탈퇴 회원 리스트</h2>
 	
-		<form action="<%=request.getContextPath() %>/userdata/deleteLeave">
+		<form action="<%=request.getContextPath() %>/userdata/deleteLeave" method= "post">
 			<button type = "submit" class="btn btn-dark">정보 삭제</button>
 		
 		<table class="table">
@@ -149,7 +144,9 @@ p.button_text a {text-decoration:none !important; display:block; color:#fff;}
 					<td>${u.gender == 1 ? "남자" : "여자"}</td>
 					<td>${u.email}</td>
 					<td>${u.tel}</td>
-					<td>${u.leave_date}</td>
+					<td>
+					<fmt:formatDate value="${u.leave_date}" type="date"  pattern="yyyy/MM/dd"  />
+					</td>
 				</tr>
 				</c:forEach>
 			</tbody>

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import dto.Sale;
+import dto.SaleReply;
 
 
 @Component
@@ -141,6 +142,54 @@ public class SaleDAO {
 			e.printStackTrace();
 		} finally {
 			sqlSession.commit();
+		}
+
+		return 0;
+
+	}
+	
+	public List<SaleReply> saleReplyList(int salenum) {
+
+		return sqlSession.selectList(ns + "saleReplyList",salenum);
+
+	}
+	
+	public int insertSaleReply(SaleReply sr) {
+
+		try {
+
+			return sqlSession.insert(ns + "insertSaleReply", sr);
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			sqlSession.commit();
+
+		}
+
+		return 0;
+
+	}
+
+	public int nextReplyidx() {
+
+		return sqlSession.selectOne(ns + "nextReplyidx");
+
+	}
+	
+	public int deleteSaleReply(int replyidx) {
+
+		try {
+
+			return sqlSession.delete(ns + "deleteSaleReply", replyidx);
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			sqlSession.commit();
+
 		}
 
 		return 0;

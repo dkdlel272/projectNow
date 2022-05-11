@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import dao.SaleDAO;
 import dto.Sale;
+import dto.SaleReply;
 
 @Controller
 @RequestMapping("/sale/")
@@ -46,7 +47,6 @@ public class SaleController {
 
 		List<Sale> list = sd.selectSaleList();
 		
-	
 		m.addAttribute("list", list);
 
 		return "/view/sale/saleList";
@@ -148,9 +148,12 @@ public class SaleController {
 		
 		String userid = (String) session.getAttribute("memberId");
 		
+		List<SaleReply> reply = sd.saleReplyList(num);
+		
 		m.addAttribute("image",image);
 		m.addAttribute("s", s);
 		m.addAttribute("userid", userid);
+		m.addAttribute("reply",reply);
 
 		return "/view/sale/saleInfo";
 	}
@@ -311,6 +314,58 @@ public class SaleController {
 				msg="거래가능";
 			} 
 		}
+		
+		m.addAttribute("msg", msg);
+		m.addAttribute("url", url);
+
+		return "/view/alert";
+	}
+	
+	@RequestMapping("saleReply")
+	public String saleReply(SaleReply sr) {
+
+		sr.setReplyidx(sd.nextReplyidx());
+		
+
+		int num = sd.insertSaleReply(sr);
+
+		String msg = "댓글 등록 실패";
+		String url = request.getContextPath() + "/sale/saleInfo?num="+sr.getSalenum();
+
+		if (num == 1) {
+
+			msg = "댓글 등록 성공";
+			
+
+		}
+
+		m.addAttribute("msg", msg);
+		m.addAttribute("url", url);
+
+		return "/view/alert";
+
+	}
+
+	@RequestMapping("saleReplyDelete")
+	public String saleReplyDelete(int replyidx, int salenum) {
+
+		
+		
+		String msg = "";
+		String url = request.getContextPath() + "/sale/saleInfo?num="+salenum;
+				
+	
+		int num = sd.deleteSaleReply(replyidx);
+		
+		if (num > 0) {
+			msg = "댓글 삭제 성공";
+			
+			
+		} else {
+			msg = "댓글 삭제 실패";
+			
+		} 
+	
 		
 		m.addAttribute("msg", msg);
 		m.addAttribute("url", url);
