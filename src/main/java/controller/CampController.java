@@ -49,7 +49,7 @@ public class CampController {
 		return "/single/CampInsert";
 	}
 
-	@RequestMapping("CampInsertPro") // 관리자만 등록가능하게if문 추가예정
+	@RequestMapping("CampInsertPro") // 캠프추가
 	public String CampInsertPro(Camp camp) {
 		String path = request.getServletContext().getRealPath("/") + "/campupload/";
 		int size = 10 * 1024 * 1024;
@@ -232,12 +232,6 @@ public class CampController {
 		return "/view/alert2";
 	} 
 
-	@RequestMapping("payManager") 
-	public String payManager() {
-
-		return "/manager/camp/payManager"; 
-	} 
-	
 	@RequestMapping("viewChk")
 	@ResponseBody 
 	public void viewChk(int idx, String chk) {
