@@ -4,200 +4,216 @@
 
 <mapper namespace="camp">
 
-<insert id="CampInsert" parameterType="camp">
-insert into camp values(
-#{campidx}, #{campname}, #{campaddr}, #{room}, 
-#{campimg}, #{campimg2}, #{campimg3}, #{roomcnt}, #{payidx}, #{roomno},
-#{chkin}, #{chkout}, #{content})
-</insert>
+	<insert id="CampInsert" parameterType="camp">
+		insert into camp values(
+		#{campidx}, #{campname}, #{campaddr}, #{room},
+		#{campimg}, #{campimg2}, #{campimg3}, #{roomcnt}, #{payidx}, #{roomno},
+		#{chkin}, #{chkout}, #{content})
+	</insert>
 
-<delete id="campDelete" parameterType="int">
-delete from camp where campidx = #{campidx}
-</delete>
+	<delete id="campDelete" parameterType="int">
+		delete from camp where campidx = #{campidx}
+	</delete>
 
-<update id="CampUpdate" parameterType="camp">
-update camp set
-campname=#{campname}, campaddr = #{campaddr}, room = #{room}, campimg = #{campimg}, campimg2 = #{campimg2}, campimg3 = #{campimg3}, 
-roomcnt = #{roomcnt}, payidx = #{payidx}, roomno = #{roomno} 
-where campidx = #{campidx}
-</update>
+	<update id="CampUpdate" parameterType="camp">
+		update camp set
+		campname=#{campname}, campaddr = #{campaddr}, room = #{room}, campimg = #{campimg},
+		campimg2 = #{campimg2}, campimg3 = #{campimg3},
+		roomcnt = #{roomcnt}, payidx = #{payidx}, roomno = #{roomno}
+		where campidx = #{campidx}
+	</update>
 
-<select id="selectCamp" resultType="camp" parameterType="int">
-select * from camp where campidx = #{campidx}
-</select>
+	<select id="selectCamp" resultType="camp" parameterType="int">
+		select * from camp where campidx = #{campidx}
+	</select>
 
-<select id="chooseCamp" resultType="camp" parameterType="String">
-select campname, campaddr, room, campimg, payidx 
-from camp where campname = #{campname}
-</select>
+	<select id="chooseCamp" resultType="camp" parameterType="String">
+		select campname, campaddr, room, campimg, payidx
+		from camp where campname = #{campname}
+	</select>
 
-<select id="nextSeq" resultType="int">
-select seqcamp.nextval from dual
-</select>
+	<select id="nextSeq" resultType="int">
+		select seqcamp.nextval from dual
+	</select>
 
-<select id="CampList"  resultType="camp">
-select campname, campaddr, 
-room, campimg, payidx, content, nvl(chk, 'y')
-from camp c , viewcamp v 
-where c.CAMPIDX=v.CAMPIDX(+)  and  nvl(chk, 'y') != 'n'
-order by c.campidx
-</select>
+	<select id="CampList" resultType="camp">
+		select campname, campaddr,
+		room, campimg, payidx, content, nvl(chk, 'y')
+		from camp c , viewcamp v
+		where c.CAMPIDX=v.CAMPIDX(+) and nvl(chk, 'y') != 'n'
+		order by c.campidx
+	</select>
 
-<select id="SearchList" resultType="camp" parameterType="map">
-select * from camp
-	<if test="searchType == 1"> 
-			 where campaddr  like '%${searchName}%'
-</if>
-	<if test="searchType == 2">
-			where room  like '%${searchName}%'
-</if>
-</select>
+	<select id="SearchList" resultType="camp" parameterType="map">
+		select * from camp
+		<if test="searchType == 1">
+			where campaddr like '%${searchName}%'
+		</if>
+		<if test="searchType == 2">
+			where room like '%${searchName}%'
+		</if>
+	</select>
 
-<select id="reserveSearchList" resultType="reserve" parameterType="map">
-select t.* from (select r.CHECKIN,r.CHECKOUT, r.USERNAME,r.CAMPNAME,r.ROOM,c.CAMPADDR,c.PAYIDX,c.CAMPIDX
-from reserve r, camp c where r.campname = c.campname ORDER BY r.CHECKIN desc) t
-	<if test="searchType == 1"> 
-			 where to_char(checkin,'mm')  like '%${searchName}%'
-</if>
-	<if test="searchType == 2">
-			where username  like '%${searchName}%'
-</if>
-order by checkin desc
-</select>
+	<select id="reserveSearchList" resultType="reserve"
+		parameterType="map">
+		select t.* from (select r.CHECKIN,r.CHECKOUT,
+		r.USERNAME,r.CAMPNAME,r.ROOM,c.CAMPADDR,c.PAYIDX,c.CAMPIDX
+		from reserve r, camp c where r.campname = c.campname ORDER BY r.CHECKIN
+		desc) t
+		<if test="searchType == 1">
+			where to_char(checkin,'mm') like '%${searchName}%'
+		</if>
+		<if test="searchType == 2">
+			where username like '%${searchName}%'
+		</if>
+		order by checkin desc
+	</select>
 
-<select id="chartMonthBoard1" resultType="indexmap" parameterType="map">
-select to_char(checkin, 'dd') co1, sum(PERSON+KID) co2 from reserve
-<if test="searchType == 1">
-where to_char(checkin, 'mm') like '01'
-</if>
-<if test="searchType == 2">
-where to_char(checkin, 'mm') like '02'
-</if>
-<if test="searchType == 3">
-where to_char(checkin, 'mm') like '03'
-</if>
-<if test="searchType == 4">
-where to_char(checkin, 'mm') like '04'
-</if>
-<if test="searchType == 5">
-where to_char(checkin, 'mm') like '05'
-</if>
-<if test="searchType == 6">
-where to_char(checkin, 'mm') like '06'
-</if>
-<if test="searchType == 7">
-where to_char(checkin, 'mm') like '07'
-</if>
-<if test="searchType == 8">
-where to_char(checkin, 'mm') like '08'
-</if>
-<if test="searchType == 9">
-where to_char(checkin, 'mm') like '09'
-</if>
-<if test="searchType == 10">
-where to_char(checkin, 'mm') like '10'
-</if>
-<if test="searchType == 11">
-where to_char(checkin, 'mm') like '11'
-</if>
-<if test="searchType == 12">
-where to_char(checkin, 'mm') like '12'
-</if>
-GROUP BY to_char(checkin, 'dd')
-</select>
+	<select id="chartMonthBoard" resultType="indexmap"	parameterType="map">
+		select to_char(checkin, 'dd') co1, sum(PERSON+KID) co2 from reserve
+		<if test="searchType == 1">
+			where to_char(checkin, 'mm') = '01'
+		</if>
+		<if test="searchType == 2">
+			where to_char(checkin, 'mm') = '02'
+		</if>
+		<if test="searchType == 3">
+			where to_char(checkin, 'mm') = '03'
+		</if>
+		<if test="searchType == 4">
+			where to_char(checkin, 'mm') = '04'
+		</if>
+		<if test="searchType == 5">
+			where to_char(checkin, 'mm') = '05'
+		</if>
+		<if test="searchType == 6">
+			where to_char(checkin, 'mm') = '06'
+		</if>
+		<if test="searchType == 7">
+			where to_char(checkin, 'mm') = '07'
+		</if>
+		<if test="searchType == 8">
+			where to_char(checkin, 'mm') = '08'
+		</if>
+		<if test="searchType == 9">
+			where to_char(checkin, 'mm') = '09'
+		</if>
+		<if test="searchType == 10">
+			where to_char(checkin, 'mm') = '10'
+		</if>
+		<if test="searchType == 11">
+			where to_char(checkin, 'mm') = '11'
+		</if>
+		<if test="searchType == 12">
+			where to_char(checkin, 'mm') = '12'
+		</if>
+		GROUP BY to_char(checkin, 'dd')
+	</select>
 
-<select id="chartSearchList2" resultType="indexmap" parameterType="map">
-select to_char(checkin, 'dd') co1, sum(payidx) co2 from reserve
-<if test="searchType == 1">
-where to_char(checkin, 'mm') like '01'
-</if>
-<if test="searchType == 2">
-where to_char(checkin, 'mm') like '02'
-</if>
-<if test="searchType == 3">
-where to_char(checkin, 'mm') like '03'
-</if>
-<if test="searchType == 4">
-where to_char(checkin, 'mm') like '04'
-</if>
-<if test="searchType == 5">
-where to_char(checkin, 'mm') like '05'
-</if>
-<if test="searchType == 6">
-where to_char(checkin, 'mm') like '06'
-</if>
-<if test="searchType == 7">
-where to_char(checkin, 'mm') like '07'
-</if>
-<if test="searchType == 8">
-where to_char(checkin, 'mm') like '08'
-</if>
-<if test="searchType == 9">
-where to_char(checkin, 'mm') like '09'
-</if>
-<if test="searchType == 10">
-where to_char(checkin, 'mm') like '10'
-</if>
-<if test="searchType == 11">
-where to_char(checkin, 'mm') like '11'
-</if>
-<if test="searchType == 12">
-where to_char(checkin, 'mm') like '12'
-</if>
-GROUP BY to_char(checkin, 'dd')
-</select>
+	<select id="chartPayList" resultType="indexmap"	parameterType="map">
+		select to_char(checkin, 'dd') co1, sum(payidx) co2 from reserve
+		<if test="searchType == 1">
+			where to_char(checkin, 'mm') = '01'
+		</if>
+		<if test="searchType == 2">
+			where to_char(checkin, 'mm') = '02'
+		</if>
+		<if test="searchType == 3">
+			where to_char(checkin, 'mm') = '03'
+		</if>
+		<if test="searchType == 4">
+			where to_char(checkin, 'mm') = '04'
+		</if>
+		<if test="searchType == 5">
+			where to_char(checkin, 'mm') = '05'
+		</if>
+		<if test="searchType == 6">
+			where to_char(checkin, 'mm') = '06'
+		</if>
+		<if test="searchType == 7">
+			where to_char(checkin, 'mm') = '07'
+		</if>
+		<if test="searchType == 8">
+			where to_char(checkin, 'mm') = '08'
+		</if>
+		<if test="searchType == 9">
+			where to_char(checkin, 'mm') = '09'
+		</if>
+		<if test="searchType == 10">
+			where to_char(checkin, 'mm') = '10'
+		</if>
+		<if test="searchType == 11">
+			where to_char(checkin, 'mm') = '11'
+		</if>
+		<if test="searchType == 12">
+			where to_char(checkin, 'mm') = '12'
+		</if>
+		GROUP BY to_char(checkin, 'dd')
+	</select>
 
-<select id="CampInfo"  resultType="camp"  parameterType="String">
-select campimg, campimg2, campimg3, campname, campaddr, 
-room,  payidx, chkin, chkout, content
-from camp where campname = #{campname}
-</select>
+	<select id="CampInfo" resultType="camp" parameterType="String">
+		select campimg, campimg2, campimg3, campname, campaddr,
+		room, payidx, chkin, chkout, content
+		from camp where campname = #{campname}
+	</select>
 
-<select id="RoomList"  resultType="camp" parameterType="String">
-select room from camp where campname=#{campname}
-</select>
-<select id="blackList" parameterType="string" resultType="userdata">
-	select*from userdata where black=#{black}
-</select>
+	<select id="RoomList" resultType="camp" parameterType="String">
+		select room from camp where campname=#{campname}
+	</select>
+	<select id="blackList" parameterType="string"
+		resultType="userdata">
+		select*from userdata where black=#{black}
+	</select>
 
-<select id ="campListAll" resultType="camp"  >
-select c.*, chk from camp  c, viewcamp v where c.campidx = v.campidx(+)
-</select>
+	<select id="campListAll" resultType="camp">
+		select c.*, chk from camp c, viewcamp v where c.campidx = v.campidx(+)
+	</select>
 
-<select id ="reserveList" resultType="reserve">
-select *  from reserve  
-</select>
+	<select id="reserveList" resultType="reserve">
+		select * from reserve
+	</select>
 
-<!-- <select id="reserveListAll" resultType="reserve">
-select r.*, c.* from reserve r, camp c   where r.campname = c.campname
-</select> -->
+	<!-- <select id="reserveListAll" resultType="reserve"> select r.*, c.* from 
+		reserve r, camp c where r.campname = c.campname </select> -->
 
-<select id="reserveListAll" resultType="reserve">
-select r.CHECKIN,r.CHECKOUT, r.USERNAME,r.CAMPNAME,r.ROOM,c.CAMPADDR,c.PAYIDX,c.CAMPIDX,
-c.ROOMCNT,c.ROOMNO 
-from reserve r, camp c where r.campname = c.campname ORDER BY r.CHECKIN desc
-</select>
+	<select id="reserveListAll" resultType="reserve">
+		select r.CHECKIN,r.CHECKOUT,
+		r.USERNAME,r.CAMPNAME,r.ROOM,c.CAMPADDR,c.PAYIDX,c.CAMPIDX,
+		c.ROOMCNT,c.ROOMNO
+		from reserve r, camp c where r.campname = c.campname ORDER BY r.CHECKIN
+		desc
+	</select>
 
-<select id="monthReserve" resultType="map" >
-    select 
-    (select count(*) from reserve where to_char(checkin, 'mm')=to_char(sysdate, 'mm'))  p11,
-   
-    (select count(*) from reserve where to_char(checkin, 'mm')=to_char(sysdate, 'mm')-1)  p12,
-    
-     (select count(*) from reserve where to_char(checkin, 'yymmdd') = to_char(sysdate, 'yymmdd')) p21,
-       (select count(*) from reserve where to_char(checkin, 'yymmdd') = to_char(sysdate+1, 'yymmdd')) p22,
-   
-     (select sum(payidx) from reserve where to_char(checkin, 'mm') = to_char(sysdate, 'mm')) p31,
-    
-     (select nvl(sum(payidx), 0) from reserve where to_char(checkin, 'yymmdd') = to_char(sysdate, 'yymmdd')) p32
-     
-     from dual
-     
-</select>
-<select id="dashboard1" resultType="indexmap">
-select to_char(checkin, 'dd') co1, sum(PERSON+KID) co2 from reserve where to_char(checkin, 'mm')=to_char(sysdate, 'mm') GROUP BY to_char(checkin, 'dd')
-</select>
-<select id="dashboard2" resultType="indexmap">
-select to_char(checkin, 'dd') co1, sum(payidx) co2 from reserve where to_char(checkin, 'mm')=to_char(sysdate, 'mm') GROUP BY to_char(checkin, 'dd')
-</select>
+	<select id="monthReserve" resultType="map">
+		select
+		(select count(*) from reserve where to_char(checkin, 'mm')=to_char(sysdate,
+		'mm')) p11,
+
+		(select count(*) from reserve where to_char(checkin, 'mm')=to_char(sysdate,
+		'mm')-1) p12,
+
+		(select count(*) from reserve where to_char(checkin, 'yymmdd') =
+		to_char(sysdate, 'yymmdd')) p21,
+		(select count(*) from reserve where to_char(checkin, 'yymmdd') =
+		to_char(sysdate+1, 'yymmdd')) p22,
+
+		(select sum(payidx) from reserve where to_char(checkin, 'mm') =
+		to_char(sysdate, 'mm')) p31,
+
+		(select nvl(sum(payidx), 0) from reserve where to_char(checkin, 'yymmdd') =
+		to_char(sysdate, 'yymmdd')) p32
+
+		from dual
+
+	</select>
+	<select id="dashboard1" resultType="indexmap">
+		select to_char(checkin, 'dd') co1, sum(PERSON+KID) co2 from reserve where
+		to_char(checkin, 'mm')=to_char(sysdate, 'mm') GROUP BY
+		to_char(checkin, 'dd')
+	</select>
+	<select id="dashboard2" resultType="indexmap">
+		select to_char(checkin, 'dd') co1, sum(payidx) co2 from reserve where
+		to_char(checkin, 'mm')=to_char(sysdate, 'mm') GROUP BY
+		to_char(checkin, 'dd')
+	</select>
 </mapper>

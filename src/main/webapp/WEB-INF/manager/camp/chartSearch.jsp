@@ -12,9 +12,10 @@
 <title>예약관리</title>
 <style>
 .pull-right {
-    float: right;
-    margin-top: -55px;
+	float: right;
+	margin-top: -55px;
 }
+
 ul.menu_login {
 	display: flow-root;
 	padding-bottom: 20px;
@@ -148,7 +149,7 @@ th, td {
 
 	<!-- 차트가 그려질 부분 -->
 	<canvas id="myChart"
-		style="max-width: 100%; width: 100%; padding-right: 200px; padding-left: 15%; display: block; height: 364px;"></canvas>
+		style="max-width: 100%; width: 100%; padding-right: 200px; padding-left: 15%; display: block; height: 364px;float: right;"></canvas>
 
 	<script>
 		var peoples = new Array();

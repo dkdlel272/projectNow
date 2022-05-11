@@ -105,15 +105,15 @@ public class CampDAO {
 		map.put("searchName", searchName);
 		return sqlSession.selectList(NS+"reserveSearchList", map);
 	}
-	public List<IndexMap> chartMonthBoard1(String searchType){
+	public List<IndexMap> chartMonthBoard(String searchType){
 		map.clear();
 		map.put("searchType", searchType); 
-		return sqlSession.selectList(NS+"chartMonthBoard1", map);
+		return sqlSession.selectList(NS+"chartMonthBoard", map);
 	}
-	public List<IndexMap> chartMonthBoard2(String searchType){
+	public List<IndexMap> chartPayList(String searchType){
 		map.clear();
 		map.put("searchType", searchType); 
-		return sqlSession.selectList(NS+"chartMonthBoard1", map);
+		return sqlSession.selectList(NS+"chartPayList", map);
 	}
 	
 	public Camp CampInfo(String campname){
