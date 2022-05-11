@@ -50,7 +50,25 @@
 </select>
 
 <update id="changeCon" parameterType="map"> 
-	update sale set condition=#{condition} where saleidx = #{saleidx}
+	update sale set condition=#{condition} where saleidx = 
 </update>
+
+<select id="saleReplyList" resultType="salereply" parameterType="int">
+	select * from salereply where salenum = #{salenum}
+</select>
+
+<insert id="insertSaleReply" parameterType="salereply">
+	insert into salereply values (#{replyidx}, #{salenum}, #{content}, #{writer}, sysdate)
+</insert>
+
+<select id="nextReplyidx" resultType="int">
+	select seqsalereply.nextval from dual
+</select>
+
+<update id="deleteSaleReply" parameterType="int">
+	delete salereply where replyidx = #{replyidx}
+</update>
+
+
 
 </mapper>

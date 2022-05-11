@@ -104,4 +104,71 @@ text-align:center; }
 .table td, .table th{
 vertical-align: middle;
 }
+.post_about {
+	width:100%;
+	margin-top:30px;
+	display:flex;
+} 
+.left_about {
+	width:49%;
+	margin-right:2%;
+}
+.right_about {
+	width:49%;
+}
+.btn_one {
+	background: #ff3a3a;
+    color: #fff;
+    border:1px solid #ff3a3a;
+    -webkit-box-shadow: 0 2px 5px rgb(0 0 0 / 10%);
+    -moz-box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px rgb(0 0 0 / 10%);
+}
+.post_wrap {
+	width:100%;
+	display:flex;
+}
+.post_upload {
+	margin-top:100px;
+	padding-bottom:30px;
+	border-bottom:2px solid #000;
+}
+.post_upload h4 {
+	margin-bottom:25px;
+	margin-top:50px;
+	color:blue;
+	font-size:18px;
+	font-weight:bold;
+}
+.p_load {
+	border-bottom:1px solid #ddd;
+	margin-bottom:20px;
+	padding-bottom:20px;
 
+} 
+.post_left {
+	width:90%;
+}
+.post_right {
+	margin-top:-50px;
+	width:10%;
+}
+.p_load span {
+	font-weight:bold;
+	font-size:16px;
+	line-height:35px;
+}
+.btns {
+	background:#fff;
+	color:#000;
+	width:100%;
+	border:1px solid #1d2124;
+} 
+.btns:hover {
+	color: #fff;
+    background-color: #23272b;
+    border-color: #1d2124;
+}
+#check-btn { display: none; }
+#check-btn:checked ~ .menubars { display: block; } 
+.menubars { display: none; }

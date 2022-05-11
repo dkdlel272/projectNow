@@ -1,6 +1,6 @@
 package controller;
 
-import java.io.UnsupportedEncodingException;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -35,8 +35,6 @@ import net.nurigo.java_sdk.exceptions.CoolsmsException;
 @Controller
 @RequestMapping("/userdata/")
 public class UserdataController {
-	// 로그인 세션 안썼는데 그거 확인하기
-	// 메일 보내기 다시 작업해야 할 듯
 
 	HttpServletRequest request;
 	Model m;
@@ -717,14 +715,18 @@ public class UserdataController {
 
 	@RequestMapping("deleteLeave")
 	public String deleteLeave() {
-
-		List<String> checkIds = new ArrayList<String>();
-
-		for (String checkId : checkIds) {
-			checkId = request.getParameter("check");
-			System.out.println(checkId);
+		
+		String[] arrayParam = request.getParameterValues("check");
+		for (int i = 0; i < arrayParam.length; i++) {
+			String userid = arrayParam[i];
+			System.out.println(arrayParam[i]);
+			int num = ud.deleteLeave(userid);
 		}
 
+		List<Leave> list = ud.selectLeaveList();
+
+		m.addAttribute("list", list);
+		
 		return "/manager/userdata/leaveList";
 	}
 

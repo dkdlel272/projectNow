@@ -27,6 +27,8 @@ ul.menu_login {
 .container {
 	margin-top:150px;
 	margin-bottom:150px;
+	margin-left: 150px;
+	margin-right: 50px;
 }
 h2#center {
 	text-align:center;
@@ -51,12 +53,14 @@ h2#center {
 .table thead th {
     vertical-align: bottom;
     border-bottom: 1px solid #dee2e6;
+     text-align: center;
 }
 .table td, .table th {
     padding: 0.75rem;
     vertical-align: top;
     font-size:15px;
     border-top: 1px solid #dee2e6;
+     text-align: center;
 }
 p.list_count {
 	font-size:16px;
@@ -94,11 +98,33 @@ p.button_text a {text-decoration:none !important; display:block; color:#fff;}
  	width:100%;
  	font-size:30px;
  	font-weight:bold;
- 	margin-bottom:100px;
+ 	margin-bottom:60px;
  }
  
  .btn-dark {
     width: 100px;
+}
+
+.wrapper {
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    margin: -35px auto;
+    margin-left: 0px;
+    margin-bottom: 3px;
+}
+
+.table {
+	width: 120%;
+	margin: auto;
+}
+
+#btn_black{
+	display: block; 
+	margin: -7px;
+	border: 1px solid;
+    width: 100px;
+    margin: auto;
 }
 </style>
 <meta charset="UTF-8">
@@ -144,10 +170,10 @@ p.button_text a {text-decoration:none !important; display:block; color:#fff;}
 						 <input type="hidden" class="form-control" name="userid" value="${u.userid}">
 						 <c:choose>
 						 <c:when test="${u.black eq '0'}">
-						 <button style="display: block; margin: -7px;" type="submit" class="btn btn-dark">블랙 추가</button>
+						 <button id="btn_black" type="submit" class="btn btn-dark">블랙 추가</button>
 						 </c:when>
 						 <c:when test="${u.black eq '1'}">
-						 <button style="display: block; margin: -7px;" type="submit" class="btn btn-red">블랙 해제</button>
+						 <button type="submit" class="btn" id="btn_black">블랙 해제</button>
 						 </c:when> 
 						 </c:choose>
 						</form></td>

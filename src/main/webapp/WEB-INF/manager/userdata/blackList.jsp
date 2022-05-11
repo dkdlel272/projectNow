@@ -31,12 +31,14 @@ ul.menu_login {
 .table thead th {
     vertical-align: bottom;
     border-bottom: 1px solid #dee2e6;
+    
 }
 .table td, .table th {
     padding: 0.75rem;
     vertical-align: top;
     font-size:15px;
     border-top: 1px solid #dee2e6;
+    text-align: center;
 }
 p.list_count {
 	font-size:16px;
@@ -68,24 +70,45 @@ p.button_text a {text-decoration:none !important; display:block; color:#fff;}
 .page-link {color:#000;}
 .container {
  	margin-top:150px;
+ 	margin-left: 150px;
 }
  h2#head_Text {
  	text-align:center;
  	width:100%;
  	font-size:30px;
  	font-weight:bold;
- 	margin-bottom:100px;
+	margin-bottom:60px;
  }
   .btn-dark {
-    width: 100px;
+    width: 150px;
     float: right;
     margin: 10px;
+}
+
+.wrapper {
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    margin: -35px auto;
+    margin-left: 0px;
+    margin-bottom: 3px;
+}
+.table {
+	width: 90%;
+}
+
+#btn_black{
+	display: block; 
+	margin: -7px;
+	border: 1px solid;
+    width: 100px;
+    margin: auto;
 }
 </style>
 
 <script>
 	function searchUser(){
-		const op = "width=100, height=300, left=150, top=150";
+		const op = "width=500, height=300, left=150, top=150";
 		window.open('<%=request.getContextPath() %>/userdata/searchUserForm','searchUser',op)
 	}
 </script>
@@ -118,14 +141,16 @@ p.button_text a {text-decoration:none !important; display:block; color:#fff;}
 					<td>${u.gender==1?"남자":"여자"}</td>
 					<td>${u.tel}</td>
 					<td>${u.email}</td>
-					<td><form action="<%=request.getContextPath() %>/userdata/changeBlack" method="post" name="b">
+					<td>
+					<form action="<%=request.getContextPath() %>/userdata/changeBlack" method="post" name="b">
 						 <input type="hidden" class="form-control" name="userid" value="${u.userid}">
 						 <c:choose>
 						 <c:when test="${u.black eq '1'}">
-						 <button style="display: block; margin: -7px;" type="submit" class="btn btn-red">블랙 해제</button>
+						 <button  type="submit" class="btn" id="btn_black">블랙 해제</button>
 						 </c:when> 
 						 </c:choose>
-						</form></td>
+					</form>
+					</td>
 				</tr>
 				</c:forEach>
 			</tbody>

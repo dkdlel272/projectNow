@@ -7,7 +7,18 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resouces/css/saleInfo.css">
+<script>
+function confirmDelete() {
+	
+	if(window.confirm("댓글을 삭제하시겠습니까?")){
+		return true;
+	} else{
+		return false;
+	}
+	
+}
 
+</script>
 </head>
 <body>
 
@@ -72,28 +83,76 @@
 				<th>내용:</th>
 				<td>${s.content}</td>
 			</tr>
-		
-		<tr>
-			<td colspan="2">
-			<div> 
-			
-			<c:if test="${s.writer eq userid}">
-				<button class="btn btn-dark" 
-					onclick="location.href='<%=request.getContextPath()%>/sale/saleUpdateForm?num=${s.saleidx}'">
-					수 정</button>
-				<button class="btn btn-dark"
-					onclick="location.href='<%=request.getContextPath()%>/sale/saleDeleteForm?num=${s.saleidx}'">
-					삭 제</button>
-			
-			</c:if>
-			
-			<button class="btn btn-dark" onclick="location.href='<%=request.getContextPath()%>/sale/saleList'">
-				목 록</button>
-			</div>
-			</td>
-		</tr>
+			<tr>
+				<td colspan="2">
+				<div> 
+				
+				<c:if test="${s.writer eq userid}">
+					<button class="btn btn-dark" 
+						onclick="location.href='<%=request.getContextPath()%>/sale/saleUpdateForm?num=${s.saleidx}'">
+						수 정</button>
+					<button class="btn btn-dark"
+						onclick="location.href='<%=request.getContextPath()%>/sale/saleDeleteForm?num=${s.saleidx}'">
+						삭 제</button>
+				
+				</c:if>
+				
+				<button class="btn btn-dark" onclick="location.href='<%=request.getContextPath()%>/sale/saleList'">
+					목 록</button>
+				</div>
+				</td>
+			</tr>
 		</table>
+		
+		<div class="post_upload">
+		
+		<h4>댓글목록</h4>
+			<c:forEach var="r" items="${reply}">
+				<form action="<%=request.getContextPath()%>/sale/saleReplyDelete?num=${r.replyidx}" 
+						method="post" onsubmit="return confirmDelete(this)">
+					<input type="hidden" name="replyidx" value="${r.replyidx}">
+					<input type="hidden" name="salenum" value="${r.salenum}">
+					<div class="post_wrap">
+						<div class="post_left">
+							<div class="p_load">
+								<span>${r.writer}</span><br>
+								&nbsp;&nbsp;${r.content}
+							</div>
+						</div>
+						
+						<c:if test="${r.writer==userid || s.writer==userid}">
+							<div class="post_right">
+								<button type="submit" class="btn btn-dark btns">삭제</button>
+							</div>
+						</c:if>
+					</div>
+				</form>
+			</c:forEach>
+			
+		</div>
+		
+		
+	<c:if test="${userid != null}">
+	 <form name="f" action="<%=request.getContextPath()%>/sale/saleReply" method="post">
+	 	<input type="hidden" name="salenum" value="${s.saleidx}">
+		 
+		 
+		 <div class="post_text">
+			<label>댓글쓰기</label>
+			<textarea class="form-control" rows="10" cols="50" name="content"></textarea>
+		</div>
+		
+		<div class="post_about">
+			<div class="left_about">
+				<input type="hidden" class="form-control" name="writer" value="${userid}">
+			</div>
+		</div>
+		<div id="center" style="padding: 3px; overflow:hidden;">
+			<button type="submit" class="btn btn-dark btn_one">댓글등록</button>
+		</div> 
+	</form>
+	</c:if>
+</div>
 
-	</div>
 </body>
 </html>
