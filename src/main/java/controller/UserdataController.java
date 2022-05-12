@@ -179,7 +179,8 @@ public class UserdataController {
 		int l = ud.findTelLeave(tel); //leave에서 tel 확인
 		
 		if (u == 0  && l == 0 ){ //userdata에도 없고 leave에도 없을 경우
-		for (int i = 0; i < 3; i++) { 
+		
+			for (int i = 0; i < 3; i++) { 
 			int index = random.nextInt(25) + 65; // A~Z까지랜덤 알파벳 생성(3자리) 
 			key += (char) index; 
 		} 
@@ -213,10 +214,6 @@ public class UserdataController {
 			System.out.println(e.getMessage());
 			System.out.println(e.getCode()); 
 		}
-
-		
-		
-		
 		return key;
 		
 	} else if (u != 0) { 
@@ -353,13 +350,6 @@ public class UserdataController {
 	public String manager() {
 
 		return "/view/manager";
-	}
-	
-	@RequestMapping("kakaoLogin")
-	public String kakaoLogin() {
-		System.out.println("kakaoLogin------------");
-		
-		return "/view/userdata/loginForm";
 	}
 
 	@RequestMapping("logout")
@@ -695,7 +685,34 @@ public class UserdataController {
 		return "/single/searchUserForm";
 	}
 
+	@RequestMapping("changeBlack2")
+	public String changeBlack2(String userid) {
 	
+		int num = 0;
+		String msg = " ";
+		String url = request.getContextPath() + "/userdata/searchUserForm";
+		
+
+		UserData u = ud.selectUserdata(userid);
+		System.out.println(u.getBlack());
+
+		if (u.getBlack().equals("0")) {
+
+			num = ud.changeBlack(userid, "1");
+			msg = "블랙리스트에 추가되었습니다";
+
+		} else if (u.getBlack().equals("1")) {
+
+			num = ud.changeBlack(userid, "0");
+			msg = "블랙리스트가 해제되었습니다";
+		}
+
+		m.addAttribute("msg", msg);
+		m.addAttribute("url", url);
+
+		return "/view/alert";
+
+	}
 	
 	
 	

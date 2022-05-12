@@ -35,7 +35,8 @@
 		  	<img class="card-img-top" src="<%=request.getContextPath() %>/saleupload/${li.image1}" >
 				  <div class="card-body">
 				   	<p class="card-text" style="text-align: right;">${li.condition }</p>
-				   	<h4 class="card-title"> No.${li.saleidx} : ${li.subject} </h4>
+				   	<input type="hidden" value="${li.saleidx}">
+				   	<h4 class="card-title">${li.subject} </h4>
 				   	<p class="card-text">장소 : ${li.location}</p>
 				   	<p class="card-text">판매자 : ${li.writer}</p>
 				   	<h5 class="card-text" style="color: red">

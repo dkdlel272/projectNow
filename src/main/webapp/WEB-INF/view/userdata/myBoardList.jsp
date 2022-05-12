@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,55 +54,26 @@ h2#center {
 				<tr>
 					<th>번호</th>
 					<th>제목</th>
-					<th>작성자</th>
 					<th>등록일</th>
 					<th>파일</th>
-					<th>조회수</th>
-
 				</tr>
 			</thead>
 			<tbody>
 			
 			<c:forEach var="b" items="${list }">
 				<tr>
-					<td>${boardnum}</td>
-					<c:set var="boardnum" value="${boardnum - 1 }"/>
+					<td>${b.num}</td>
 					<td>
-				
-					<c:if test="${b.reflevel > 0 }">
-					<img src ="<%=request.getContextPath() %>/image/level.gif" width="${5*b.reflevel } %>">
-					<img src ="<%=request.getContextPath() %>/image/re.gif">
-					</c:if>
-					
-					
 					<a href="<%=request.getContextPath() %>/board/boardInfo?num=${b.num}">
 						${b.subject}</a></td>
-					<td>${b.writer}</td>
-					<td>${b.regdate }</td>
+					<td><fmt:formatDate value="${b.regdate}" type="date"  pattern="yyyy/MM/dd"  /></td>
 					<td>${b.file1}</td>
-					<td>${b.readcnt}</td>
 				
 				</tr>
 			</c:forEach>	
 			</tbody>
 		</table>
 	
-		<div class="container"  >
-		<ul class="pagination justify-content-center"  >
-		
-  			 <li class='page-item <c:if test="${startPage <= bottomLine}"> disabled </c:if>'>
-  			 <a class="page-link" href="<%=request.getContextPath()%>/board/list?pageNum=${startPage - bottomLine}">Previous</a></li>
-  
- 		 <c:forEach var="i" begin="${startPage}" end="${endPage}">
- 			 <li class='page-item <c:if test="${i==pageInt}">active</c:if>'>
- 			 <a class="page-link" href="<%=request.getContextPath()%>/board/list?pageNum=${i}">${i}</a></li>
-		</c:forEach>
-  
- 			 <li class='page-item <c:if test="${endPage >= maxPage}"> disabled </c:if>'>
- 			 <a class="page-link" href="<%=request.getContextPath()%>/board/list?pageNum=${startPage + bottomLine}">Next</a></li>
- 
- 
-</ul> </div>
 	</div>
 </body>
 </html>

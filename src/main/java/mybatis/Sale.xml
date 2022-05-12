@@ -50,7 +50,7 @@
 </select>
 
 <update id="changeCon" parameterType="map"> 
-	update sale set condition=#{condition} where saleidx = 
+	update sale set condition=#{condition} where saleidx = #{saleidx}
 </update>
 
 <select id="saleReplyList" resultType="salereply" parameterType="int">

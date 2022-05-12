@@ -44,30 +44,10 @@
   
 </form>
 
-  <br>
-	<a id="custom-login-btn" href="javascript:loginWithKakao()">
-	  <img
-	    src="//k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg"
-	    width="222" alt="카카오 로그인 버튼"/>
-	</a>
+  
 
 </div>
 
-<script type="text/javascript">
 
-	//카카오 로그인
-	window.Kakao.init('6eb3fafbf00838307ce2c04f9b423aec');  	// SDK를 초기화 (JavaScript 키 입력)
-	console.log(Kakao.isInitialized());    						// SDK 초기화 여부 판단(false일 경우 JavaScript 키 확인)
-	
-  function loginWithKakao() {
-    	window.Kakao.Auth.authorize({
-      		scope : 'account_email,gender'
-      		success : function (authObj){
-      			console.log(authObj)
-      		}
-    })
-  }
-  
-</script>
 </body>
 </html>
