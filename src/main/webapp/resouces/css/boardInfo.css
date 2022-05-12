@@ -62,9 +62,11 @@ p.tables {
  .board_box_left {
  	width:80%;
  }
- .board_box_right {
- 	width:20%;
- }
+.board_box_right {
+    width: 20%;
+    text-align: right;
+    margin-top: 43px;
+}
  .side_menu {
  	text-align: right;
     padding-top: 35px;
@@ -94,3 +96,20 @@ p.tables {
 .board_box_right ul li:nth-child(1) {
 	border-bottom:1px solid #ddd;
 }   
+
+
+
+.btns {
+	background:#fff;
+	color:#000;
+	width:100%;
+	border:1px solid #1d2124;
+} 
+.btns:hover {
+	color: #fff;
+    background-color: #23272b;
+    border-color: #1d2124;
+}
+#check-btn { display: none; }
+#check-btn:checked ~ .menubars { display: block; } 
+.menubars { display: none; }

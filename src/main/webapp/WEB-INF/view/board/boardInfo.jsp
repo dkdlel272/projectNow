@@ -27,10 +27,11 @@
 			</div>
 			<c:if test="${memberId eq 'vision'}">
 			<div class="board_box_right">
-				<div class="side_menu"><i class="xi-bars"></i></div>
-				<ul>
+				<input id="check-btn" class="side_menu" type="checkbox"/>
+				<label for="check-btn"><i class="xi-bars"></i></label>
+				<ul class="menubars">
 					<li><a href="boardUpdateForm?num=${b.num}">수정 <i class="xi-border-color"></i></a></li>
-					<li><a href="boardDeleteForm?num=${b.num}">삭제 <i class="xi-bitbucket"></i></a></li>
+					<li><a href="boardReviewDeleteForm?num=${b.num}">삭제 <i class="xi-bitbucket"></i></a></li>
 				</ul>
 			</div>
 			</c:if>
