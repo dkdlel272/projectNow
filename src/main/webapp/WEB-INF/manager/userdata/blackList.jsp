@@ -108,7 +108,7 @@ p.button_text a {text-decoration:none !important; display:block; color:#fff;}
 
 <script>
 	function searchUser(){
-		const op = "width=500, height=300, left=150, top=150";
+		const op = "width=600, height=300, left=150, top=150";
 		window.open('<%=request.getContextPath() %>/userdata/searchUserForm','searchUser',op)
 	}
 </script>
@@ -129,7 +129,7 @@ p.button_text a {text-decoration:none !important; display:block; color:#fff;}
 					<th>성별</th>
 					<th>연락처</th>
 					<th>이메일</th>
-					<th>블랙리스트</th>					
+					<th>블랙여부</th>					
 
 				</tr>
 			</thead>
