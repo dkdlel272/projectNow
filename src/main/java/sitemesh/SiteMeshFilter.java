@@ -18,11 +18,14 @@ public class SiteMeshFilter extends ConfigurableSiteMeshFilter{
 			.addDecoratorPath("/userdata/userdataList", "/WEB-INF/view/manager.jsp")
 			.addDecoratorPath("/userdata/blackList", "/WEB-INF/view/manager.jsp")
 			.addDecoratorPath("/userdata/leaveList", "/WEB-INF/view/manager.jsp")
+			.addDecoratorPath("/userdata/deleteLeave", "/WEB-INF/view/manager.jsp")
 			.addDecoratorPath("/camp/reserveSearch", "/WEB-INF/view/manager.jsp")
 			.addDecoratorPath("/camp/chartSearch", "/WEB-INF/view/manager.jsp")
 			.addExcludedPath("/camp/campUpdate")
 			.addExcludedPath("/camp/CampInsert")
 			.addExcludedPath("/userdata/readId")
+			.addExcludedPath("/userdata/searchUserForm")
+			.addExcludedPath("/userdata/searchUserList")
 			.addExcludedPath("/userdata/manager");
 		
 		

@@ -19,7 +19,7 @@
 </insert>
 
 <select id="selectMyboard" parameterType="string" resultType="board">
-	select * from board b where b.writer = ( select u.name from USERDATA u where userid = #{userid})
+	select * from board where writer = #{userid} order by regdate desc
 </select>
 
 <select id="findId" parameterType="map" resultType="string">
