@@ -141,14 +141,14 @@ public class CampController {
 	@RequestMapping("reserveManager")
 	public String reserveManager(){
 		Map map = cd.monthReserve();
-		List<IndexMap> d1 = cd.peopleboard();
-		List<IndexMap> d2 = cd.payboard();
+		List<IndexMap> people = cd.peopleboard();
+		List<IndexMap> pay = cd.payboard();
 		Map<Integer, String> md1 = new HashMap<Integer, String>();
-		for (IndexMap im : d1) {
+		for (IndexMap im : people) {
 			md1.put(Integer.parseInt(im.getCo1()), im.getCo2());
 		}
 		Map<Integer, String> md2 = new HashMap<Integer, String>();
-		for (IndexMap im : d2) {
+		for (IndexMap im : pay) {
 			md2.put(Integer.parseInt(im.getCo1()), im.getCo2());
 		}
 		m.addAttribute("map", map);
@@ -250,14 +250,14 @@ public class CampController {
 	public String chartSearch(String searchType) {
 		List<Camp> cl = cd.campListAll();
 		Map map = cd.monthReserve();
-		List<IndexMap> d1 = cd.chartMonthBoard(searchType);
-		List<IndexMap> d2 = cd.chartPayList(searchType);
+		List<IndexMap> cmb = cd.chartMonthBoard(searchType);
+		List<IndexMap> cp = cd.chartPayList(searchType);
 		Map<Integer, String> md1 = new HashMap<Integer, String>();
-		for (IndexMap im : d1) {
+		for (IndexMap im : cmb) {
 			md1.put(Integer.parseInt(im.getCo1()), im.getCo2());
 		}
 		Map<Integer, String> md2 = new HashMap<Integer, String>();
-		for (IndexMap im : d2) {
+		for (IndexMap im : cp) {
 			md2.put(Integer.parseInt(im.getCo1()), im.getCo2());
 		}
 		m.addAttribute("map", map);
