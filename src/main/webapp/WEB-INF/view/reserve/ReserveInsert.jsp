@@ -133,7 +133,7 @@ merchant_uid: 'merchant_' + new Date().getTime(),
 
 name: '${camp.campname}',
 
-amount: '${camp.payidx}',
+amount: '1000',
 
 <c:forEach var="user" items="${user }">
 buyer_email: '${user.email}',
