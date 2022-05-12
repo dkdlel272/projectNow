@@ -89,21 +89,21 @@ th, td {
 				</tr>
 				<tr>
 					<td>이번달 예약</td>
-					<td>${map.P11}명</td>
+					<td>${map.TMONTH}명</td>
 					<td>지난달 예약</td>
-					<td>${map.P12}명</td>
+					<td>${map.LMONTH}명</td>
 				</tr>
 				<tr>
 					<td>오늘 캠핑객</td>
-					<td>${map.P21}명</td>
+					<td>${map.TPEOPLE}명</td>
 					<td>내일 캠핑객</td>
-					<td>${map.P22}명</td>
+					<td>${map.YPEOPLE}명</td>
 				</tr>
 				<tr>
 					<td>이번달 총매출</td>
-					<td>${map.P31}원</td>
+					<td>${map.SUMPAY}원</td>
 					<td>오늘 매출</td>
-					<td>${map.P32}원</td>
+					<td>${map.DAYPAY}원</td>
 				</tr>
 			</thead>
 		</table>

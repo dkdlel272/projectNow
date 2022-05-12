@@ -237,7 +237,8 @@ function toggle(element, idx) {
 							</form>
 						</td>
 						<td>
-						<label class="switch"> <input type="checkbox" onclick="toggle(this, '${c.campidx}')"  <c:if test="${c.chk eq 'n'}" > checked </c:if>   >
+						<label class="switch"> <input type="checkbox" onclick="toggle(this, '${c.campidx}')"
+						<c:if test="${c.chk eq 'n'}" > checked </c:if>>
 						<span class="slider round"> </span></label>
 						</td>
 					</tr>

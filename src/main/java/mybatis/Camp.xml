@@ -182,23 +182,28 @@
 
 	<select id="monthReserve" resultType="map">
 		select
-		(select count(*) from reserve where to_char(checkin, 'mm')=to_char(sysdate,'mm')) p11,
-		(select count(*) from reserve where to_char(checkin, 'mm')=to_char(sysdate,'mm')-1) p12,
-		(select count(*) from reserve where to_char(checkin, 'yymmdd') = to_char(sysdate, 'yymmdd')) p21,
-		(select count(*) from reserve where to_char(checkin, 'yymmdd') = to_char(sysdate+1, 'yymmdd')) p22,
-		(select sum(payidx) from reserve where to_char(checkin, 'mm') =	to_char(sysdate, 'mm')) p31,
-		(select nvl(sum(payidx), 0) from reserve where to_char(checkin, 'yymmdd') =	to_char(sysdate, 'yymmdd')) p32
-		from dual
+		(select count(*) from reserve where to_char(checkin, 'mm')
+		=to_char(sysdate,'mm')) tmonth,
+		(select count(*) from reserve where to_char(checkin, 'mm')
+		=to_char(sysdate,'mm')-1) lmonth,
+		(select count(*) from reserve where to_char(checkin, 'yymmdd')
+		 = to_char(sysdate, 'yymmdd')) tpeople,
+		(select count(*) from reserve where to_char(checkin, 'yymmdd')
+		 = to_char(sysdate+1, 'yymmdd')) ypeople,
+		(select sum(payidx) from reserve where to_char(checkin, 'mm')
+		 =	to_char(sysdate, 'mm')) sumpay,
+		(select nvl(sum(payidx), 0) from reserve where to_char(checkin, 'yymmdd')
+		 =	to_char(sysdate, 'yymmdd')) daypay	from dual
 	</select>
 	
 	
-	<select id="dashboard1" resultType="indexmap">
+	<select id="peopleboard" resultType="indexmap">
 		select to_char(checkin, 'dd') co1, sum(PERSON+KID) co2 from reserve where
 		to_char(checkin, 'mm')=to_char(sysdate, 'mm') GROUP BY
 		to_char(checkin, 'dd')
 	</select>
 	
-	<select id="dashboard2" resultType="indexmap">
+	<select id="payboard" resultType="indexmap">
 		select to_char(checkin, 'dd') co1, sum(payidx) co2 from reserve where
 		to_char(checkin, 'mm')=to_char(sysdate, 'mm') GROUP BY
 		to_char(checkin, 'dd')

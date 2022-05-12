@@ -139,10 +139,10 @@ public class CampController {
 	}
 
 	@RequestMapping("reserveManager")
-	public String reserveManager() {
+	public String reserveManager(){
 		Map map = cd.monthReserve();
-		List<IndexMap> d1 = cd.dashboard1();
-		List<IndexMap> d2 = cd.dashboard2();
+		List<IndexMap> d1 = cd.peopleboard();
+		List<IndexMap> d2 = cd.payboard();
 		Map<Integer, String> md1 = new HashMap<Integer, String>();
 		for (IndexMap im : d1) {
 			md1.put(Integer.parseInt(im.getCo1()), im.getCo2());

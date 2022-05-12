@@ -146,13 +146,13 @@ public class CampDAO {
 		
 			return sqlSession.selectOne(NS+"monthReserve");
 		}
-	public List<IndexMap> dashboard1() {
+	public List<IndexMap> peopleboard() {
 		
-			return sqlSession.selectList(NS+"dashboard1");
+			return sqlSession.selectList(NS+"peopleboard");
 	}
-	public List<IndexMap> dashboard2() {
+	public List<IndexMap> payboard() {
 		
-			return sqlSession.selectList(NS+"dashboard2");
+			return sqlSession.selectList(NS+"payboard");
 			}
 	
 	
