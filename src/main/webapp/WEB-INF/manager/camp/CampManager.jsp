@@ -221,16 +221,14 @@ function toggle(element, idx) {
 						<td><a style="text-decoration: auto;" href="<%=request.getContextPath() %>/reserve/CampInfo?campname=${c.campname}">${c.campname}</a></td>
 						<td>${c.campaddr}</td>
 						<td>${c.room}</td>
-						<td>${c.payidx}</td>
+						<td><fmt:formatNumber value="${c.payidx}" pattern="#,###"/></td>
 						<td>
-							<form action="<%=request.getContextPath()%>/camp/campDelete"
-								method="post">
+							<form action="<%=request.getContextPath()%>/camp/campDelete" method="post">
 								<input type="hidden" value="${c.campidx}" name="campidx">
 								<button style="position: absolute; margin-left: 100px;"
 									type="submit">삭제</button>
 							</form>
-							<form action="<%=request.getContextPath()%>/camp/campUpdate"
-								method="post">
+							<form action="<%=request.getContextPath()%>/camp/campUpdate" method="post">
 								<input type="hidden" value="${c.campidx}" name="campidx">
 								<button style="margin-right: 40px;" type="button"
 									onclick="window.open('<%=request.getContextPath()%>/camp/campUpdate?campidx=${c.campidx}','', 'width=500, height=700')">수정</button>
@@ -298,7 +296,7 @@ function toggle(element, idx) {
 						<td>${r.campname}</td>
 						<td>${r.campaddr}</td>
 						<td>${r.room}</td>
-						<td>${r.payidx}</td>
+						<td><fmt:formatNumber value="${r.payidx}" pattern="#,###"/></td>
 						<td><fmt:parseDate value="${r.checkin}" var="checkin"
 								pattern="yyyy-MM-dd" /> <fmt:formatDate value="${checkin}"
 								pattern="yyyy-MM-dd" /></td>

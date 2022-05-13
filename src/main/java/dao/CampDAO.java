@@ -47,9 +47,9 @@ public class CampDAO {
 	}
 	
 	
-	public int CampUpdate(Camp idx) {
+	public int CampUpdate(Camp camp) {
 		try {
-			return sqlSession.update(NS+"CampUpdate",idx);
+			return sqlSession.update(NS+"CampUpdate", camp);
 		} catch (Exception e){
 			e.printStackTrace();
 		}finally {

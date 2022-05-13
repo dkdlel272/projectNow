@@ -25,8 +25,6 @@
 <form action="<%=request.getContextPath() %>/camp/CampInsertPro" enctype="multipart/form-data" method="post">
 <h2   id="center">캠프 생성</h2>
 				<div class="form-group">
-				<label>캠핑장번호</label> 
-					<input type="text" class="form-control" name="campidx">
 					<label>캠핑장이름</label> 
 					<input type="text" class="form-control" name="campname"> 
 					<label>캠핑장주소</label>
@@ -59,7 +57,6 @@
 	</div>
 	</form>
 	</div>
-
 	<script>
 	function closeCamp(form) {
 		 form.submit()

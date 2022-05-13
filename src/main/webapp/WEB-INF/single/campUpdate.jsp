@@ -28,7 +28,8 @@
 <form action="<%=request.getContextPath()%>/camp/CampUpdatePro" method="post" enctype="multipart/form-data">
 <h2   id="center">캠핑장 수정</h2>
 				<div class="form-group">
-				<label>캠핑장번호</label> 
+				
+					<label>캠핑장번호</label> 
 					<input type="text" class="form-control" name="campidx" value="${c.campidx}" readonly="readonly">
 					<label>캠핑장이름</label> 
 					<input type="text" class="form-control" name="campname" value="${c.campname}"> 
@@ -57,8 +58,11 @@
 			<label>캠핑장 사진3</label> 
 			<input type="file" class="form-control" name="f3">
 		</div>
+			<input type="hidden" class="form-control" value="${c.campimg}" name="campimg">
+			<input type="hidden" class="form-control" value="${c.campimg2}" name="campimg2">
+			<input type="hidden" class="form-control" value="${c.campimg3}" name="campimg3">					
 	<div id="center" style="padding: 3px;">
-		<button type="button" class="btn btn-dark"      onclick="closeCamp(this.form)">수정</button>
+		<button type="submit" class="btn btn-dark"      onclick="closeCamp(this.form)">수정</button>
 	</div>
 	</form>
 	</div>
@@ -66,7 +70,7 @@
 
 </script>
 	<script>
-	function closeCamp(form, closefct) {
+	function closeCamp(form) {
 		 form.submit()
 		
 	}
@@ -76,7 +80,7 @@
 	<script>
 function win_upload() {
 	const op = "width=500, height=150, left =50, top=150";
-	open ('<%=request.getContextPath()%>/single/campUpdate.jsp',"",op);	
+	open ('<%=request.getContextPath()%>/camp/campUpdate',"",op);	
 }
 </script>
 	

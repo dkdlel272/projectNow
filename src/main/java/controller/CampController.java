@@ -50,7 +50,10 @@ public class CampController {
 	}
 
 	@RequestMapping("CampInsertPro") // 캠프추가
-	public String CampInsertPro(Camp camp) {
+	public String CampInsertPro(Camp camp, String campname) {
+		System.out.println(campname);
+		String msg = "";
+		String url = "";
 		String path = request.getServletContext().getRealPath("/") + "/campupload/";
 		int size = 10 * 1024 * 1024;
 		System.out.println(path);
@@ -103,10 +106,10 @@ public class CampController {
 		} else {
 			camp.setCampimg3("");
 		}
-
+		 msg = "캠핑장 이름이 중복되었습니다";
+		 url = request.getContextPath() + "/single/CampInsert";
+		camp.setCampidx(cd.nextSeq());
 		int seq = cd.CampInsert(camp); 
-		String msg = "캠핑장 등록 실패";
-		String url = request.getContextPath() + "/manager/camp/CampInsert";
 		if (seq >= 1) {
 			msg = "캠핑장 등록 성공";
 			url = request.getContextPath() + "/manager/camp/CampList";
@@ -160,16 +163,14 @@ public class CampController {
 	@RequestMapping("campUpdate")
 	public String campUpdate(int campidx) {
 		Camp c = cd.selectCamp(campidx);
-		System.out.println(c);
 		m.addAttribute("c", c);
 		return "/single/campUpdate";
 	}
 
-	@RequestMapping("CampUpdatePro")
-	public String CampUpdatePro(Camp camp) {
+	@RequestMapping("CampUpdatePro") 
+	public String CampUpdatePro(Camp camp, String campimg, String campimg2, String campimg3){
 		String path = request.getServletContext().getRealPath("/") + "/campupload/";
 		int size = 10 * 1024 * 1024;
-		System.out.println(path);
 		MultipartFile multipartFile1 = camp.getF1();
 		MultipartFile multipartFile2 = camp.getF2();
 		MultipartFile multipartFile3 = camp.getF3();
@@ -185,9 +186,8 @@ public class CampController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		} else {
-			camp.setCampimg("");
-
+		}else {
+			camp.setCampimg(campimg);
 		}
 		if (!multipartFile2.isEmpty()) {
 			File file = new File(path, multipartFile2.getOriginalFilename());
@@ -201,8 +201,8 @@ public class CampController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		} else {
-			camp.setCampimg2("");
+		}else {
+			camp.setCampimg2(campimg2);
 		}
 		if (!multipartFile3.isEmpty()) {
 			File file = new File(path, multipartFile3.getOriginalFilename());
@@ -216,16 +216,17 @@ public class CampController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		} else {
-			camp.setCampimg3("");
+		}else {
+			camp.setCampimg3(campimg3);
 		}
 		String msg = "";
 		String url = "";
-		Camp c = cd.selectCamp(camp.getCampidx());
-		if (c.getCampidx() == camp.getCampidx()) {
-			cd.CampUpdate(camp);
+		if (cd.CampUpdate(camp) > 0) {
+			System.out.println(cd.CampUpdate(camp));
 			msg = "캠프 정보가 수정 되었습니다";
 			url = request.getContextPath() + "/camp/CampManager";
+		}else {
+			msg="수정 실패";
 		}
 		m.addAttribute("msg", msg);
 		m.addAttribute("url", url);
