@@ -5,24 +5,20 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+<script
+	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script
+	src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+	<script src ="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
 <title>Insert title here</title>
 <style>
-ul.menu_login {
-    display: flow-root;
-    padding-bottom: 20px;
-    padding-top: 20px;
-    list-style: none;
-    margin: 0px;
-    padding-right: 1304px;
-    float: right;
-    background: linear-gradient(150deg, #3585CB, #48a3e5, #2babbf, #519ed7, #4496ed);
-}
-#wrapper {
-	display:none !important;
-}
-.subback {
-	display:none !important;
-}
 .table .thead-dark th {
     color: #000;
     font-size: 16px;
@@ -40,110 +36,80 @@ ul.menu_login {
     border-top: 1px solid #dee2e6;
     text-align: center;
 }
-p.list_count {
-	font-size:16px;
-}
-a {color:#000; font-size:15px; }
-p.button_text {font-size:16px; margin-bottom:0px; font-weight:none; text-align:center;}
-p.button_text a {text-decoration:none !important; display:block; color:#fff;}
-.list_button {
-    width: 150px;
-    float: right;
-    padding: px;
-    padding: 10px;
-    background-color: #23272b;
-    border-radius: 50px;
-} 
-.list_button:hover {
-	background:#545658;
-}
-.list_button:hover a{
-	color:#fff;
-}
-.pagination {
-	width:100%;
-}
-.page-item.active .page-link {
-	background-color: #23272b;
-	border:none;
-}
-.page-link {color:#000;}
-.container {
- 	margin-top:150px;
- 	margin-left: 150px;
-}
- h2#head_Text {
+ h3#head_Text {
  	text-align:center;
  	width:100%;
  	font-size:30px;
  	font-weight:bold;
-	margin-bottom:60px;
+	margin:50px;
+	
  }
-  .btn-dark {
-    width: 150px;
-    float: right;
-    margin: 10px;
-}
-
-.wrapper {
-    width: 50px;
-    height: 50px;
-    text-align: center;
-    margin: -35px auto;
-    margin-left: 0px;
-    margin-bottom: 3px;
-}
-.table {
-	width: 90%;
-}
-
-#btn_black{
+ 
+ .search {
+ 	margin: 20px;
+	float: right;
+ }
+ #btn_black{
 	display: block; 
 	margin: -7px;
 	border: 1px solid;
     width: 100px;
     margin: auto;
 }
+ 
+
 </style>
 </head>
 <body>
-<form class="container pt-5" action="<%=request.getContextPath()%>/userdata/searchUserList">
-<input type="text" class="form-control in" name="searchId">
-<button type="submit" class="btn btn-info"> 회원 검색 </button>
-</form>
+	<h3 id="head_Text">회원 검색</h3> 
+	<div class="container">
 
-<table class="table">
+		<form class="search" action="<%=request.getContextPath()%>/userdata/searchUserList">
+			<input type="text" name="searchId" placeholder="아이디를 입력하세요">
+			<button type="submit" class="btn btn-info"> 검색 </button>
+		</form>
+
+		<table class="table">
  			 <thead class="thead-dark">
 				<tr>
 					<th>아이디</th>
 					<th>이름</th>
 					<th>이메일</th>
 					<th>연락처</th>
-					<th>블랙회원</th>
+					<th>블랙여부</th>
 				</tr>
 			</thead>
-			<tbody>
-			<c:forEach var="u" items="${list}">
-				<tr>
-					<td>${u.userid}</td>
-					<td>${u.name}</td>
-					<td>${u.email}</td>
-					<td>${u.tel}</td>
-					<td><form action="<%=request.getContextPath() %>/userdata/changeBlack2" method="post" name="b">
-						 <input type="hidden" class="form-control" name="userid" value="${u.userid}">
-						 <c:choose>
-						 <c:when test="${u.black eq '0'}">
-						 <button style="display: block; margin: -7px;" type="submit" class="btn btn-dark">블랙 추가</button>
-						 </c:when>
-						 <c:when test="${u.black eq '1'}">
-						 <button style="display: block; margin: -7px;" type="submit" class="btn btn-red">블랙 해제</button>
-						 </c:when> 
-						 </c:choose>
-						</form></td>
-				</tr>
-				</c:forEach>
-			</tbody>
-		</table>
+				<tbody>
+					<c:forEach var="u" items="${list}">
+					<tr>
+						<td>${u.userid}</td>
+						<td>${u.name}</td>
+						<td>${u.email}</td>
+						<td>${u.tel}</td>
+						<td><form action="<%=request.getContextPath() %>/userdata/changeBlack2" method="post" name="b">
+							 <input type="hidden" class="form-control" name="userid" value="${u.userid}">
+							 <c:choose>
+							 <c:when test="${u.black eq '0'}">
+							 <button style="display: block; margin: -7px;" type="button" 
+							 		class="btn btn-dark" onclick="closeSearch(this.form)">블랙 추가</button>
+							 </c:when>
+							 <c:when test="${u.black eq '1'}">
+							 <button style="display: block; margin: -7px;" type="button" class="btn" 
+							 		id="btn_black" onclick="closeSearch(this.form)">블랙 해제</button>
+							 </c:when> 
+							 </c:choose>
+							</form></td>
+					</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
+		
+<script>
+	function closeSearch(form) {
+		 form.submit()
+	}
+</script>
 
 </body>
 </html>

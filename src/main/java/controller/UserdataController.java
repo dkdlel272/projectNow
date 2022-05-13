@@ -690,7 +690,6 @@ public class UserdataController {
 	
 		int num = 0;
 		String msg = " ";
-		String url = request.getContextPath() + "/userdata/searchUserForm";
 		
 
 		UserData u = ud.selectUserdata(userid);
@@ -708,9 +707,9 @@ public class UserdataController {
 		}
 
 		m.addAttribute("msg", msg);
-		m.addAttribute("url", url);
+	
 
-		return "/view/alert";
+		return "/view/alert2";
 
 	}
 	

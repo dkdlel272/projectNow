@@ -81,7 +81,7 @@
 </select>
 
 <select id="searchUserList"  resultType="userdata" parameterType="String">
-	select * from userdata where userid like #{userid}
+	select * from userdata where userid like '%${value}%'
 </select>
 
 <update id="deleteLeave" parameterType="string">

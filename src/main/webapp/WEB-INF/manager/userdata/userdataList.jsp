@@ -151,7 +151,7 @@ p.button_text a {text-decoration:none !important; display:block; color:#fff;}
 					<th>연락처</th>
 					<th>주소</th>
 					<th>생년월일</th>
-					<th>블랙회원</th>
+					<th>블랙여부</th>
 				</tr>
 			</thead>
 			<tbody>
